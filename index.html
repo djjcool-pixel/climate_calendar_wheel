@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0b1924" />
+<meta name="description" content="季节回声：双模式气候日历年轮，寻找同城春秋气候回声，或将一个城市的日期映射到另一座城市。" />
+<title>季节回声｜Climate Calendar Wheel</title>
+<style>
+:root{--bg:#0c1924;--panel:#142531;--deep:#0f202c;--text:#f2f7f1;--muted:#94aab4;--soft:#b7cbd0;--line:#32465080;--green:#d4f18a;--orange:#f8b188;--radius:17px;--font:Inter,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-width:320px;background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased}
+button,select,input{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+button:hover{transition:background .16s,color .16s,border .16s}
+.shell{max-width:1500px;padding:0 32px 26px;margin:auto}
+.topbar{height:70px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--text)}
+.brand-mark{height:34px;width:34px;border:2px solid var(--green);border-radius:50%;position:relative;display:grid;place-items:center}
+.brand-mark:before{content:'';width:18px;height:18px;border:1.5px solid var(--green);border-radius:50%}
+.brand-mark:after{content:'';height:5px;width:5px;border-radius:50%;background:var(--green);position:absolute;right:2px;top:3px}
+.brand-word{font-size:16px;font-weight:800;letter-spacing:.03em}.brand-word small{display:block;font-size:8px;color:#8397a0;letter-spacing:.24em;font-weight:700;margin-top:3px}
+.source-pill{padding:8px 13px;color:#bdcad0;border:1px solid var(--line);font-size:10px;border-radius:20px;white-space:nowrap}
+.intro{padding:24px 0 12px;display:flex;align-items:end;justify-content:space-between;gap:20px}
+.eyebrow{color:var(--green);font-size:10px;letter-spacing:.2em;font-weight:800}
+.intro h1{margin:7px 0;font-size:clamp(24px,2.5vw,34px);font-weight:830;letter-spacing:-.045em;line-height:1.2}.intro h1 em{font-style:normal;color:var(--green)}
+.intro p{font-size:12px;line-height:1.65;color:#a9bbc2;margin:0}
+.intro-aside{max-width:260px;line-height:1.65;color:#9bb0b8;font-size:11px;border-left:1px solid var(--line);padding-left:15px;margin-bottom:2px}
+.mode-switch{margin:10px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:735px}
+.mode-option{border:1px solid var(--line);background:#162b38;color:#a5bac0;padding:13px 16px;text-align:left;border-radius:13px;display:flex;align-items:center;gap:11px;min-width:0}
+.mode-option .mode-icon{font-size:21px;line-height:1;display:grid;place-items:center;flex:0 0 28px;color:#aac4b1}
+.mode-option b{font-size:13px;display:block;color:#e2ebe5;margin-bottom:3px}.mode-option small{display:block;font-size:10px;color:#92a7ae;line-height:1.35}
+.mode-option.active{border-color:#c9e98892;background:#243b3e;box-shadow:inset 0 0 0 1px #b5db8430}.mode-option.active .mode-icon{color:var(--green)}
+.workspace{display:grid;grid-template-columns:minmax(228px,258px) minmax(0,1fr) minmax(245px,305px);align-items:stretch;gap:14px;margin-top:14px}
+.panel,.bottom-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);min-width:0}
+.controls{padding:19px;display:flex;flex-direction:column;gap:19px}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:5px;padding-bottom:0}
+.section-title strong{font-size:12px;letter-spacing:.08em}.section-title small{font-size:10px;color:#7d96a2}
+.fieldlabel{display:block;margin-bottom:8px;color:#9cafb7;font-size:11px;font-weight:600}
+.source-target{display:grid;gap:13px}.field{min-width:0}.select-wrap{position:relative}.select-wrap:after{content:'⌄';position:absolute;right:12px;top:46%;transform:translateY(-50%);pointer-events:none;color:#c4d3d1;font-size:21px}
+select{width:100%;min-width:0;appearance:none;border-radius:9px;padding:12px 29px 12px 11px;background:#1d3340;border:1px solid #40566380;color:var(--text);font-size:13px;font-weight:700}
+.city-info{display:flex;align-items:flex-start;gap:7px;color:#8fa5ad;font-size:10px;line-height:1.5;margin-top:8px;min-height:15px}.city-info:before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);margin-top:5px;flex-shrink:0}.target-info:before{background:var(--orange)}
+.target-field[hidden]{display:none!important}
+.swap-button{border:1px solid #40566370;background:#152b36;color:#bed3d1;width:100%;padding:8px 12px;border-radius:9px;text-align:center;font-size:11px;font-weight:700}.swap-button:hover{background:#254752}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:#10212d;border:1px solid var(--line);padding:4px;gap:3px;border-radius:10px}.seg.two{grid-template-columns:1fr 1fr}
+.seg button{border:0;background:transparent;color:#99acb4;min-width:0;white-space:nowrap;border-radius:7px;padding:10px 4px;font-size:11px;font-weight:700}
+.seg button.active{color:#e7f6cb;background:#3a5154}.seg button:focus-visible{outline-offset:0}
+.date-row{display:flex;gap:7px}.date-row input{border:1px solid #40566380;color:var(--text);background:#1d3340;border-radius:9px;padding:10px 6px;min-width:0;width:100%;font-size:13px;color-scheme:dark}
+.iconbtn{flex-shrink:0;width:36px;background:#1d3340;border:1px solid #40566380;border-radius:9px;font-size:21px;color:#c9d6d6}
+.shortcutrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.shortcutrow button{border-radius:20px;border:1px solid #40566390;background:transparent;color:#a7bdc3;font-size:10px;padding:6px 9px}
+.shortcutrow button:hover{color:white;background:#2b4551}
+.range{width:100%;accent-color:var(--green);margin:10px 0 5px;cursor:pointer}.rangehead{display:flex;justify-content:space-between;color:#728c99;font-size:9px}.rangehead span:nth-child(2){color:#b6cbcb}
+.control-hint{font-size:10px;line-height:1.6;color:#8aa2ab;padding-top:6px;border-top:1px solid var(--line)}
+.wheel-panel{padding:10px 9px 12px;background:radial-gradient(ellipse at 50% 45%,#203845 0%,#152936 60%,#11222e 100%);overflow:hidden}
+.wheel-top{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:9px 10px 0;font-size:10px;letter-spacing:.12em;color:#b4c8c9;font-weight:700}
+.wheel-top .right{color:#8fa7af;font-weight:500;letter-spacing:.04em}
+.wheel-svg-wrap{max-width:715px;width:100%;aspect-ratio:1;margin:0 auto}.wheel-svg{display:block;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none}
+.wheel-svg .monthlabel{font-size:18px;fill:#9eb4bc;font-weight:650;text-anchor:middle;dominant-baseline:middle}.wheel-svg .monthlabel.selectedMonth{fill:white}
+.wheel-svg .monthboundary{stroke:#5a747b;stroke-width:1.1;opacity:.53}.wheel-svg .tempbar{stroke-linecap:round}
+.wheel-svg .orbit{font-size:11px;fill:#93acb6;font-weight:750;letter-spacing:.18em;text-anchor:middle}.wheel-svg .center-date{font-size:37px;fill:#f2f7ed;text-anchor:middle;font-weight:800;letter-spacing:-.06em}
+.wheel-svg .center-num{font-size:23px;font-weight:800;fill:var(--green);text-anchor:middle}.wheel-svg .center-num.orange{fill:var(--orange)}
+.wheel-svg .center-sub{font-size:12px;fill:#adbec0;text-anchor:middle}.wheel-svg .center-foot{font-size:10px;fill:#839ca7;text-anchor:middle}
+.wheel-legend{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px;margin:-1px 0 6px;font-size:10px;color:#a3b7bd}
+.gradient{width:115px;height:7px;border-radius:8px;background:linear-gradient(90deg,#518fc3,#7dc5a8,#d1da8c,#efba6f,#d15b5b)}
+.legend-dot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:4px}.legend-dot.orange{background:var(--orange)}
+.results{display:flex;flex-direction:column;gap:12px;min-width:0}.result-card{padding:16px 18px}.result-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:11px}.result-top span:first-child{font-size:11px;letter-spacing:.06em;font-weight:750;color:#bec9cd}.result-top span:last-child{font-size:9px;color:#76939e;letter-spacing:.04em}
+.overline{font-size:10px;color:#98acb4;font-weight:650}.big-date{font-size:30px;font-weight:820;letter-spacing:-.05em;margin:9px 0 3px;line-height:1.15}.big-temp{color:var(--green);font-size:23px;letter-spacing:-.045em;font-weight:780}.result-card.match-card{background:linear-gradient(150deg,#1e3945,#1b323e)}.match-card .big-temp{color:var(--orange)}
+.diff{font-size:10px;color:#c7d6d7;background:#2d4650;border:1px solid #506d7240;padding:8px;border-radius:8px;margin-top:11px}.diff b{color:#f1f5ec}.fine-print{font-size:10px;color:#839da6;line-height:1.5;margin-top:9px}
+.details-card{padding:15px 16px;background:#182e3a;flex:1}.details-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.details-head b{font-size:12px}.details-head small{font-size:9px;color:#8da3ab}
+.metric-grid{margin-top:11px;display:grid;grid-template-columns:75px 1fr 1fr;row-gap:1px;column-gap:4px}.metric-grid .cell{font-size:11px;padding:8px 2px;border-bottom:1px solid #3b53604b;min-width:0}.metric-grid .head{font-size:10px;color:#8eacb2;font-weight:750}.metric-grid .metric-name{color:#a2b7bf}.metric-grid .first{color:#dbf3b5;font-variant-numeric:tabular-nums}.metric-grid .second{color:#fbc8a9;font-variant-numeric:tabular-nums}.metric-grid .align-right{text-align:right}
+.detail-caption{font-size:10px;line-height:1.6;color:#8aa2aa;margin:11px 0 0}
+.under{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:14px;margin-top:14px}.bottom-card{padding:19px 23px}.bottom-card .h3{font-size:13px;font-weight:750}.bottom-card p{margin:8px 0 0;color:#8fa6ae;font-size:11px;line-height:1.6}
+.foot-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.foot-data{font-size:11px;color:#cce9ae;font-variant-numeric:tabular-nums;font-weight:750}
+.month-pair{display:grid;gap:12px;margin-top:13px}.month-row{display:grid;grid-template-columns:58px minmax(0,1fr);align-items:center;gap:9px}.month-city{font-size:11px;color:#c4d9dd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px}.monthmini{padding:0;border:0;background:transparent;min-width:0;text-align:center;cursor:pointer}.monthmini .bar{display:block;width:100%;height:7px;opacity:.9;border-radius:5px}.monthmini.selected .bar{outline:2px solid var(--green);outline-offset:2px}.monthmini .txt{font-size:9px;display:block;color:#77939e;margin-top:6px}.monthmini.selected .txt{color:var(--green)}.monthmini.target .bar{opacity:.7}.monthmini.target{cursor:default}
+.insight-text{line-height:1.8!important;color:#b5c9cd!important;font-size:12px!important;margin:12px 0 15px!important}
+.cta{border-radius:9px;background:var(--green);color:#1b2b27;font-weight:800;font-size:11px;padding:10px 15px;border:none}.cta:hover{background:#e4fbb1}
+.footer{margin-top:16px;padding-top:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px 16px;border-top:1px solid var(--line);color:#78929b;font-size:10px;line-height:1.7}.footer a{color:#bed9b2;text-decoration:none}.footer a:hover{text-decoration:underline}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media(max-width:1160px){.shell{padding:0 22px 24px}.workspace{grid-template-columns:235px minmax(0,1fr)}.results{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1.6fr}.result-card{padding:18px}.intro-aside{display:none}}
+@media(max-width:760px){.shell{padding:0 14px 24px}.topbar{height:62px}.intro{padding:20px 0 10px}.intro h1{font-size:27px}.mode-switch{max-width:none}.workspace{grid-template-columns:1fr;gap:11px;margin-top:12px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:13px;padding:15px;grid-row:1}.controls>.section-title,.source-target,.controls>.control-hint{grid-column:1/-1}.source-target{grid-template-columns:1fr 1fr;align-items:start;gap:10px}.swap-button{grid-column:1/-1;padding:7px}.wheel-panel{grid-row:2;padding:8px 2px}.wheel-svg-wrap{max-width:610px}.results{grid-row:3;grid-column:auto;grid-template-columns:1fr 1fr;gap:10px}.details-card{grid-column:1/-1}.metric-grid{grid-template-columns:130px 1fr 1fr}.under{grid-template-columns:1fr}.bottom-card{padding:18px}.footer{margin-top:15px}.control-hint{display:none}}
+@media(max-width:440px){.brand-word{font-size:14px}.source-pill{font-size:9px;padding:7px 9px}.intro{padding:16px 0 6px}.intro h1{font-size:24px;margin:5px 0}.intro p{font-size:11px}.eyebrow{font-size:9px}.mode-switch{gap:7px;margin-top:9px}.mode-option{padding:10px 9px;gap:7px;border-radius:11px}.mode-option .mode-icon{font-size:18px;flex-basis:23px}.mode-option b{font-size:12px}.mode-option small{font-size:9px}.controls{padding:13px;gap:12px}.source-target{gap:8px}.source-target select{font-size:12px;padding-left:8px;padding-right:23px}.fieldlabel{font-size:10px}.city-info{font-size:9px}.wheel-top{padding:7px 14px 0;font-size:9px}.wheel-top .right{font-size:9px}.wheel-svg .monthlabel{font-size:19px}.wheel-svg .center-date{font-size:41px}.wheel-svg .orbit{font-size:11px}.wheel-legend{font-size:9px;gap:6px}.gradient{width:68px}.result-card{padding:13px 12px}.result-top{margin-bottom:10px}.result-top span:first-child{font-size:10px}.result-top span:last-child{font-size:8px}.big-date{font-size:24px}.big-temp{font-size:20px}.fine-print{font-size:9px}.metric-grid{grid-template-columns:85px 1fr 1fr}.months{gap:3px}.monthmini .txt{font-size:8px}.month-row{grid-template-columns:44px 1fr}.month-city{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+
+/* v4 — wheel first, spectrum second, optional date mapping */
+:root{--panel:#152935;--line:#36535b65;--green:#d4f18a;--orange:#f8b188}
+.shell{max-width:1380px;padding:0 32px 22px}.topbar{height:61px}.source-pill{font-size:9px;letter-spacing:.1em;color:#a5b9b9}
+.intro{padding:19px 0 19px;align-items:center}.intro h1{margin:5px 0;font-size:clamp(23px,2.1vw,29px)}.intro p{font-size:11px}.intro-aside{display:block;border:0;padding:0;max-width:none;font-size:10px;letter-spacing:.15em;color:#738f99}
+.primary-experience{background:linear-gradient(135deg,#142a36,#0f222e 90%);border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;box-shadow:0 24px 58px #07111a35}
+.primary-experience:before{content:'';position:absolute;pointer-events:none;width:560px;height:560px;left:24%;top:100px;border-radius:50%;background:#bfe68b08;filter:blur(60px)}
+.primary-bar{display:flex;justify-content:space-between;gap:15px;align-items:end;padding:23px 28px 17px;border-bottom:1px solid #3b556035;position:relative}.section-kicker{font-size:9px;letter-spacing:.23em;font-weight:750;color:#accf88}.primary-bar h2,.spectrum-heading h2{font-size:19px;font-weight:800;line-height:1.3;letter-spacing:-.025em;margin:8px 0 0}.live-mark{display:inline-flex;font-size:9px;color:#a8d49d;background:#29423b;border:1px solid #56836a55;border-radius:99px;padding:4px 7px;margin-left:8px;font-weight:600;letter-spacing:.02em;vertical-align:middle}.wheel-explain{font-size:10px;color:#90a9af}
+.primary-toolbar{display:grid;grid-template-columns:minmax(190px,1fr) minmax(220px,1.08fr) minmax(218px,.93fr);gap:18px;align-items:start;margin:18px 28px 8px;position:relative}.primary-toolbar>.toolbar-city,.primary-toolbar>.toolbar-metric,.primary-toolbar>.toolbar-date{min-width:0}.primary-toolbar .fieldlabel{margin-bottom:8px;font-size:10px}.primary-toolbar .city-info{margin-top:6px;font-size:9px}.primary-toolbar select,.primary-toolbar input{height:43px}.primary-toolbar .date-row{height:43px}.primary-toolbar .iconbtn{width:38px;font-size:24px;line-height:1}.primary-toolbar .seg{height:43px}.primary-toolbar .seg button{font-size:12px}.primary-toolbar select{font-size:12px}
+.wheel-showcase{display:grid;grid-template-columns:minmax(0,1fr) 264px;gap:6px;max-width:1170px;margin:auto;align-items:center;padding:0 25px 5px}.wheel-panel{border:0;background:none;overflow:visible;padding:0;min-width:0}.wheel-top{max-width:725px;margin:auto;padding:14px 6px 2px;letter-spacing:.13em;font-size:10px}.wheel-top-dot{width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;box-shadow:0 0 10px #d4f18a77}.wheel-svg-wrap{max-width:710px;filter:drop-shadow(0 0 16px #c0dd7e0d);animation:wheel-enter .9s cubic-bezier(.2,.8,.2,1) both}.wheel-svg{touch-action:none}.wheel-svg .tempbar{transition:opacity .3s ease}.wheel-legend{margin:-8px 0 12px;gap:12px;font-size:10px}.wheel-legend #ring-key{color:#6f9297}.wheel-legend .gradient{width:116px}.legend-separator{height:10px;border-left:1px solid #52697370}.wheel-panel.reveal-wheel .wheel-svg-wrap{animation:wheel-change .48s cubic-bezier(.15,.75,.27,1)}
+.wheel-sidebar{align-self:stretch;display:flex;flex-direction:column;justify-content:center;max-width:264px;margin:auto;padding:16px 10px 35px;animation:fade-up .75s .14s both}.sidebar-heading span{font-size:9px;letter-spacing:.2em;color:#8fb2b0;font-weight:800;display:block}.sidebar-heading strong{font-size:13px;display:block;margin-top:6px}.sidebar-date{margin-top:22px}.sidebar-date>span{display:block;font-size:28px;font-weight:800;letter-spacing:-.06em;white-space:nowrap}.sidebar-date strong{display:block;color:var(--green);font-size:48px;letter-spacing:-.075em;font-weight:780;line-height:1.15;margin-top:5px;font-variant-numeric:tabular-nums}.sidebar-date strong small{font-size:20px;margin-left:6px;font-weight:500}.sidebar-lead{font-size:11px;color:#93aeb6}.sidebar-divider{height:1px;background:#58707950;margin:28px 0 21px}.sidebar-subtitle{font-size:10px;color:#89a5af;margin-bottom:12px}.sidebar-match{display:flex;align-items:center;gap:11px}.sidebar-match strong{display:block;font-size:23px;color:#f9e1cb;letter-spacing:-.04em}.sidebar-match small{display:block;font-size:11px;color:#8dacb3;margin-top:6px}.match-orbit-dot{height:10px;width:10px;flex-shrink:0;background:var(--orange);border:3px solid #253842;border-radius:50%;box-shadow:0 0 0 2px #f8b188c9,0 0 20px #f8b18850}.sidebar-arrow{font-size:21px;margin-left:auto;color:#f8b188}.sidebar-hint{color:#819ba6;font-size:11px;line-height:1.85;margin-top:28px}.sidebar-explore{margin-top:14px;padding:12px 14px;border:1px solid #7b9b88aa;color:#dcf4b9;background:#203d3d;border-radius:10px;font-size:12px;font-weight:750;display:flex;align-items:center;justify-content:space-between;transition:background .2s,transform .2s,box-shadow .2s}.sidebar-explore:hover{background:#325a4d;transform:translateY(-2px);box-shadow:0 8px 22px #07130e50}
+.wheel-navigation{margin:0 29px 22px;border-top:1px solid #3e55623a;padding:14px 2px 0;display:grid;grid-template-columns:auto 1fr auto;gap:8px 16px;align-items:center}.wheel-navigation>label{grid-column:1;grid-row:1;font-size:11px;color:#a5b8bd}.wheel-navigation>#slider-label{grid-column:3;grid-row:1;font-size:10px;color:#a3c58b}.wheel-navigation .range{grid-column:1/4;grid-row:2;margin:0;width:100%}.wheel-navigation .rangehead{grid-column:1/4;grid-row:3;display:flex;align-items:center;justify-content:space-between;color:#708f99}.wheel-navigation .shortcutrow{margin:0}.wheel-navigation .shortcutrow button{font-size:10px;padding:5px 12px}
+.spectrum-card{margin-top:16px;padding:23px 29px 25px;background:#142934;border:1px solid var(--line);border-radius:18px;animation:fade-up .7s .14s both}.spectrum-heading{display:flex;justify-content:space-between;align-items:end;gap:16px}.spectrum-heading h2{font-size:18px}.spectrum-heading .foot-data{font-size:11px}.spectrum-card>p{font-size:11px;color:#8faab3;margin:11px 0 21px}.spectrum-body{display:grid;gap:15px}.spectrum-cityline{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.spectrum-cityline strong{font-size:11px;color:#d0e5e1}.spectrum-cityline span{font-size:10px;color:#83a4ad}.spectrum-gradient-track{position:relative;width:100%;height:27px;border-radius:8px;display:flex;overflow:hidden;outline:1px solid #8ea4ae3b;cursor:crosshair;box-shadow:inset 0 0 10px #060d1570;transition:filter .2s,transform .2s}.spectrum-gradient-track:hover{filter:brightness(1.16)}.spectrum-gradient-track>span{flex:1 1 0;min-width:0;height:100%;pointer-events:none}.spectrum-gradient-track::after{content:'';position:absolute;left:calc(var(--position,87.4%));top:0;bottom:0;width:3px;transform:translateX(-1.5px);background:#f5ffe0;box-shadow:0 0 0 1px #08212d,0 0 12px #ffffff99;z-index:1;pointer-events:none;transition:left .22s cubic-bezier(.22,.7,.3,1)}.spectrum-gradient-track.is-target{height:17px;cursor:default}.spectrum-gradient-track.is-target:after{background:var(--orange)}.spectrum-month-labels{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));margin-top:9px}.spectrum-month-labels span{text-align:left;font-size:10px;color:#748f99}.spectrum-month-labels span:last-child{text-align:right}.target-spectrum{padding-top:4px}
+.mapping-panel{margin-top:16px;background:#132631;border:1px solid var(--line);border-radius:18px;overflow:hidden}.mapping-summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:17px;padding:22px 28px;transition:background .2s}.mapping-summary::-webkit-details-marker{display:none}.mapping-summary:hover{background:#1a323f}.summary-icon{width:47px;height:47px;border:1px solid #59786caa;background:#203c40;border-radius:13px;display:grid;place-items:center;font-size:23px;color:var(--green);flex-shrink:0}.summary-text{display:flex;flex-direction:column;gap:5px;min-width:0}.summary-text small{font-size:9px;letter-spacing:.15em;color:#9cbc99;font-weight:800}.summary-text strong{font-size:16px;letter-spacing:-.015em}.summary-text>span{font-size:10px;color:#819da7}.summary-status{margin-left:auto;white-space:nowrap;font-size:10px;color:#96afa9}.summary-chevron{font-size:29px;color:#d5edbd;transition:transform .3s ease;margin-left:5px;line-height:1}.mapping-panel[open] .summary-chevron{transform:rotate(180deg)}.mapping-panel[open] .mapping-summary{border-bottom:1px solid #3c596240}.mapping-panel[open] .mapping-content{animation:panel-open .36s cubic-bezier(.16,.75,.2,1) both}.mapping-content{padding:20px 28px 28px}.mapping-content .mode-switch{max-width:none;margin:0;gap:10px}.mapping-settings{display:flex;align-items:end;flex-wrap:wrap;gap:14px;margin:15px 0}.mapping-settings>.field{width:240px}.mapping-settings .control-block{width:260px;margin-left:auto}.mapping-settings .control-block .seg{height:44px}.mapping-settings .swap-button{max-width:220px;height:44px}.results{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:12px}.details-card{min-height:220px}.mapping-insight{margin-top:12px;background:#1b323c;border:1px solid #3a566055;border-radius:13px;padding:17px 19px}.mapping-insight .foot-top strong{font-size:13px}.mapping-insight .insight-text{margin:11px 0 6px!important}.mapping-insight #match-method-note{font-size:10px;line-height:1.7;color:#8aa2ab;margin:0}.footer{margin-top:19px}
+@keyframes wheel-enter{from{opacity:0;transform:translateY(10px) scale(.965);filter:blur(5px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}@keyframes wheel-change{from{opacity:.7;transform:scale(.987)}to{opacity:1;transform:scale(1)}}@keyframes fade-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes panel-open{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:translateY(0)}}@keyframes link-drift{from{stroke-dashoffset:0}to{stroke-dashoffset:-48}}@keyframes marker-pulse{0%,100%{stroke-opacity:1}50%{stroke-opacity:.5}}
+.wheel-svg .connection-path{animation:link-drift 2.7s linear infinite}.wheel-svg .point-halo{animation:marker-pulse 2.8s ease-in-out infinite}.wheel-svg .selection-line{transition:transform .38s cubic-bezier(.18,.8,.24,1);transform-origin:360px 360px}
+@media(max-width:1100px){.shell{padding:0 22px 22px}.wheel-showcase{grid-template-columns:minmax(0,1fr) 235px;padding:0 15px}.wheel-sidebar{padding:0 6px 25px}.sidebar-date strong{font-size:41px}.intro-aside{display:none}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1;min-height:0}.metric-grid{grid-template-columns:170px 1fr 1fr}}
+@media(max-width:760px){.shell{padding:0 12px 18px}.topbar{height:56px}.source-pill{font-size:8px;letter-spacing:.04em}.intro{padding:17px 2px 14px}.intro h1{font-size:23px}.intro p{font-size:10px}.primary-experience{border-radius:16px}.primary-bar{padding:17px 16px 13px}.primary-bar h2{font-size:17px}.wheel-explain{display:none}.primary-toolbar{margin:13px 13px 0;gap:9px;grid-template-columns:1fr 1fr}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1}.primary-toolbar .fieldlabel{font-size:9px}.primary-toolbar .city-info{display:none}.primary-toolbar select,.primary-toolbar .seg,.primary-toolbar .date-row{height:40px}.primary-toolbar .seg{padding:3px}.primary-toolbar .seg button{font-size:10px;padding:8px 2px}.primary-toolbar .date-row{max-width:none}.wheel-showcase{display:flex;flex-direction:column;gap:0;padding:2px 4px 5px}.wheel-panel{width:100%}.wheel-top{padding:14px 13px 0;font-size:9px}.wheel-svg-wrap{width:100%;max-width:600px}.wheel-legend{margin:-1px auto 12px;font-size:9px;gap:8px}.wheel-sidebar{width:calc(100% - 25px);max-width:none;padding:16px 8px 12px;margin:0 12px;border-top:1px solid #46636c60;display:grid;grid-template-columns:1fr 1fr;gap:5px 16px;align-items:start}.sidebar-heading{grid-column:1/-1}.sidebar-heading span{font-size:8px}.sidebar-heading strong{display:none}.sidebar-date{margin:2px 0 0}.sidebar-date>span{font-size:19px}.sidebar-date strong{font-size:30px;margin-top:2px}.sidebar-date strong small{font-size:14px}.sidebar-lead{grid-column:1;grid-row:3;margin:0;font-size:10px}.sidebar-divider{display:none}.sidebar-subtitle{grid-column:2;grid-row:2;margin:0;font-size:9px}.sidebar-match{grid-column:2;grid-row:3;align-items:start}.sidebar-match strong{font-size:19px}.sidebar-match small{font-size:9px}.sidebar-arrow{font-size:17px}.sidebar-hint{display:none}.sidebar-explore{grid-column:1/-1;margin-top:10px;padding:10px 13px;font-size:11px}.wheel-navigation{margin:4px 15px 15px;padding:11px 0 0}.wheel-navigation .rangehead{font-size:8px}.wheel-navigation .shortcutrow button{padding:4px 10px;font-size:9px}.spectrum-card{padding:18px 16px;margin-top:12px}.spectrum-heading h2{font-size:16px}.spectrum-card>p{margin-bottom:18px}.spectrum-gradient-track{height:26px}.spectrum-month-labels span{font-size:9px}.mapping-panel{margin-top:12px}.mapping-summary{padding:18px 15px;gap:10px}.summary-icon{width:40px;height:40px;font-size:19px;border-radius:10px}.summary-text strong{font-size:13px}.summary-text>span{font-size:9px}.summary-status{display:none}.summary-chevron{font-size:24px;margin-left:auto}.mapping-content{padding:15px}.mapping-settings>.field{flex:1;min-width:180px}.mapping-settings .control-block{flex:1;margin-left:0;min-width:180px}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1}.footer{padding-top:12px}}
+@media(max-width:410px){.shell{padding:0 8px 14px}.brand-word{font-size:13px}.brand-mark{width:30px;height:30px}.source-pill{font-size:7px;padding:6px 7px}.intro{padding:14px 4px 12px}.intro h1{font-size:21px}.primary-bar{padding:15px 12px 12px}.primary-bar h2{font-size:16px}.live-mark{font-size:8px;margin-left:4px}.primary-toolbar{margin:11px 10px 0;gap:8px}.primary-toolbar select{font-size:11px;padding-left:8px;padding-right:22px}.primary-toolbar .seg button{font-size:9px}.wheel-top{padding:11px 10px 0;font-size:8px}.wheel-svg .monthlabel{font-size:17px}.wheel-legend{gap:6px;font-size:8px}.wheel-legend .gradient{width:65px}.sidebar-date strong{font-size:28px}.sidebar-match strong{font-size:18px}.spectrum-card{padding:16px 12px}.spectrum-month-labels span{font-size:8px}.mapping-summary{padding:15px 12px}.summary-icon{width:35px;height:35px}.summary-text strong{font-size:12px}.summary-text>span{font-size:8px}.mode-option{padding:10px}.mode-option b{font-size:11px}.mode-option small{font-size:9px}.results .result-card{padding:13px}.metric-grid{grid-template-columns:90px 1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-word">季节回声<small>CLIMATE CALENDAR</small></span></a><span class="source-pill">CLIMATE NORMALS · 1991—2020</span></header>
+<main id="top">
+<section class="intro"><div><div class="eyebrow">SEASONAL ECHO / 气候年轮</div><h1>一年四季，<em>尽在一圈之间。</em></h1><p>拨动年轮，探索气温的涨落与相似的日子。</p></div><span class="intro-aside">365 DAYS · 6 CITIES · ONE WHEEL</span></section>
+<section class="primary-experience" aria-labelledby="wheel-title">
+<div class="primary-bar"><div><span class="section-kicker">THE CLIMATE WHEEL</span><h2 id="wheel-title">全年气温轮盘 <span class="live-mark">● 交互探索</span></h2></div><span class="wheel-explain">点按或拖动外圈刻度，选择一年中的任意一天 <span aria-hidden="true">↗</span></span></div>
+<div class="primary-toolbar">
+<div class="toolbar-city"><label class="fieldlabel" for="city">探索城市</label><div class="select-wrap"><select id="city"><option value="tokyo">东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu">成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option></select></div><div class="city-info" id="city-detail">日本 · 东京站</div></div>
+<div class="toolbar-metric"><span class="fieldlabel">气温视角</span><div class="seg" role="group" aria-label="气温指标"><button type="button" data-metric="mean" class="active" aria-pressed="true">日均温</button><button type="button" data-metric="high" aria-pressed="false">日最高</button><button type="button" data-metric="low" aria-pressed="false">日最低</button></div></div>
+<div class="toolbar-date"><label class="fieldlabel" for="date">选定日期</label><div class="date-row"><button class="iconbtn" id="prev-day" type="button" aria-label="前一天">‹</button><input id="date" type="date" value="2025-11-15" min="2025-01-01" max="2025-12-31"/><button class="iconbtn" id="next-day" type="button" aria-label="后一天">›</button></div></div>
+</div>
+<div class="wheel-showcase">
+<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> 365 DAYS · 12 MONTHS</span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="img" aria-label="365天气温轮盘，可拖动外圈选择起点日期，选择日期也可用输入框或滑动条。"></svg></div><div class="wheel-legend"><span>冷</span><span class="gradient"></span><span>热</span><span class="legend-separator"></span><span><span class="legend-dot"></span>起点</span><span><span class="legend-dot orange"></span>相似日</span><span id="ring-key">单城年轮</span></div></div>
+<div class="wheel-sidebar">
+<div class="sidebar-heading"><span>DATE SNAPSHOT</span><strong>此刻的气候</strong></div>
+<div class="sidebar-date"><span id="sidebar-date">11月15日</span><strong id="sidebar-temp">12.5<small>°C</small></strong></div><p class="sidebar-lead" id="sidebar-lead">东京 · 秋季 · 日均温</p>
+<div class="sidebar-divider"></div>
+<div class="sidebar-subtitle">与另一段时节呼应</div><div class="sidebar-match"><span class="match-orbit-dot"></span><div><strong id="sidebar-match-date">4月5日</strong><small id="sidebar-match-text">参考气温 ≈ 12.5°C</small></div><span class="sidebar-arrow">↗</span></div>
+<div class="sidebar-hint">点击年轮上的任意日期，即时探索气温与季节的变化。</div>
+<button type="button" id="open-mapping" class="sidebar-explore">探索日期映射 <span>↗</span></button>
+</div>
+</div>
+<div class="wheel-navigation"><label for="day-slider">沿着一年滑动</label><span id="slider-label">DAY 319 / 365</span><input class="range" id="day-slider" type="range" min="0" max="364" value="318" aria-label="选择一年中的某一天"/><div class="rangehead"><span>01 JAN</span><div class="shortcutrow"><button type="button" data-quick="03-15">3 月</button><button type="button" data-quick="08-15">8 月</button><button type="button" data-quick="11-15">11 月</button></div><span>31 DEC</span></div></div>
+</section>
+<section class="spectrum-card" aria-labelledby="spectrum-title"><div class="spectrum-heading"><div><span class="section-kicker">TEMPERATURE SPECTRUM</span><h2 id="spectrum-title">十二个月的温度光谱</h2></div><span class="foot-data" id="annual-average">年均 15.8°C</span></div><p id="spectrum-caption">从冬日的冷蓝到盛夏的暖红，点击光谱也能跳转日期。</p><div class="spectrum-body"><div class="spectrum-cityline"><strong id="spectrum-city">东京</strong><span id="spectrum-current">当前所选日期</span></div><div class="spectrum-gradient-track" id="months" tabindex="0" role="slider" aria-label="按全年温度光谱选择日期" aria-valuemin="1" aria-valuemax="365" aria-valuenow="319" aria-valuetext="11月15日"></div><div class="spectrum-month-labels" aria-hidden="true"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></div><div class="target-spectrum target-field" id="target-month-row" hidden><div class="spectrum-cityline"><strong id="target-spectrum-city">成都</strong><span>目标城市</span></div><div class="spectrum-gradient-track is-target" id="target-months" aria-hidden="true"></div></div></div></section>
+<details class="mapping-panel" id="mapping-details"><summary class="mapping-summary"><span class="summary-icon">⇄</span><span class="summary-text"><small>ADVANCED EXPLORER</small><strong>日期映射 · 发现气候相近的另一日</strong><span>同城季节回声 · 跨城市日期对照 · 综合气候分析</span></span><span class="summary-status">点击展开</span><span class="summary-chevron">⌄</span></summary>
+<div class="mapping-content"><nav class="mode-switch" aria-label="探索模式"><button id="mode-same" type="button" class="mode-option active" aria-pressed="true"><span class="mode-icon" aria-hidden="true">◎</span><span><b>同城 · 季节映射</b><small>在春秋之间寻找相近的气候</small></span></button><button id="mode-cross" type="button" class="mode-option" aria-pressed="false"><span class="mode-icon" aria-hidden="true">⇄</span><span><b>跨城市 · 日期映射</b><small>同样的温度，发生在哪一天？</small></span></button></nav>
+<div class="mapping-settings"><div class="target-field field" id="target-field" hidden><label class="fieldlabel" for="target-city">目标城市</label><div class="select-wrap"><select id="target-city"><option value="tokyo">东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu" selected>成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option></select></div><span class="city-info target-info" id="target-detail">中国 · 成都</span></div><button type="button" id="swap-cities" class="swap-button target-field" hidden>⇄ 交换起点和目标城市</button><div class="control-block"><span class="fieldlabel">日期匹配依据</span><div class="seg two" role="group" aria-label="匹配方式"><button type="button" data-algorithm="temp" class="active" aria-pressed="true">温度优先</button><button type="button" data-algorithm="climate" aria-pressed="false">综合气候</button></div></div></div>
+<div class="results" aria-live="polite"><section class="panel result-card"><div class="result-top"><span>01 / 起点日期</span><span>ORIGINAL</span></div><div class="overline" id="selected-subtitle">东京 · 秋季</div><div class="big-date" id="selected-date">11月15日</div><div class="big-temp" id="selected-temp">≈ 12.5 °C</div><div class="fine-print">气候参考日期，而非当天实时天气。</div></section><section class="panel result-card match-card"><div class="result-top"><span>02 / 最佳对应</span><span>CLIMATE MATCH</span></div><div class="overline" id="matched-subtitle">东京 · 春季</div><div class="big-date" id="matched-date">4月5日</div><div class="big-temp" id="matched-temp">≈ 12.5 °C</div><div class="diff" id="match-diff">气温差约 <b>0.0°C</b></div></section><section class="panel details-card"><div class="details-head"><b>气候差异一览</b><small id="metric-note">起点 vs 匹配日</small></div><div class="metric-grid" id="metric-grid"></div><p class="detail-caption" id="detail-caption">日高/低温为插值参考；湿度与降水对比以气候月均值为单位。</p></section></div>
+<div class="mapping-insight"><div class="foot-top"><strong id="insight-title">温度相似，季节不同</strong><button type="button" id="copy-result" class="cta">复制对比结果 ↗</button></div><p class="insight-text" id="insight-text">请选择日期查看季节匹配的详细说明。</p><p id="match-method-note">匹配基于气候参考值，综合气候匹配同时衡量平均温度、最高温、最低温、湿度及降水。</p></div></div></details>
+</main>
+<footer class="footer"><span>SEASONAL ECHO © 2026 · 非闰年 365 日。逐日温度由月度平年值平滑插值，仅用于气候对比，不是逐日实测或天气预报。</span><span>数据：<a href="https://www.data.jma.go.jp/stats/en/normal/normal.html" target="_blank" rel="noopener">JMA ↗</a> · <a href="https://ds.data.jma.go.jp/tcc/tcc/products/climate/climatview/frame.php" target="_blank" rel="noopener">ClimatView ↗</a> · <a href="https://www.climate-zone.com/" target="_blank" rel="noopener">Climate Zone ↗</a>。部分湿度、降水资料为估算或历史样本。</span></footer>
+</div>
+<div id="sr-status" class="sr-only" role="status" aria-live="polite"></div>
+<script>
+(()=>{'use strict';
+const CITIES={
+  tokyo:{name:'东京',en:'Tokyo',region:'日本 · 关东地区 · 东京站',mean:[5.4,6.1,9.4,14.3,18.8,21.9,25.7,26.9,23.3,18.0,12.5,7.7],high:[9.8,10.9,14.2,19.4,23.6,26.1,29.9,31.3,27.5,22.0,16.7,12.0],low:[1.2,2.1,5.0,9.8,14.6,18.5,22.4,23.5,20.3,14.8,8.8,3.8]},
+  beijing:{name:'北京',en:'Beijing',region:'中国 · 华北地区 · 北京站 54511',mean:[-2.8,0.6,7.5,15.1,21.3,25.3,27.2,26.0,21.2,13.8,5.2,-1.0],high:[2.3,6.1,13.2,21.0,27.2,30.8,31.8,30.7,26.5,19.3,10.3,3.7],low:[-6.9,-4.2,1.9,9.0,15.1,20.0,23.0,22.0,16.3,8.8,0.7,-5.0]},
+  hefei:{name:'合肥',en:'Hefei',region:'中国 · 安徽 · 合肥站 58321',mean:[3.1,5.7,10.6,16.8,22.2,25.6,28.6,27.9,23.6,17.9,11.4,5.3],high:[7.2,10.2,15.5,21.9,27.1,29.7,32.6,32.1,28.2,22.9,16.4,9.9],low:[-0.1,2.2,6.6,12.4,17.8,21.9,25.4,24.7,20.1,13.9,7.4,1.7]},
+  chengdu:{name:'成都',en:'Chengdu',region:'中国 · 四川 · 温江站 56187',mean:[5.7,8.0,12.6,17.6,21.4,24.1,25.6,25.4,21.7,17.3,12.3,7.0],high:[9.3,12.1,16.8,22.5,26.3,28.3,30.0,29.9,25.7,20.7,16.0,10.7],low:[2.7,4.9,8.4,12.9,17.2,20.5,22.1,21.7,18.9,14.7,9.6,4.2]},
+  xian:{name:'西安',en:'Xi’an',region:'中国 · 陕西 · 泾河站 57131（部分项目16年样本）',mean:[0.5,4.3,10.9,16.8,21.5,26.1,27.8,26.1,20.8,15.2,8.3,2.3],high:[4.9,9.2,16.6,23.0,27.6,32.1,32.8,30.9,25.4,19.7,12.9,6.8],low:[-3.1,0.3,6.1,11.6,16.4,21.0,23.4,22.2,17.3,11.5,4.8,-1.5]},
+  guangzhou:{name:'广州',en:'Guangzhou',region:'中国 · 广东 · 广州站 59287',mean:[13.8,15.5,18.3,22.5,26.0,27.9,28.9,28.6,27.4,24.5,20.1,15.5],high:[18.7,20.0,22.3,26.4,30.0,32.0,33.3,33.2,32.0,29.3,25.3,20.7],low:[10.6,12.5,15.5,19.6,23.1,25.1,25.8,25.5,24.2,20.9,16.7,11.9]}
+};
+Object.assign(CITIES.tokyo,{"humidity":[51,52,57,62,68,75,76,74,75,71,64,56],"rain":[59.7,56.5,116.0,133.7,139.7,167.8,156.2,154.7,224.9,234.8,96.3,57.9]});
+Object.assign(CITIES.beijing,{"humidity":[51,48,43,38,39,50,65,68,61,56,56,54],"rain":[2.1,5.6,8.5,21.9,36.5,72.7,170.6,114.1,53.3,29.3,13.7,2.5]});
+Object.assign(CITIES.hefei,{"humidity":[75,74,74,71,70,73,80,79,75,71,73,74],"rain":[47,51,82,80,90,162,180,140,65,56,54,37]});
+Object.assign(CITIES.chengdu,{"humidity":[75,73,68,65,64,68,75,79,80,80,77,76],"rain":[7,12,19,44,60,114,179,211,94,36,14,6]});
+Object.assign(CITIES.xian,{"humidity":[59,58,54,50,49,51,59,61,65,64,63,59],"rain":[7,8,27,36,51,64,96,84,80,62,21,7]});
+Object.assign(CITIES.guangzhou,{"humidity":[68,72,74,78,82,87,87,86,83,76,70,66],"rain":[58,64,81,206,333,368,231,254,213,69,38,30]});
+const daysInMonth=[31,28,31,30,31,30,31,31,30,31,30,31];
+const starts=[0];for(let i=0;i<12;i++)starts[i+1]=starts[i]+daysInMonth[i];
+const anchors=starts.slice(0,12).map((s,i)=>s+(daysInMonth[i]-1)/2);
+const seasons=['冬季','冬季','春季','春季','春季','夏季','夏季','夏季','秋季','秋季','秋季','冬季'];
+const metricLabels={mean:'日均温',high:'日最高',low:'日最低'};
+const $=id=>document.getElementById(id);
+const wheel=$('wheel');const svgNS='http://www.w3.org/2000/svg';
+const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
+const state={mode:'same',source:'tokyo',target:'chengdu',metric:'mean',algorithm:'temp',day:starts[10]+14,hover:null,drag:false};
+const seriesCache={};
+function idxToDate(d){let m=0;while(m<11 && starts[m+1]<=d)m++;return{month:m+1,day:d-starts[m]+1,monthIndex:m}}
+function dateStr(d){const x=idxToDate(d);return x.month+'月'+x.day+'日'}
+function dateToIdx(v){const p=v.split('-').map(Number);if(p.length!==3||p[1]<1||p[1]>12||!Number.isFinite(p[2]))return state.day;return starts[p[1]-1]+clamp(p[2],1,daysInMonth[p[1]-1])-1}
+function interpolated(arr,day){let i=0;while(i<11&&anchors[i+1]<=day)i++;let a=i,b=(i+1)%12,x1=anchors[i],x2=i===11?anchors[0]+365:anchors[i+1];
+if(day<anchors[0]){a=11;b=0;x1=anchors[11]-365;x2=anchors[0]}
+const prev=(a+11)%12,next=(b+1)%12;
+const xPrev=day<anchors[0]?anchors[10]-365:(a===0?anchors[11]-365:anchors[a-1]);
+const xNext=b===11?anchors[0]+365:(b===0&&day>=anchors[0]?anchors[1]+365:anchors[b+1]);
+const tangentA=(arr[b]-arr[prev])/(x2-xPrev),tangentB=(arr[next]-arr[a])/(xNext-x1);
+const h=x2-x1,t=(day-x1)/h,t2=t*t,t3=t2*t;
+return (2*t3-3*t2+1)*arr[a]+(t3-2*t2+t)*h*tangentA+(-2*t3+3*t2)*arr[b]+(t3-t2)*h*tangentB}
+function series(city,key){const id=city+'_'+key;return seriesCache[id]||(seriesCache[id]=Array.from({length:365},(_,d)=>interpolated(CITIES[city][key],d)))}
+function value(city,key,d){return series(city,key)[d]}
+function trend(city,d){return value(city,'mean',(d+3)%365)-value(city,'mean',(d+362)%365)}
+function circularDist(a,b){return Math.min(Math.abs(a-b),365-Math.abs(a-b))}
+function normalizedRain(city,d){const m=idxToDate(d).monthIndex;return CITIES[city].rain[m]/daysInMonth[m]}
+function matchScore(from,d,to,i){const tmp=Math.abs(value(from,state.metric,d)-value(to,state.metric,i));if(state.algorithm==='temp')return tmp;
+const delta=(key)=>Math.abs(value(from,key,d)-value(to,key,i));
+const hum=Math.abs(value(from,'humidity',d)-value(to,'humidity',i));
+const rain=Math.abs(normalizedRain(from,d)-normalizedRain(to,i));
+return Math.sqrt(.50*(tmp/2.5)**2+.13*(delta('mean')/3)**2+.10*(delta('high')/4)**2+.10*(delta('low')/4)**2+.10*(hum/13)**2+.07*(rain/3)**2)}
+function matchDate(d){const from=state.source,to=state.mode==='same'?from:state.target;const sourceTrend=Math.sign(trend(from,d));let best=null;
+for(let i=0;i<365;i++){
+ if(state.mode==='same'){
+  if(circularDist(d,i)<42)continue;
+  const candidateTrend=Math.sign(trend(to,i));
+  if(sourceTrend && candidateTrend && sourceTrend===candidateTrend)continue;
+ }
+ const score=matchScore(from,d,to,i);
+ const tie=state.mode==='same'?-circularDist(d,i):((Math.sign(trend(to,i))!==sourceTrend?1:0)*366+circularDist(d,i));
+ // Score always wins; use slope and date proximity only to resolve near-equal temperatures.
+ if(!best||score<best.score-0.015||(Math.abs(score-best.score)<=0.015 && tie<best.tie))best={index:i,score,tie};
+}
+return best?best.index:(d+182)%365}
+function svgEl(tag,attrs={},parent=wheel){const e=document.createElementNS(svgNS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);parent.appendChild(e);return e}
+function polar(deg,r){const a=(deg-90)*Math.PI/180;return{x:360+Math.cos(a)*r,y:360+Math.sin(a)*r}}
+const angleDay=day=>day/365*360;
+function colorFor(temp){const bounds=[-8,2,9,16,23,30,36],cols=[[81,143,195],[112,181,210],[126,197,168],[209,218,140],[239,186,111],[231,128,99],[209,91,91]];let n=0;while(n<bounds.length-2&&temp>bounds[n+1])n++;let t=clamp((temp-bounds[n])/(bounds[n+1]-bounds[n]),0,1);let c=cols[n].map((v,j)=>Math.round(v+(cols[n+1][j]-v)*t));return 'rgb('+c.join(',')+')'}
+let wheelBaseKey='';let overlayLayer=null;
+function drawWheel(){
+ const d=state.hover===null?state.day:state.hover,m=matchDate(d),cross=state.mode==='cross';
+ const key=[state.mode,state.source,state.target,state.metric].join('|');
+ const aSeries=series(state.source,state.metric),bSeries=series(cross?state.target:state.source,state.metric);
+ if(wheelBaseKey!==key){wheelBaseKey=key;wheel.replaceChildren();
+ svgEl('circle',{cx:360,cy:360,r:cross?269:261,fill:'none',stroke:'#344f5a','stroke-width':cross?44:61,opacity:.52});
+ svgEl('circle',{cx:360,cy:360,r:303,fill:'none',stroke:'#405a62','stroke-width':1,opacity:.5});
+ svgEl('circle',{cx:360,cy:360,r:cross?205:221,fill:'none',stroke:'#49636e','stroke-width':1,opacity:.6});
+ const bars=svgEl('g',{'pointer-events':'none'});
+ for(let i=0;i<365;i++){const angle=angleDay(i),p1=polar(angle,cross?255:239),p2=polar(angle,cross?281:280);svgEl('line',{x1:p1.x.toFixed(2),y1:p1.y.toFixed(2),x2:p2.x.toFixed(2),y2:p2.y.toFixed(2),stroke:colorFor(aSeries[i]),'stroke-width':3.5,opacity:.91,class:'tempbar'},bars)}
+ if(cross){const targetBars=svgEl('g',{'pointer-events':'none'});for(let i=0;i<365;i++){const angle=angleDay(i),p1=polar(angle,205),p2=polar(angle,233);svgEl('line',{x1:p1.x.toFixed(2),y1:p1.y.toFixed(2),x2:p2.x.toFixed(2),y2:p2.y.toFixed(2),stroke:colorFor(bSeries[i]),'stroke-width':3.6,opacity:.82,class:'tempbar'},targetBars)}}
+ for(let n=0;n<12;n++){const p1=polar(angleDay(starts[n]),cross?199:226),p2=polar(angleDay(starts[n]),295);svgEl('line',{x1:p1.x,y1:p1.y,x2:p2.x,y2:p2.y,class:'monthboundary','pointer-events':'none'});
+ const pos=polar(angleDay(starts[n]+daysInMonth[n]/2),328);const label=svgEl('text',{x:pos.x,y:pos.y,class:'monthlabel','data-month':n,'pointer-events':'none'});label.textContent=String(n+1).padStart(2,'0')}
+ overlayLayer=svgEl('g',{'pointer-events':'none'});
+ }
+ overlayLayer.replaceChildren();
+ const src=polar(angleDay(d),cross?252:226),dst=polar(angleDay(m),cross?240:226);
+ svgEl('path',{d:`M ${src.x} ${src.y} Q 360 360 ${dst.x} ${dst.y}`,fill:'none',stroke:'#accbbd','stroke-width':2,'stroke-dasharray':'5 7',opacity:.72,class:'connection-path'},overlayLayer);
+ for(const [day,color,r0,r1] of [[d,'#d4f18a',cross?246:223,304],[m,'#f8b188',cross?198:223,cross?241:304]]){
+ const p0=polar(angleDay(day),r0),p1=polar(angleDay(day),r1);
+ svgEl('line',{x1:p0.x,y1:p0.y,x2:p1.x,y2:p1.y,stroke:color,'stroke-width':4.5,'stroke-linecap':'round'},overlayLayer);
+ svgEl('circle',{cx:p1.x,cy:p1.y,r:10,fill:'none',stroke:color,'stroke-width':1,opacity:.5,class:'point-halo'},overlayLayer);
+ svgEl('circle',{cx:p1.x,cy:p1.y,r:6.4,fill:'#172833',stroke:color,'stroke-width':3},overlayLayer);
+ }
+ svgEl('circle',{cx:360,cy:360,r:177,fill:'#142934',stroke:'#46616a','stroke-width':1.5},overlayLayer);
+ svgEl('circle',{cx:360,cy:360,r:165,fill:'none',stroke:'#3c5a61','stroke-width':1,'stroke-dasharray':'2 10'},overlayLayer);
+ const label=(str,y,cls)=>{const e=svgEl('text',{x:360,y,class:cls},overlayLayer);e.textContent=str};
+ label(cross?CITIES[state.source].name+'  →  '+CITIES[state.target].name:'S E A S O N A L  E C H O',277,'orbit');
+ label(dateStr(d),345,'center-date');label('≈ '+aSeries[d].toFixed(1)+' °C',381,'center-num');
+ svgEl('line',{x1:312,y1:403,x2:408,y2:403,stroke:'#526a71','stroke-width':1},overlayLayer);
+ label(cross?'目标城市 · 最相近日期':'另一季节 · 最相近日期',433,'center-sub');
+ label(dateStr(m),479,'center-date');label(cross?CITIES[state.target].name+' · ≈ '+bSeries[m].toFixed(1)+' °C':'≈ '+bSeries[m].toFixed(1)+' °C',511,'center-num orange');
+ label(cross?'外圈起点 / 内圈目标':'拖动年轮，探索日期',544,'center-foot');
+ wheel.querySelectorAll('.monthlabel').forEach(el=>el.classList.toggle('selectedMonth',Number(el.dataset.month)===idxToDate(d).monthIndex));
+ $('ring-key').textContent=cross?'外圈起点 · 内圈目标':'单城年轮';
+}
+function changeDay(day){state.day=((day%365)+365)%365;state.hover=null;render()}
+function activeClasses(){for(const [attr,val] of [['data-metric',state.metric],['data-algorithm',state.algorithm]]){document.querySelectorAll('['+attr+']').forEach(btn=>{const active=btn.getAttribute(attr)===val;btn.classList.toggle('active',active);btn.setAttribute('aria-pressed',String(active))})}
+for(const [id,active] of [['mode-same',state.mode==='same'],['mode-cross',state.mode==='cross']]){$(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',String(active))}}
+function renderResults(){const d=state.hover===null?state.day:state.hover,m=matchDate(d),src=state.source,dst=state.mode==='same'?src:state.target,a=idxToDate(d),b=idxToDate(m);
+ $('selected-subtitle').textContent=CITIES[src].name+' · '+seasons[a.monthIndex]+' · '+metricLabels[state.metric];
+ $('selected-date').textContent=dateStr(d);$('selected-temp').textContent='≈ '+value(src,state.metric,d).toFixed(1)+' °C';
+ $('sidebar-date').textContent=dateStr(d);$('sidebar-temp').innerHTML=value(src,state.metric,d).toFixed(1)+'<small>°C</small>';
+ $('sidebar-lead').textContent=CITIES[src].name+' · '+seasons[a.monthIndex]+' · '+metricLabels[state.metric];
+ $('sidebar-match-date').textContent=dateStr(m);$('sidebar-match-text').textContent=CITIES[dst].name+' · ≈ '+value(dst,state.metric,m).toFixed(1)+'°C';
+ $('matched-subtitle').textContent=CITIES[dst].name+' · '+seasons[b.monthIndex]+' · '+metricLabels[state.metric];
+ $('matched-date').textContent=dateStr(m);$('matched-temp').textContent='≈ '+value(dst,state.metric,m).toFixed(1)+' °C';
+ const delta=Math.abs(value(src,state.metric,d)-value(dst,state.metric,m));
+ $('match-diff').innerHTML=state.algorithm==='climate'?'综合气候相似 · 参考气温差 <b>'+delta.toFixed(1)+' °C</b>':'主要气温差 <b>'+delta.toFixed(1)+' °C</b>';
+ const rows=[['平均最高温',value(src,'high',d).toFixed(1)+'°C',value(dst,'high',m).toFixed(1)+'°C'],['平均最低温',value(src,'low',d).toFixed(1)+'°C',value(dst,'low',m).toFixed(1)+'°C'],['月均湿度',Math.round(CITIES[src].humidity[a.monthIndex])+'%',Math.round(CITIES[dst].humidity[b.monthIndex])+'%'],['月降水量',Math.round(CITIES[src].rain[a.monthIndex])+'mm',Math.round(CITIES[dst].rain[b.monthIndex])+'mm']];
+ const grid=$('metric-grid');grid.replaceChildren();
+ [['', '起点', '对应'],...rows].forEach((r,j)=>r.forEach((text,i)=>{let cell=document.createElement('span');cell.className='cell '+(j===0?'head':i===0?'metric-name':i===1?'first':'second')+(i===2?' align-right':'');cell.textContent=text;grid.appendChild(cell)}));
+ $('metric-note').textContent=CITIES[src].name+' vs '+CITIES[dst].name;
+ $('detail-caption').textContent='高/低温为参考日期插值；湿度、降水展示各自所在月份的平均水平。湿度含模型估算，降水并非当天降雨量。';
+ const tempText='约 '+delta.toFixed(1)+'°C';
+ $('insight-title').textContent=state.mode==='same'?'一座城市，两段季节':'不同城市，相近温度';
+ const warmA=seasons[a.monthIndex],warmB=seasons[b.monthIndex];
+ $('insight-text').textContent=state.mode==='same'?
+  CITIES[src].name+'的'+dateStr(d)+'（'+warmA+'），'+metricLabels[state.metric]+'约 '+value(src,state.metric,d).toFixed(1)+'°C；与'+dateStr(m)+'（'+warmB+'）相差'+tempText+'。虽然温度相近，月平均湿度和降水量仍可能不同。':
+  CITIES[src].name+' '+dateStr(d)+'，在'+CITIES[dst].name+'大致对应'+dateStr(m)+'。两地'+metricLabels[state.metric]+'相差'+tempText+'，但降水和湿度各有自己的季节节奏。';
+ $('match-method-note').textContent=state.algorithm==='temp'?'当前按「'+metricLabels[state.metric]+'」优先匹配，其他指标仅用于对照。':'当前综合考虑选定气温、平均最高/最低温、月均湿度及月降水强度；不保证单项气温差最小。';
+}
+function renderMonthRow(city,container,interactive,activeIndex){
+ const track=$(container),key=city+'|'+state.metric;
+ if(track.dataset.key!==key){track.dataset.key=key;track.replaceChildren();const frag=document.createDocumentFragment();for(let i=0;i<365;i++){const seg=document.createElement('span');seg.style.background=colorFor(value(city,state.metric,i));frag.appendChild(seg)}track.appendChild(frag)}
+ const current=interactive?state.day:matchDate(state.day);track.style.setProperty('--position',((current+.5)/365*100).toFixed(3)+'%');
+ if(interactive){track.setAttribute('aria-valuenow',String(state.day+1));track.setAttribute('aria-valuetext',dateStr(state.day));}
+}
+function render(sync=true){const cross=state.mode==='cross';activeClasses();if(sync){
+ $('target-field').hidden=!cross;$('swap-cities').hidden=!cross;$('target-month-row').hidden=!cross;
+ $('city').value=state.source;$('target-city').value=state.target;
+ $('city-detail').textContent=CITIES[state.source].region;$('target-detail').textContent=CITIES[state.target].region;
+ const date=idxToDate(state.day);$('date').value='2025-'+String(date.month).padStart(2,'0')+'-'+String(date.day).padStart(2,'0');
+ $('day-slider').value=state.day;$('slider-label').textContent='DAY '+(state.day+1)+' / 365';
+ $('view-mode').textContent=metricLabels[state.metric]+' · '+(cross?'双城市年轮':'单城市年轮');
+ const avg=CITIES[state.source].mean.reduce((sum,x)=>sum+x,0)/12;
+ $('annual-average').textContent=CITIES[state.source].name+' 年均 '+avg.toFixed(1)+'°C';
+ $('spectrum-city').textContent=CITIES[state.source].name;$('spectrum-current').textContent=dateStr(state.day)+' · '+value(state.source,state.metric,state.day).toFixed(1)+'°C';$('target-spectrum-city').textContent=CITIES[state.target].name;
+ renderMonthRow(state.source,'months',true,date.monthIndex);
+ if(cross)renderMonthRow(state.target,'target-months',false,idxToDate(matchDate(state.day)).monthIndex);
+ $('spectrum-caption').textContent=cross?'两行分别表示起点与目标城市的月度温度；点击第一行可选日期。':'按月度气候平年值着色；点击月份可跳转到当月 15 日。';
+ }
+ drawWheel();renderResults();if(!sync){renderMonthRow(state.source,'months',true,idxToDate(state.day).monthIndex);if(cross)renderMonthRow(state.target,'target-months',false,idxToDate(matchDate(state.day)).monthIndex)}if(sync)$('sr-status').textContent=CITIES[state.source].name+' '+dateStr(state.day)+' 的气候匹配已更新';
+}
+$('open-mapping').addEventListener('click',()=>{$('mapping-details').open=true;$('mapping-details').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});});
+$('months').addEventListener('pointerdown',e=>{const r=$('months').getBoundingClientRect();changeDay(Math.floor(clamp((e.clientX-r.left)/r.width,0,.999999)*365))});
+$('months').addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();changeDay(state.day+(e.key==='ArrowRight'?1:-1))}if(e.key==='Home'){e.preventDefault();changeDay(0)}if(e.key==='End'){e.preventDefault();changeDay(364)}});
+function animateWheel(){const el=$('wheel-panel');el.classList.remove('reveal-wheel');void el.offsetWidth;el.classList.add('reveal-wheel')}
+$('mode-same').addEventListener('click',()=>{state.mode='same';state.hover=null;animateWheel();render()});
+$('mode-cross').addEventListener('click',()=>{state.mode='cross';state.hover=null;if(state.target===state.source)state.target=Object.keys(CITIES).find(k=>k!==state.source);animateWheel();render()});
+$('city').addEventListener('change',e=>{const old=state.source;state.source=e.target.value;if(state.mode==='cross'&&state.source===state.target)state.target=old;state.hover=null;animateWheel();render()});
+$('target-city').addEventListener('change',e=>{const old=state.target;state.target=e.target.value;if(state.target===state.source)state.source=old;state.hover=null;animateWheel();render()});
+$('swap-cities').addEventListener('click',()=>{[state.source,state.target]=[state.target,state.source];state.hover=null;animateWheel();render()});
+document.querySelectorAll('[data-metric]').forEach(b=>b.addEventListener('click',()=>{state.metric=b.dataset.metric;state.hover=null;animateWheel();render()}));
+document.querySelectorAll('[data-algorithm]').forEach(b=>b.addEventListener('click',()=>{state.algorithm=b.dataset.algorithm;state.hover=null;render()}));
+$('date').addEventListener('change',e=>changeDay(dateToIdx(e.target.value)));
+$('day-slider').addEventListener('input',e=>changeDay(Number(e.target.value)));
+$('prev-day').addEventListener('click',()=>changeDay(state.day-1));$('next-day').addEventListener('click',()=>changeDay(state.day+1));
+document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>changeDay(dateToIdx('2025-'+b.dataset.quick))));
+// Hit-test a full-size ring by angle: on mobile the individual daily strokes are too small to tap reliably.
+function dayFromPointer(e){const r=wheel.getBoundingClientRect();const x=(e.clientX-r.left)*720/r.width-360,y=(e.clientY-r.top)*720/r.height-360;const radius=Math.hypot(x,y);
+if(radius<235||radius>342)return null;const ang=(Math.atan2(y,x)*180/Math.PI+90+360)%360;return Math.round(ang/360*365)%365}
+wheel.addEventListener('pointerdown',e=>{const d=dayFromPointer(e);if(d===null)return;state.drag=true;wheel.setPointerCapture(e.pointerId);changeDay(d);e.preventDefault()});
+wheel.addEventListener('pointermove',e=>{const d=dayFromPointer(e);if(state.drag){if(d!==null&&d!==state.day)changeDay(d);return}
+if(e.pointerType==='mouse'){if(state.hover!==d){state.hover=d;render(false)}}});
+function endDrag(e){if(state.drag){state.drag=false;if(wheel.hasPointerCapture(e.pointerId))wheel.releasePointerCapture(e.pointerId)}}
+wheel.addEventListener('pointerup',endDrag);wheel.addEventListener('pointercancel',endDrag);
+wheel.addEventListener('pointerleave',()=>{if(state.drag)return;if(state.hover!==null){state.hover=null;render(false)}});
+document.addEventListener('keydown',e=>{if(['INPUT','SELECT','BUTTON','TEXTAREA'].includes(document.activeElement?.tagName))return;if(e.key==='ArrowLeft'){e.preventDefault();changeDay(state.day-1)}if(e.key==='ArrowRight'){e.preventDefault();changeDay(state.day+1)}});
+$('copy-result').addEventListener('click',async()=>{
+const d=state.day,m=matchDate(d),a=state.source,b=state.mode==='same'?a:state.target;
+const text=`季节回声｜${state.mode==='same'?'同城季节映射':'跨城市日期映射'}\n起点：${CITIES[a].name} ${dateStr(d)} · ${metricLabels[state.metric]}约 ${value(a,state.metric,d).toFixed(1)}°C\n对应：${CITIES[b].name} ${dateStr(m)} · ${metricLabels[state.metric]}约 ${value(b,state.metric,m).toFixed(1)}°C\n平均最高：${value(a,'high',d).toFixed(1)} / ${value(b,'high',m).toFixed(1)}°C\n平均最低：${value(a,'low',d).toFixed(1)} / ${value(b,'low',m).toFixed(1)}°C\n月均相对湿度：${CITIES[a].humidity[idxToDate(d).monthIndex]} / ${CITIES[b].humidity[idxToDate(m).monthIndex]}%\n月降水量：${CITIES[a].rain[idxToDate(d).monthIndex]} / ${CITIES[b].rain[idxToDate(m).monthIndex]} mm\n匹配方式：${state.algorithm==='temp'?'温度优先':'综合气候'}；参考气候平年值与月度插值，并非逐日实测或天气预报。`;
+ const btn=$('copy-result');try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(text);else{const area=document.createElement('textarea');area.value=text;document.body.appendChild(area);area.select();if(!document.execCommand('copy'))throw new Error('复制失败');area.remove()}btn.textContent='已复制 ✓'}catch(err){btn.textContent='复制失败'}setTimeout(()=>btn.textContent='复制对比结果 ↗',1800);
+});
+render();
+})();
+</script>
+</body>
+</html>

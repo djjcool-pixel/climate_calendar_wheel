@@ -143,7 +143,12 @@ select{-webkit-appearance:none;line-height:1.25}
 .sidebar-explore,.swap-button,.cta,.mode-option{min-height:44px}
 .sidebar-explore{transition:background-color .18s,border-color .18s,transform .18s var(--ease-out)}
 .mode-option{transition:border-color .22s,background-color .22s}
-.range{min-height:28px;margin:0;touch-action:pan-y}
+.range{appearance:none;-webkit-appearance:none;height:28px;min-height:28px;margin:0;background:transparent;touch-action:pan-y}
+.range::-webkit-slider-runnable-track{height:4px;border-radius:99px;background:linear-gradient(90deg,var(--green) var(--progress,0%),#40545f var(--progress,0%))}
+.range::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:16px;height:16px;margin-top:-6px;border:0;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px #d4f18a12}
+.range::-moz-range-track{height:4px;border-radius:99px;background:#40545f}
+.range::-moz-range-progress{height:4px;border-radius:99px;background:var(--green)}
+.range::-moz-range-thumb{width:16px;height:16px;border:0;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px #d4f18a12}
 .wheel-svg-wrap{position:relative;isolation:isolate;--touch-x:0px;--touch-y:0px;-webkit-tap-highlight-color:transparent}
 .wheel-svg-wrap:before{content:'';position:absolute;inset:7.4%;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle at 34% 20%,#a1d6da20,#102731 70%);box-shadow:0 12px 23px #020e1760,inset 0 2px 3px #c4f0e01b,inset 0 -9px 16px #000b1290}
 .wheel-svg-wrap:after{content:'';position:absolute;left:0;top:0;width:130px;height:130px;z-index:2;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#e5ffcc25,transparent 68%);opacity:0;transform:translate3d(calc(var(--touch-x) - 65px),calc(var(--touch-y) - 65px),0);transition:opacity .2s}
@@ -444,7 +449,7 @@ function render(sync=true){const cross=state.mode==='cross',day=state.hover??sta
  $('city').value=state.source;$('target-city').value=state.target;
  setText($('city-detail'),CITIES[state.source].region);setText($('target-detail'),CITIES[state.target].region);
  const date=idxToDate(state.day);$('date').value=calendarYear+'-'+String(date.month).padStart(2,'0')+'-'+String(date.day).padStart(2,'0');
- $('day-slider').value=state.day;setText($('slider-label'),'DAY '+(state.day+1)+' / 365');
+ $('day-slider').value=state.day;$('day-slider').style.setProperty('--progress',(state.day/364*100).toFixed(3)+'%');setText($('slider-label'),'DAY '+(state.day+1)+' / 365');
  setText($('view-mode'),metricLabels[state.metric]+' · '+(cross?'跨城市':'同城季节'));
  const title=cross?'跨城市日期映射 ':'同城季节映射 ';if($('wheel-title').firstChild.nodeValue!==title)$('wheel-title').firstChild.nodeValue=title;
  const avg=CITIES[state.source].mean.reduce((sum,x)=>sum+x,0)/12;

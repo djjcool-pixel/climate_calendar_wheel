@@ -243,7 +243,19 @@ select{-webkit-appearance:none;line-height:1.25}
 @media(prefers-reduced-motion:reduce){.dial-surface{transform:none!important;will-change:auto!important}}
 
 /* Wardrobe suggestions reuse the selected day's local climate series. */
-.outfit-card{margin-top:12px;padding:22px 24px 17px;background:linear-gradient(130deg,#19333b,#142b36 78%);border:1px solid #47635b70;border-radius:18px;min-width:0}
+.outfit-card{margin-top:12px;background:linear-gradient(130deg,#19333b,#142b36 78%);border:1px solid #47635b70;border-radius:18px;min-width:0}
+.outfit-summary{padding:22px 24px 17px;list-style:none;cursor:pointer;border-radius:inherit;-webkit-tap-highlight-color:transparent}
+.outfit-summary::-webkit-details-marker{display:none}
+.outfit-summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.outfit-details{padding:0 24px 17px}
+.outfit-preview{margin:0;color:#d0e0c7;font-size:12px;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.outfit-toggle{display:flex;align-items:center;gap:6px;margin-top:11px;color:#b6d49e;font-size:10px;line-height:18px}
+.outfit-toggle svg{width:16px;height:16px;flex:none;transition:transform .18s ease}
+.outfit-preview-note{margin-left:auto;color:#83a2a8;font-size:9px}
+.outfit-close-label{display:none}
+.outfit-card[open] .outfit-open-label,.outfit-card[open] .outfit-preview{display:none}
+.outfit-card[open] .outfit-close-label{display:inline}
+.outfit-card[open] .outfit-toggle svg{transform:rotate(180deg)}
 .outfit-head{display:flex;align-items:center;justify-content:space-between;gap:14px}
 .outfit-head h2{font-size:18px;font-weight:700;letter-spacing:-.02em;margin:5px 0 6px}
 .outfit-context{margin:0;color:#99b6bb;font-size:11px;line-height:1.5;min-height:17px}
@@ -260,11 +272,17 @@ select{-webkit-appearance:none;line-height:1.25}
 .outfit-notes p:before{content:'·';position:absolute;left:0;color:#b4d394}
 .outfit-footnote{margin:12px 0 0;padding-top:10px;border-top:1px solid #49656035;font-size:10px;line-height:1.6;color:#86a4ac}
 @media(max-width:760px){
- .outfit-card{padding:17px 14px 14px;border-radius:16px}.outfit-head h2{font-size:16px}.outfit-badge{font-size:10px;padding:6px 9px}
- .outfit-weather{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:13px 0 12px;padding-top:11px}.outfit-weather b{font-size:11px;margin-left:5px}
+ :root{--secondary-preview-height:216px}
+ .outfit-card{border-radius:16px}.outfit-summary{padding:17px 14px 14px}.outfit-details{padding:0 14px 14px}.outfit-head h2{font-size:16px}.outfit-badge{font-size:10px;padding:6px 9px}
+ .outfit-card:not([open]) .outfit-summary{min-height:calc(var(--secondary-preview-height) - 2px);display:flex;flex-direction:column;justify-content:space-between}
+ .outfit-card:not([open]) .outfit-summary>*,.outfit-head{width:100%}
+ .spectrum-card{min-height:var(--secondary-preview-height)}
+ .outfit-weather{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:11px 0 10px;padding-top:10px}.outfit-weather b{font-size:11px;margin-left:5px}
+ .outfit-toggle{margin-top:7px}
  .outfit-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.outfit-piece{padding:12px 10px;column-gap:8px;min-height:94px}.outfit-piece dd{font-size:12px;min-height:38px}
  .outfit-notes{grid-template-columns:1fr;gap:5px;margin-top:12px}.outfit-notes p{min-height:19px;font-size:10px}
 }
+@media(prefers-reduced-motion:reduce){.outfit-toggle svg{transition:none}}
 </style>
 </head>
 <body>
@@ -292,13 +310,19 @@ select{-webkit-appearance:none;line-height:1.25}
 </div>
 <div class="wheel-navigation"><label for="day-slider">沿着一年滑动</label><span id="slider-label">DAY 319 / 365</span><input class="range" id="day-slider" type="range" min="0" max="364" value="318" aria-label="选择一年中的某一天"/><div class="rangehead"><span>01 JAN</span><div class="shortcutrow"><button type="button" data-quick="03-15">3 月</button><button type="button" data-quick="08-15">8 月</button><button type="button" data-quick="11-15">11 月</button></div><span>31 DEC</span></div></div>
 </section>
-<section class="outfit-card" id="outfit-card" aria-labelledby="outfit-title">
+<details class="outfit-card" id="outfit-card" aria-labelledby="outfit-title" open>
+<summary class="outfit-summary">
 <div class="outfit-head"><div><span class="section-kicker">WHAT TO WEAR</span><h2 id="outfit-title">服装推荐</h2><p class="outfit-context" id="outfit-context">根据所选城市与日期提供参考</p></div><span class="outfit-badge" id="outfit-badge">日常穿搭</span></div>
 <div class="outfit-weather" aria-label="推荐参考气温"><span>日均<b id="outfit-mean">—</b></span><span>低温<b id="outfit-low">—</b></span><span>高温<b id="outfit-high">—</b></span></div>
+<p class="outfit-preview" id="outfit-preview">穿搭建议</p>
+<span class="outfit-toggle"><span class="outfit-open-label">展开穿搭详情</span><span class="outfit-close-label">收起详情</span><span class="outfit-preview-note">气候参考</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></span>
+</summary>
+<div class="outfit-details">
 <dl class="outfit-grid"><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4-5 3 3 5 2-1v9h8v-9l2 1 3-5-5-3c-1 3-7 3-8 0Z"/></svg><dt>上装</dt><dd id="outfit-top">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 3-5 4-1 12 5 1 1-9v10h6V11l1 9 5-1-1-12-5-4-3 4-3-4Z"/><path d="M12 7v14M9 3l3 8 3-8"/></svg><dt>外搭</dt><dd id="outfit-outer">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12l1 18h-6l-1-11-1 11H5L6 3Z"/><path d="M6 7h12M12 3v4"/></svg><dt>下装</dt><dd id="outfit-bottom">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h5l2 6 4 2 5 1 1 4H3V9l1-2Z"/><path d="M3 17h17M10 12l3-2M12 14l3-2"/></svg><dt>鞋履</dt><dd id="outfit-shoes">—</dd></div></dl>
 <div class="outfit-notes"><p id="outfit-layer-note">按体感灵活增减衣层。</p><p id="outfit-extra-note">外出前留意实时天气。</p></div>
 <p class="outfit-footnote">按历史气候均值提供日常穿搭参考，出门前请结合实时天气与个人体感调整。</p>
-</section>
+</div>
+</details>
 <section class="spectrum-card" aria-labelledby="spectrum-title"><div class="spectrum-heading"><div><span class="section-kicker">TEMPERATURE SPECTRUM</span><h2 id="spectrum-title">全年温度光谱</h2></div><span class="foot-data" id="annual-average">年均 15.8°C</span></div><p id="spectrum-caption" hidden></p><div class="spectrum-body"><div class="spectrum-cityline"><strong id="spectrum-city">成都</strong><span id="spectrum-current">当前所选日期</span></div><div class="spectrum-gradient-track" id="months" tabindex="0" role="slider" aria-label="按全年温度光谱选择日期" aria-valuemin="1" aria-valuemax="365" aria-valuenow="319" aria-valuetext="11月15日"></div><div class="spectrum-month-labels" aria-hidden="true"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></div><div class="target-spectrum target-field" id="target-month-row" hidden><div class="spectrum-cityline"><strong id="target-spectrum-city">东京</strong><span>目标城市</span></div><div class="spectrum-gradient-track is-target" id="target-months" aria-hidden="true"></div></div></div></section>
 <details class="mapping-panel" id="mapping-details"><summary class="mapping-summary"><span class="summary-icon">⇄</span><span class="summary-text"><small>MORE OPTIONS</small><strong>更多日期比较</strong></span><span class="summary-chevron">⌄</span></summary>
 <div class="mapping-content"><nav class="mode-switch" aria-label="探索模式"><button id="mode-same" type="button" class="mode-option active" aria-pressed="true"><span class="mode-icon" aria-hidden="true">◎</span><span><b>同城 · 季节映射</b><small>在春秋之间寻找相近的气候</small></span></button><button id="mode-cross" type="button" class="mode-option" aria-pressed="false"><span class="mode-icon" aria-hidden="true">⇄</span><span><b>跨城市 · 日期映射</b><small>同样的温度，发生在哪一天？</small></span></button></nav>
@@ -407,6 +431,7 @@ function renderClothing(day){
  const city=state.source,month=idxToDate(day).monthIndex,climate={mean:value(city,'mean',day),low:value(city,'low',day),high:value(city,'high',day),humidity:CITIES[city].humidity[month],rain:CITIES[city].rain[month]};
  const advice=clothingAdvice(climate);
  setText($('outfit-context'),CITIES[city].name+' · '+dateStr(day));
+ setText($('outfit-preview'),advice.items[0]+' · '+advice.items[1]);
  setText($('outfit-badge'),advice.label);$('outfit-card').dataset.tier=advice.id;
  for(const key of ['mean','low','high'])setText($('outfit-'+key),climate[key].toFixed(1)+'°C');
  ['top','outer','bottom','shoes'].forEach((key,i)=>setText($('outfit-'+key),advice.items[i]));
@@ -669,6 +694,11 @@ const d=state.day,m=matchDate(d),a=state.source,b=state.mode==='same'?a:state.ta
 const text=`季节回声｜${state.mode==='same'?'同城季节映射':'跨城市日期映射'}\n起点：${CITIES[a].name} ${dateStr(d)} · ${metricLabels[state.metric]}约 ${value(a,state.metric,d).toFixed(1)}°C\n对应：${CITIES[b].name} ${dateStr(m)} · ${metricLabels[state.metric]}约 ${value(b,state.metric,m).toFixed(1)}°C\n平均最高：${value(a,'high',d).toFixed(1)} / ${value(b,'high',m).toFixed(1)}°C\n平均最低：${value(a,'low',d).toFixed(1)} / ${value(b,'low',m).toFixed(1)}°C\n月均相对湿度：${CITIES[a].humidity[idxToDate(d).monthIndex]} / ${CITIES[b].humidity[idxToDate(m).monthIndex]}%\n月降水量：${CITIES[a].rain[idxToDate(d).monthIndex]} / ${CITIES[b].rain[idxToDate(m).monthIndex]} mm\n匹配方式：${state.algorithm==='temp'?'温度优先':'综合气候'}；参考气候平年值与月度插值，并非逐日实测或天气预报。`;
  const btn=$('copy-result');try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(text);else{const area=document.createElement('textarea');area.value=text;document.body.appendChild(area);area.select();if(!document.execCommand('copy'))throw new Error('复制失败');area.remove()}btn.textContent='已复制 ✓'}catch(err){btn.textContent='复制失败'}setTimeout(()=>btn.textContent='复制对比结果 ↗',1800);
 });
+// Native disclosure: compact by default on phones, expanded on desktop. No animation loop.
+const outfitLayout=window.matchMedia('(max-width:760px)');
+const syncOutfitLayout=()=>{$('outfit-card').open=!outfitLayout.matches};
+syncOutfitLayout();
+if(outfitLayout.addEventListener)outfitLayout.addEventListener('change',syncOutfitLayout);else outfitLayout.addListener(syncOutfitLayout);
 $('date').min=calendarYear+'-01-01';$('date').max=calendarYear+'-12-31';$('date').setAttribute('aria-label','选择日期（'+calendarYear+'年）');
 requestRender();
 })();

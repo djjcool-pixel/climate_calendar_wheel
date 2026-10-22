@@ -10,6 +10,7 @@
 
 - **气温年轮（主视图）**：展示全年逐日气温的冷暖分布。默认打开当天；鼠标悬停外圈实时预览，点击确认日期。手机可沿外圈触摸拨动，松手确认。
 - **服装推荐**：根据源城市与所选日期的参考日均温、低温和高温，推荐上装、外搭、下装、鞋履；补充昼夜温差、月度湿度与降水提示。选定日期后更新，拖动预览期间保留已选日期的建议，减少连续排版开销。穿搭建议使用完整温度范围，不随比较指标或目标城市改变；参考历史气候，出门前仍需结合实时天气和个人体感。
+- **手机穿搭预览**：服装推荐默认折叠，预览卡与单城市全年温度光谱统一为 216px 高；展示参考气温和简要建议，点击或键盘操作即可展开四类衣物与详细提示。桌面默认展开，使用浏览器原生折叠控件，不增加高度动画。
 - **全年温度光谱**：全年连续温度色带，支持点击选取日期。
 - **日期映射（默认折叠）**：同城寻找升温季与降温季气温近似的日期，或将源城市某天映射到另一城市的近似气候日期。
 - **气候比较**：支持平均气温、平均最高 / 最低气温以及温度优先 / 综合气候两种匹配方式，并展示湿度与降水的参考对照。
@@ -64,6 +65,7 @@ npm install --no-save --package-lock=false playwright@1.62.1
 npx playwright install chromium firefox webkit
 node scripts/verify-motion.cjs
 node scripts/verify-outfit.cjs
+BROWSERS=chromium,firefox,webkit node scripts/verify-outfit-layout.cjs
 BROWSERS=chromium,firefox,webkit node scripts/verify-motion.cjs
 ```
 

@@ -14,7 +14,7 @@
 - **气候比较**：支持平均气温、平均最高 / 最低气温以及温度优先 / 综合气候两种匹配方式，并展示湿度与降水的参考对照。
 - **响应式设计与动效**：手机端优化，轮盘和信息卡自适应；提供入场、切换和连线动态效果，兼容系统减少动态效果设置。
 
-城市：东京、北京、合肥、成都、西安、广州、武汉。
+城市：东京、北京、合肥、成都、西安、广州、武汉、哈密、昆明。默认城市为成都。
 
 ## 数据说明
 
@@ -24,6 +24,8 @@
 - [Japan Meteorological Agency — Climate Normals](https://www.data.jma.go.jp/stats/en/normal/normal.html)
 - [JMA ClimatView](https://ds.data.jma.go.jp/tcc/tcc/products/climate/climatview/frame.php)
 - [Climate Zone](https://www.climate-zone.com/)
+- [Climates to Travel — Hami](https://www.climatestotravel.com/climate/china/hami)：哈密气温、相对湿度与降水采用该页 1991–2020 月度参考；降水保留月份说明中的小数值。
+- [Climates to Travel — Kunming](https://www.climatestotravel.com/climate/china/kunming)：昆明气温、相对湿度与降水采用该页 1991–2020 月度参考。
 
 ## 部署
 
@@ -47,6 +49,8 @@ python3 -m http.server 8000
 - 指针与连线共用一个按需运行的 `requestAnimationFrame` 循环；使用可中途接续的阻尼运动，跨年按最短圆弧移动。日期、滑块和按钮始终以最终选定值为准。
 - SVG 温度刻度、指针、连线及文本节点复用；目标城市内圈首次使用时才创建。指针输入每帧合并，匹配结果按配置与日期缓存，缓存最多保留 16 组。
 - 温度光谱使用 CSS 渐变；折叠的比较面板延后更新。静止后停止动画循环，切换到后台、轮盘离屏或系统开启“减少动态效果”时直接归位。
+- 手机城市框仅显示中文名称，桌面辅以英文；展开时保留完整中英文原生选项，原生控件保留 16px 字号以避免 iOS 聚焦放大。
+- 表盘按压时沿触点方向轻移并产生最多 3° 的倾斜，松手阻尼回正；与指针共用按需动画循环，归位后移除 3D 变换和临时合成层。开启“减少动态效果”时不倾斜。
 - 主要控件统一 44px 高，使用 SVG 导航图标；分段按钮的选中底色平滑滑动。触屏上沿外圈拨动，中心区域可正常滚动页面。
 
 ### 浏览器回归检查
@@ -60,4 +64,4 @@ node scripts/verify-motion.cjs
 BROWSERS=chromium,firefox,webkit node scripts/verify-motion.cjs
 ```
 
-Linux 如缺少浏览器系统库，可按 Playwright 提示安装所需开发环境依赖。检查覆盖 320–1440px 布局、跨年短弧、快速连续点击、节点复用、拖动确认与取消、键盘、跨城交换、减少动态效果与静止停帧；Chromium 另用原生触屏事件验证外圈拨动与中心滚动。内嵌浏览器仍建议在目标 App 的真机上复核。
+Linux 如缺少浏览器系统库，可按 Playwright 提示安装所需开发环境依赖。检查覆盖 320–1440px 布局、城市文字与箭头的间距、哈密/昆明跨城比较、四向按压及回正、跨年短弧、快速连续点击、节点复用、拖动确认与取消、键盘、跨城交换、减少动态效果与静止停帧；Chromium 另用原生触屏事件验证外圈拨动与中心滚动。内嵌浏览器仍建议在目标 App 的真机上复核。

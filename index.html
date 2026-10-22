@@ -9,7 +9,7 @@
 <style>
 :root{--bg:#0c1924;--panel:#142531;--deep:#0f202c;--text:#f2f7f1;--muted:#94aab4;--soft:#b7cbd0;--line:#32465080;--green:#d4f18a;--orange:#f8b188;--radius:17px;--font:Inter,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;min-width:320px;background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased}
 button,select,input{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 button{-webkit-tap-highlight-color:transparent}
@@ -150,14 +150,14 @@ select{-webkit-appearance:none;line-height:1.25}
 .range::-moz-range-progress{height:4px;border-radius:99px;background:var(--green)}
 .range::-moz-range-thumb{width:16px;height:16px;border:0;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px #d4f18a12}
 .wheel-svg-wrap{position:relative;isolation:isolate;--touch-x:0px;--touch-y:0px;-webkit-tap-highlight-color:transparent}
-.wheel-svg-wrap:before{content:'';position:absolute;inset:7.4%;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle at 34% 20%,#a1d6da20,#102731 70%);box-shadow:0 12px 23px #020e1760,inset 0 2px 3px #c4f0e01b,inset 0 -9px 16px #000b1290}
-.wheel-svg-wrap:after{content:'';position:absolute;left:0;top:0;width:130px;height:130px;z-index:2;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#e5ffcc25,transparent 68%);opacity:0;transform:translate3d(calc(var(--touch-x) - 65px),calc(var(--touch-y) - 65px),0);transition:opacity .2s}
-.wheel-panel.dial-hover .wheel-svg-wrap:after,.wheel-panel.dial-active .wheel-svg-wrap:after{opacity:1}
+.dial-surface:before{content:'';position:absolute;inset:7.4%;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle at 34% 20%,#a1d6da20,#102731 70%);box-shadow:0 12px 23px #020e1760,inset 0 2px 3px #c4f0e01b,inset 0 -9px 16px #000b1290}
+.dial-surface:after{content:'';position:absolute;left:0;top:0;width:130px;height:130px;z-index:2;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#e5ffcc25,transparent 68%);opacity:0;transform:translate3d(calc(var(--touch-x) - 65px),calc(var(--touch-y) - 65px),0);transition:opacity .2s}
+.wheel-panel.dial-hover .dial-surface:after,.wheel-panel.dial-active .dial-surface:after{opacity:1}
 .wheel-svg{position:relative;z-index:1;touch-action:none;pointer-events:none;transform-origin:center;transition:transform .24s var(--ease-out)}
 .dial-scroll-zone{position:absolute;inset:20%;border-radius:50%;z-index:3;touch-action:pan-y}
 .dial-hit-area{touch-action:none;pointer-events:stroke;cursor:grab}
 .dial-active .dial-hit-area{cursor:grabbing}
-.wheel-panel.dial-active .wheel-svg{transform:scale(.997);transition-duration:.12s}
+
 .temperature-ring{transition:opacity .32s}
 .dial-ripple{position:absolute;left:var(--touch-x);top:var(--touch-y);z-index:3;width:22px;height:22px;border-radius:50%;border:1px solid #e2ffc6;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.7)}
 .wheel-panel.dial-confirmed .dial-ripple{animation:dial-confirm .46s var(--ease-out) both}
@@ -169,10 +169,10 @@ select{-webkit-appearance:none;line-height:1.25}
  .sidebar-explore:hover{background:#294a45;border-color:#8eaf90;transform:translateY(-1px);box-shadow:none}
  .seg button:hover{color:#f0f8e6}.mode-option:hover{border-color:#69877f}
 }
-@media(hover:none){.sidebar-explore:hover{transform:none;box-shadow:none}.wheel-svg-wrap:after{display:none}}
+@media(hover:none){.sidebar-explore:hover{transform:none;box-shadow:none}.dial-surface:after{display:none}}
 @media(max-width:760px){
  .primary-toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:10px}
- .primary-toolbar select,.primary-toolbar .date-row input{font-size:16px}
+ .primary-toolbar .date-row input{font-size:14px}
  .primary-toolbar .seg button{font-size:11px;padding:0 2px}
  .toolbar-date .date-row{height:44px}.toolbar-date .fieldlabel{font-size:10px}
  .primary-bar{align-items:center;gap:8px}.primary-bar h2{font-size:17px}
@@ -186,26 +186,77 @@ select{-webkit-appearance:none;line-height:1.25}
 }
 @media(max-width:380px){
  .primary-bar h2{font-size:15px}.today-btn{font-size:10px;padding:8px 9px}
- .primary-toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:8px}.primary-toolbar select{font-size:16px;padding-left:7px}
+ .primary-toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:8px}.primary-toolbar select{padding-left:7px}
  .primary-toolbar .seg button{font-size:10px}.sidebar-match strong{font-size:20px}.sidebar-date strong{font-size:28px}
 }
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.wheel-panel.dial-active .wheel-svg{transform:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.dial-surface{transform:none!important}}
+
+/* Compact city labels; the full native choice list stays available on every screen. */
+.city-select{position:relative;min-width:0}
+.city-select:after{display:none}
+.city-select select{position:absolute;inset:0;z-index:2;width:100%;height:100%;margin:0;opacity:0;font-size:16px;cursor:pointer}
+.city-display{display:flex;align-items:center;gap:8px;min-width:0;height:44px;padding:0 12px;border:1px solid #40566380;border-radius:10px;background:#1d3340;pointer-events:none}
+.city-name{flex-shrink:0;font-size:14px;font-weight:600;line-height:1.4;color:#e5eee9;letter-spacing:.015em}
+.city-en{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;font-weight:400;color:#8faab1;line-height:1.4}
+.city-chevron{width:16px;height:16px;flex-shrink:0;margin-left:auto;color:#9eb6bc}
+.city-select select:focus-visible + .city-display{outline:1.5px solid #aec994;outline-offset:2px}
+.primary-toolbar input:focus-visible{outline:1.5px solid #aec994;outline-offset:2px}
+.date-row input{font-weight:400;letter-spacing:.015em;color:#dfe9e6}
+.primary-toolbar .fieldlabel{line-height:1.4;font-weight:500}
+.primary-toolbar .seg button{font-weight:600}
+.wheel-svg .center-sub{fill:#a6bec1}
+.wheel-svg:focus-visible{outline:2px solid #c4df9a;outline-offset:-4px;border-radius:50%}
+@media(hover:hover) and (pointer:fine){.city-select:hover .city-display{border-color:#73948b}}
+@media(max-width:760px){
+ .shell{padding:0 12px 20px}
+ .primary-bar{padding:14px 15px 12px}
+ .primary-toolbar{margin:12px 15px 0;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px 10px}
+ .primary-toolbar .fieldlabel{font-size:10px;margin-bottom:7px}
+ .city-name{font-size:14px;font-weight:550}.city-en{display:none}.city-display{padding:0 12px}
+ .primary-toolbar .seg{padding:4px}.primary-toolbar .seg button{font-size:11px}
+ .toolbar-date{gap:10px}.toolbar-date .fieldlabel{margin:0}
+ .primary-toolbar .date-row input{font-size:14px;padding:8px 10px}
+ .today-btn{font-weight:600;border-radius:10px}.today-icon{width:16px;height:16px}
+ .wheel-top{padding:12px 15px 1px;font-size:9px;letter-spacing:.09em}.wheel-top .right{font-size:9px;letter-spacing:.02em;color:#94aeb6}
+ .wheel-svg .center-sub{font-size:14px}.wheel-svg .center-num{font-size:25px}
+ .wheel-legend{font-size:9px;gap:7px;margin:-5px 0 8px}
+ .wheel-sidebar{padding:14px 3px 13px;gap:6px 12px}.sidebar-date>span{font-size:17px;font-weight:650}.sidebar-match strong{font-size:21px;font-weight:650}
+ .sidebar-subtitle{font-size:10px;color:#9bb4bb}.sidebar-lead,.sidebar-match small{font-size:10px;color:#90adb6}
+ .sidebar-arrow{opacity:.65}.sidebar-explore{font-weight:600}
+ .spectrum-card,.mapping-panel{border-radius:16px}
+ .spectrum-cityline span,.spectrum-month-labels span{color:#8daab3}
+}
+@media(max-width:360px){
+ .primary-toolbar{margin-inline:12px;column-gap:8px}
+ .primary-toolbar .seg button{font-size:10px}.city-display{padding-inline:10px}
+ .primary-toolbar .date-row input{padding-inline:5px}.date-row{gap:5px}
+ .wheel-top{padding-inline:12px;letter-spacing:.055em}
+ .wheel-legend{gap:6px}.wheel-legend .gradient{width:56px}
+ .sidebar-match strong{font-size:20px}.sidebar-match small,.sidebar-lead{font-size:9px}
+}
+/* Preserve the native date editor and iOS's no-focus-zoom threshold. */
+@supports(-webkit-touch-callout:none){.primary-toolbar .date-row input{font-size:16px}}
+
+.wheel-svg-wrap{perspective:1000px}
+.dial-surface{position:relative;isolation:isolate;width:100%;height:100%;transform-origin:50% 50%;transform:none}
+.dial-active .dial-surface,.is-tilting .dial-surface{will-change:transform}
+@media(prefers-reduced-motion:reduce){.dial-surface{transform:none!important;will-change:auto!important}}
 </style>
 </head>
 <body>
 <div class="shell">
-<header class="topbar"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-word">季节回声<small>CLIMATE CALENDAR</small></span></a><span class="source-pill">365 DAYS · 7 CITIES</span></header>
+<header class="topbar"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-word">季节回声<small>CLIMATE CALENDAR</small></span></a><span class="source-pill">365 DAYS · 9 CITIES</span></header>
 <main id="top">
 <section class="intro"><div><div class="eyebrow">SEASONAL ECHO / 气候年轮</div><h1>转动年轮，<em>遇见另一季节。</em></h1></div></section>
 <section class="primary-experience" aria-labelledby="wheel-title">
 <div class="primary-bar"><div><span class="section-kicker">SEASONAL ECHO</span><h2 id="wheel-title">同城季节映射 <span class="live-mark" id="interaction-indicator">● 已选定</span></h2></div><button id="return-today" class="today-btn" type="button" aria-label="返回今天的日期"><span class="today-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10a9 9 0 1 1 2.6 8.4M3 4v6h6"/></svg></span><span>返回今日</span></button></div>
 <div class="primary-toolbar">
-<div class="toolbar-city"><label class="fieldlabel" for="city">城市</label><div class="select-wrap"><select id="city"><option value="tokyo">东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu" selected>成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option><option value="wuhan">武汉 Wuhan</option></select></div><div class="city-info" id="city-detail">中国 · 四川 · 温江站</div></div>
+<div class="toolbar-city"><label class="fieldlabel" for="city">城市</label><div class="select-wrap city-select"><select id="city"><option value="tokyo">东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu" selected>成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option><option value="wuhan">武汉 Wuhan</option><option value="hami">哈密 Hami</option><option value="kunming">昆明 Kunming</option></select><span class="city-display" aria-hidden="true"><span class="city-name" id="city-name">成都</span><span class="city-en" id="city-en">Chengdu</span><svg class="city-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 8 4 4 4-4"/></svg></span></div><div class="city-info" id="city-detail">中国 · 四川 · 温江站</div></div>
 <div class="toolbar-metric"><span class="fieldlabel">比较指标</span><div class="seg" role="group" aria-label="气温指标"><button type="button" data-metric="mean" class="active" aria-pressed="true">日均温</button><button type="button" data-metric="high" aria-pressed="false">日最高</button><button type="button" data-metric="low" aria-pressed="false">日最低</button></div></div>
 <div class="toolbar-date"><label class="fieldlabel" for="date">日期</label><div class="date-row"><button class="iconbtn" id="prev-day" type="button" aria-label="前一天"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><input id="date" type="date" value="2025-11-15" min="2025-01-01" max="2025-12-31"/><button class="iconbtn" id="next-day" type="button" aria-label="后一天"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></div></div>
 </div>
 <div class="wheel-showcase">
-<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> 365 DAYS · 12 MONTHS</span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="slider" tabindex="0" aria-valuemin="1" aria-valuemax="365" aria-valuenow="1" aria-orientation="horizontal" aria-label="全年气候轮盘：沿外圈拨动，或用方向键选择日期"></svg><span class="dial-scroll-zone" aria-hidden="true"></span><span class="dial-ripple" aria-hidden="true"></span></div><div class="wheel-legend"><span>冷</span><span class="gradient"></span><span>热</span><span class="legend-separator"></span><span><span class="legend-dot"></span>起点</span><span><span class="legend-dot orange"></span>相似日</span><span id="ring-key">单城年轮</span></div></div>
+<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> 365 DAYS · 12 MONTHS</span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><div class="dial-surface"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="slider" tabindex="0" aria-valuemin="1" aria-valuemax="365" aria-valuenow="1" aria-orientation="horizontal" aria-label="全年气候轮盘：沿外圈拨动，或用方向键选择日期"></svg><span class="dial-scroll-zone" aria-hidden="true"></span><span class="dial-ripple" aria-hidden="true"></span></div></div><div class="wheel-legend"><span>冷</span><span class="gradient"></span><span>热</span><span class="legend-separator"></span><span><span class="legend-dot"></span>起点</span><span><span class="legend-dot orange"></span>相似日</span><span id="ring-key">单城年轮</span></div></div>
 <div class="wheel-sidebar">
 <div class="sidebar-heading"><span>SELECTED DATE</span><strong>当前日期</strong></div>
 <div class="sidebar-date"><span id="sidebar-date">11月15日</span><strong id="sidebar-temp"><span id="sidebar-temp-value">12.5</span><small>°C</small></strong></div><p class="sidebar-lead" id="sidebar-lead">成都 · 秋季 · 日均温</p>
@@ -220,7 +271,7 @@ select{-webkit-appearance:none;line-height:1.25}
 <section class="spectrum-card" aria-labelledby="spectrum-title"><div class="spectrum-heading"><div><span class="section-kicker">TEMPERATURE SPECTRUM</span><h2 id="spectrum-title">全年温度光谱</h2></div><span class="foot-data" id="annual-average">年均 15.8°C</span></div><p id="spectrum-caption" hidden></p><div class="spectrum-body"><div class="spectrum-cityline"><strong id="spectrum-city">成都</strong><span id="spectrum-current">当前所选日期</span></div><div class="spectrum-gradient-track" id="months" tabindex="0" role="slider" aria-label="按全年温度光谱选择日期" aria-valuemin="1" aria-valuemax="365" aria-valuenow="319" aria-valuetext="11月15日"></div><div class="spectrum-month-labels" aria-hidden="true"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></div><div class="target-spectrum target-field" id="target-month-row" hidden><div class="spectrum-cityline"><strong id="target-spectrum-city">东京</strong><span>目标城市</span></div><div class="spectrum-gradient-track is-target" id="target-months" aria-hidden="true"></div></div></div></section>
 <details class="mapping-panel" id="mapping-details"><summary class="mapping-summary"><span class="summary-icon">⇄</span><span class="summary-text"><small>MORE OPTIONS</small><strong>更多日期比较</strong></span><span class="summary-chevron">⌄</span></summary>
 <div class="mapping-content"><nav class="mode-switch" aria-label="探索模式"><button id="mode-same" type="button" class="mode-option active" aria-pressed="true"><span class="mode-icon" aria-hidden="true">◎</span><span><b>同城 · 季节映射</b><small>在春秋之间寻找相近的气候</small></span></button><button id="mode-cross" type="button" class="mode-option" aria-pressed="false"><span class="mode-icon" aria-hidden="true">⇄</span><span><b>跨城市 · 日期映射</b><small>同样的温度，发生在哪一天？</small></span></button></nav>
-<div class="mapping-settings"><div class="target-field field" id="target-field" hidden><label class="fieldlabel" for="target-city">目标城市</label><div class="select-wrap"><select id="target-city"><option value="tokyo" selected>东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu">成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option><option value="wuhan">武汉 Wuhan</option></select></div><span class="city-info target-info" id="target-detail">日本 · 东京</span></div><button type="button" id="swap-cities" class="swap-button target-field" hidden>⇄ 交换起点和目标城市</button><div class="control-block"><span class="fieldlabel">日期匹配依据</span><div class="seg two" role="group" aria-label="匹配方式"><button type="button" data-algorithm="temp" class="active" aria-pressed="true">温度优先</button><button type="button" data-algorithm="climate" aria-pressed="false">综合气候</button></div></div></div>
+<div class="mapping-settings"><div class="target-field field" id="target-field" hidden><label class="fieldlabel" for="target-city">目标城市</label><div class="select-wrap city-select"><select id="target-city"><option value="tokyo" selected>东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu">成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option><option value="wuhan">武汉 Wuhan</option><option value="hami">哈密 Hami</option><option value="kunming">昆明 Kunming</option></select><span class="city-display" aria-hidden="true"><span class="city-name" id="target-city-name">东京</span><span class="city-en" id="target-city-en">Tokyo</span><svg class="city-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 8 4 4 4-4"/></svg></span></div><span class="city-info target-info" id="target-detail">日本 · 东京</span></div><button type="button" id="swap-cities" class="swap-button target-field" hidden>⇄ 交换起点和目标城市</button><div class="control-block"><span class="fieldlabel">日期匹配依据</span><div class="seg two" role="group" aria-label="匹配方式"><button type="button" data-algorithm="temp" class="active" aria-pressed="true">温度优先</button><button type="button" data-algorithm="climate" aria-pressed="false">综合气候</button></div></div></div>
 <div class="results"><section class="panel result-card"><div class="result-top"><span>01 / 起点日期</span><span>ORIGINAL</span></div><div class="overline" id="selected-subtitle">东京 · 秋季</div><div class="big-date" id="selected-date">11月15日</div><div class="big-temp" id="selected-temp">≈ 12.5 °C</div></section><section class="panel result-card match-card"><div class="result-top"><span>02 / 最佳对应</span><span>CLIMATE MATCH</span></div><div class="overline" id="matched-subtitle">东京 · 春季</div><div class="big-date" id="matched-date">4月5日</div><div class="big-temp" id="matched-temp">≈ 12.5 °C</div><div class="diff" id="match-diff">气温差约 <b>0.0°C</b></div></section><section class="panel details-card"><div class="details-head"><b>气候差异一览</b><small id="metric-note">起点 vs 匹配日</small></div><div class="metric-grid" id="metric-grid"></div><p class="detail-caption" id="detail-caption" hidden></p></section></div>
 <div class="mapping-insight"><div class="foot-top"><strong id="insight-title">温度相似，季节不同</strong><button type="button" id="copy-result" class="cta">复制对比结果 ↗</button></div><p class="insight-text" id="insight-text">请选择日期查看季节匹配的详细说明。</p><p id="match-method-note" hidden></p></div></div></details>
 </main>
@@ -236,7 +287,11 @@ const CITIES={
   chengdu:{name:'成都',en:'Chengdu',region:'中国 · 四川 · 温江站 56187',mean:[5.7,8.0,12.6,17.6,21.4,24.1,25.6,25.4,21.7,17.3,12.3,7.0],high:[9.3,12.1,16.8,22.5,26.3,28.3,30.0,29.9,25.7,20.7,16.0,10.7],low:[2.7,4.9,8.4,12.9,17.2,20.5,22.1,21.7,18.9,14.7,9.6,4.2]},
   xian:{name:'西安',en:'Xi’an',region:'中国 · 陕西 · 泾河站 57131（部分项目16年样本）',mean:[0.5,4.3,10.9,16.8,21.5,26.1,27.8,26.1,20.8,15.2,8.3,2.3],high:[4.9,9.2,16.6,23.0,27.6,32.1,32.8,30.9,25.4,19.7,12.9,6.8],low:[-3.1,0.3,6.1,11.6,16.4,21.0,23.4,22.2,17.3,11.5,4.8,-1.5]},
   wuhan:{name:'武汉',en:'Wuhan',region:'中国 · 湖北 · 武汉',mean:[4.2,7.0,11.6,17.9,22.7,26.3,29.3,28.7,24.2,18.4,12.1,6.2],high:[8.3,11.4,16.3,22.7,27.3,30.4,33.2,32.8,28.9,23.3,17.1,10.8],low:[1.0,3.6,7.9,13.7,18.8,23.0,26.2,25.4,20.8,14.8,8.4,2.8]},
-  guangzhou:{name:'广州',en:'Guangzhou',region:'中国 · 广东 · 广州站 59287',mean:[13.8,15.5,18.3,22.5,26.0,27.9,28.9,28.6,27.4,24.5,20.1,15.5],high:[18.7,20.0,22.3,26.4,30.0,32.0,33.3,33.2,32.0,29.3,25.3,20.7],low:[10.6,12.5,15.5,19.6,23.1,25.1,25.8,25.5,24.2,20.9,16.7,11.9]}
+  guangzhou:{name:'广州',en:'Guangzhou',region:'中国 · 广东 · 广州站 59287',mean:[13.8,15.5,18.3,22.5,26.0,27.9,28.9,28.6,27.4,24.5,20.1,15.5],high:[18.7,20.0,22.3,26.4,30.0,32.0,33.3,33.2,32.0,29.3,25.3,20.7],low:[10.6,12.5,15.5,19.6,23.1,25.1,25.8,25.5,24.2,20.9,16.7,11.9]},
+  // 1991–2020: https://www.climatestotravel.com/climate/china/hami
+  hami:{name:'哈密',en:'Hami',region:'中国 · 新疆 · 哈密市区 · 1991–2020参考',mean:[-9.8,-2.7,6.0,14.4,19.8,24.8,26.7,25.1,19.0,10.7,1.5,-7.5],high:[-3.1,4.8,13.9,22.4,28.2,33.0,34.7,33.6,28.1,19.4,8.3,-1.2],low:[-16.4,-10.1,-1.8,6.4,11.5,16.7,18.6,16.5,9.8,1.9,-5.3,-13.7],humidity:[60,43,28,24,28,34,39,39,39,42,50,59],rain:[1.4,1.4,1.5,2.9,4.0,5.7,9.0,5.7,3.3,4.0,2.9,1.8]},
+  // 1991–2020: https://www.climatestotravel.com/climate/china/kunming
+  kunming:{name:'昆明',en:'Kunming',region:'中国 · 云南 · 昆明市区 · 1991–2020参考',mean:[9.5,11.5,14.7,17.7,19.6,20.9,20.7,20.5,19.0,16.4,12.7,9.6],high:[16.2,18.4,21.7,24.3,25.1,25.2,24.7,24.8,23.3,21.0,18.5,15.8],low:[2.8,4.6,7.8,11.1,14.0,16.5,16.8,16.2,14.6,11.8,7.0,3.4],humidity:[61,53,49,51,61,74,79,77,76,76,70,68],rain:[25,15,20,30,90,175,225,185,120,85,30,14.9]}
 };
 Object.assign(CITIES.tokyo,{"humidity":[51,52,57,62,68,75,76,74,75,71,64,56],"rain":[59.7,56.5,116.0,133.7,139.7,167.8,156.2,154.7,224.9,234.8,96.3,57.9]});
 Object.assign(CITIES.beijing,{"humidity":[51,48,43,38,39,50,65,68,61,56,56,54],"rain":[2.1,5.6,8.5,21.9,36.5,72.7,170.6,114.1,53.3,29.3,13.7,2.5]});
@@ -306,6 +361,8 @@ function colorFor(temp){const bounds=[-8,2,9,16,23,30,36],cols=[[81,143,195],[11
 const motionPreference=window.matchMedia('(prefers-reduced-motion:reduce)');
 let frameId=0,pendingRender=false,pendingSync=false,lastFrame=0,wheelVisible=true;
 const dialMotion={source:{position:0,target:0,velocity:0},match:{position:0,target:0,velocity:0},ready:false};
+const faceMotion=Object.fromEntries(['x','y','rx','ry','press'].map(key=>[key,{position:0,target:0,velocity:0}]));
+const faceAxes=Object.values(faceMotion);
 const wrapDay=d=>((d%365)+365)%365;
 const nearestDay=(day,reference)=>reference+((day-wrapDay(reference)+547.5)%365)-182.5;
 function wakeMotion(){if(!frameId&&!document.hidden)frameId=requestAnimationFrame(tick)}
@@ -314,16 +371,18 @@ function tick(time){frameId=0;
  if(pendingRender){const sync=pendingSync;pendingRender=pendingSync=false;render(sync)}
  const dt=lastFrame?Math.min((time-lastFrame)/1000,.05):1/60;lastFrame=time;
  const snap=motionPreference.matches||!wheelVisible;
- let moving=false;
- for(const axis of [dialMotion.source,dialMotion.match]){
+ let moving=false,tilting=false;
+ const step=(axis,omega)=>{
   // Exact critically damped spring: retarget without discarding current velocity.
-  const omega=state.drag?42:state.hover!==null?32:20;
   const distance=axis.position-axis.target,term=axis.velocity+omega*distance,decay=Math.exp(-omega*dt);
   axis.position=axis.target+(distance+term*dt)*decay;
   axis.velocity=(axis.velocity-omega*term*dt)*decay;
-  if(snap||(Math.abs(axis.position-axis.target)<.008&&Math.abs(axis.velocity)<.08)){axis.position=axis.target;axis.velocity=0}else moving=true;
- }
- paintDial();dialPanel.classList.toggle('is-moving',moving);
+  if(snap||(Math.abs(axis.position-axis.target)<.008&&Math.abs(axis.velocity)<.08)){axis.position=axis.target;axis.velocity=0;return false}return true;
+ };
+ for(const axis of [dialMotion.source,dialMotion.match])moving=step(axis,state.drag?42:state.hover!==null?32:20)||moving;
+ for(const axis of faceAxes)tilting=step(axis,state.drag?34:24)||tilting;
+ moving=moving||tilting;
+ paintDial();dialPanel.classList.toggle('is-moving',moving);dialPanel.classList.toggle('is-tilting',tilting);
  if(moving||pendingRender)wakeMotion();else lastFrame=0;
 }
 let wheelBaseKey='',wheelParts=null;
@@ -360,7 +419,7 @@ function buildWheel(){
  const label=(y,cls)=>svgEl('text',{x:360,y,class:cls},overlay);
  const labels={orbit:label(277,'orbit'),date:label(345,'center-date'),temp:label(381,'center-num')};
  svgEl('line',{x1:312,y1:403,x2:408,y2:403,stroke:'#526a71','stroke-width':1},overlay);
- labels.sub=label(433,'center-sub');labels.matchDate=label(479,'center-date');labels.matchTemp=label(511,'center-num orange');labels.foot=label(544,'center-foot');
+ labels.sub=label(433,'center-sub');labels.matchDate=label(479,'center-date');labels.matchTemp=label(511,'center-num orange');
  // SVG touch-action is applied on its root box; the HTML center sibling permits scrolling.
  svgEl('circle',{cx:360,cy:360,r:282.5,fill:'none',stroke:'transparent','stroke-width':129,class:'dial-hit-area','aria-hidden':'true'});
  wheelParts={bed,inner,source,target,targetBars,boundaries,months,connection,sourceMarker,targetMarker,labels,cross:false};
@@ -388,7 +447,6 @@ function drawWheel(){
  setText(labels.date,dateStr(d));setText(labels.temp,'≈ '+value(state.source,state.metric,d).toFixed(1)+' °C');
  setText(labels.sub,cross?'目标城市 · 最相近日期':'另一季节 · 最相近日期');
  setText(labels.matchDate,dateStr(m));setText(labels.matchTemp,(cross?CITIES[dst].name+' · ':'')+'≈ '+value(dst,state.metric,m).toFixed(1)+' °C');
- setText(labels.foot,cross?'外圈起点 / 内圈目标':state.drag?'松手确认日期':state.hover!==null?'预览中 · 点击确认':'沿外圈拨动日期');
  parts.months.forEach((el,n)=>el.classList.toggle('selectedMonth',n===idxToDate(d).monthIndex));
  setText($('ring-key'),cross?'双城对照':'春秋同温');
  for(const [axis,day] of [[dialMotion.source,d],[dialMotion.match,m]]){
@@ -399,6 +457,9 @@ function drawWheel(){
  wheel.setAttribute('aria-valuenow',String(state.day+1));wheel.setAttribute('aria-valuetext',dateStr(state.day));
 }
 function paintDial(){if(!wheelParts)return;
+ const face=faceMotion;
+ // Drop the 3D transform entirely at rest, releasing the temporary compositor layer.
+ dialSurface.style.transform=faceAxes.every(axis=>axis.position===0)?'none':`translate3d(${face.x.position.toFixed(2)}px,${face.y.position.toFixed(2)}px,${(-2*face.press.position).toFixed(2)}px) rotateX(${face.rx.position.toFixed(2)}deg) rotateY(${face.ry.position.toFixed(2)}deg) scale(${(1-.006*face.press.position).toFixed(4)})`;
  $('months').style.setProperty('--position',((wrapDay(dialMotion.source.position)+.5)/365*100).toFixed(3)+'%');
  if(wheelParts.cross)$('target-months').style.setProperty('--position',((wrapDay(dialMotion.match.position)+.5)/365*100).toFixed(3)+'%');
  const a=angleDay(dialMotion.source.position),b=angleDay(dialMotion.match.position),cross=wheelParts.cross;
@@ -447,6 +508,7 @@ function renderMonthRow(city,container,interactive){
 function render(sync=true){const cross=state.mode==='cross',day=state.hover??state.day;if(sync){activeClasses();
  $('target-field').hidden=!cross;$('swap-cities').hidden=!cross;$('target-month-row').hidden=!cross;
  $('city').value=state.source;$('target-city').value=state.target;
+ for(const [id,key] of [['city',state.source],['target-city',state.target]]){setText($(id+'-name'),CITIES[key].name);setText($(id+'-en'),CITIES[key].en)}
  setText($('city-detail'),CITIES[state.source].region);setText($('target-detail'),CITIES[state.target].region);
  const date=idxToDate(state.day);$('date').value=calendarYear+'-'+String(date.month).padStart(2,'0')+'-'+String(date.day).padStart(2,'0');
  $('day-slider').value=state.day;$('day-slider').style.setProperty('--progress',(state.day/364*100).toFixed(3)+'%');setText($('slider-label'),'DAY '+(state.day+1)+' / 365');
@@ -493,7 +555,7 @@ let todayTimer=0;
 $('return-today').addEventListener('click',()=>{cancelDial();const now=new Date();changeDay(starts[now.getMonth()]+Math.min(now.getDate(),daysInMonth[now.getMonth()])-1);
  const b=$('return-today');b.classList.add('today-bounce');clearTimeout(todayTimer);todayTimer=setTimeout(()=>b.classList.remove('today-bounce'),550)});
 document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>changeDay(dateToIdx('2025-'+b.dataset.quick))));
-const dialPanel=$('wheel-panel'),dialWrap=wheel.parentElement;
+const dialPanel=$('wheel-panel'),dialSurface=wheel.parentElement,dialWrap=dialSurface.parentElement;
 let dialRect=null,pendingHighlight=null,activePointerId=null,confirmTimer=0;
 function invalidateDialRect(){dialRect=null}
 window.addEventListener('resize',invalidateDialRect,{passive:true});window.addEventListener('scroll',invalidateDialRect,{passive:true,capture:true});
@@ -504,9 +566,13 @@ function dayFromPointer(e,allowOutside=false){const {x,y}=pointerPosition(e),rad
  if(radius<60||(!allowOutside&&(radius<218||radius>347)))return null;
  return Math.round(((Math.atan2(y,x)*180/Math.PI+450)%360)/360*365)%365;
 }
-function pointHighlight(e){const {rect}=pointerPosition(e);pendingHighlight={x:+(e.clientX-rect.left).toFixed(1),y:+(e.clientY-rect.top).toFixed(1)}}
+function pointHighlight(e){const {rect,x,y}=pointerPosition(e);pendingHighlight={x:+(e.clientX-rect.left).toFixed(1),y:+(e.clientY-rect.top).toFixed(1)};
+ if(state.drag&&!motionPreference.matches){const nx=clamp(x/360,-1,1),ny=clamp(y/360,-1,1),travel=clamp(rect.width*.009,2.5,5);
+  faceMotion.x.target=nx*travel;faceMotion.y.target=ny*travel;faceMotion.rx.target=-ny*3;faceMotion.ry.target=nx*3;faceMotion.press.target=1;wakeMotion();
+ }
+}
 function setPreview(d){if(d===state.day&&!state.drag)d=null;dialPanel.classList.toggle('dial-hover',d!==null);if(d===state.hover)return;state.hover=d;requestRender(false)}
-function releaseDial(){dialPanel.classList.remove('dial-active')}
+function releaseDial(){dialPanel.classList.remove('dial-active');for(const axis of faceAxes)axis.target=0;wakeMotion()}
 function cancelDial(){const id=activePointerId;state.drag=false;activePointerId=null;releaseDial();setPreview(null);
  if(id!==null&&wheel.hasPointerCapture?.(id))wheel.releasePointerCapture(id);
 }
@@ -531,10 +597,10 @@ window.addEventListener('blur',cancelDial);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){cancelDial();return}if(e.defaultPrevented||e.altKey||e.ctrlKey||e.metaKey||e.target.closest('input,select,button,textarea,a,summary,[contenteditable="true"]'))return;
  if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();changeDay(state.day+(e.key==='ArrowRight'?1:-1))}
 });
-function settleMotion(){for(const axis of [dialMotion.source,dialMotion.match]){axis.position=axis.target;axis.velocity=0}paintDial();dialPanel.classList.remove('is-moving');lastFrame=0}
+function settleMotion(){for(const axis of [dialMotion.source,dialMotion.match,...faceAxes]){axis.position=axis.target;axis.velocity=0}paintDial();dialPanel.classList.remove('is-moving','is-tilting');lastFrame=0}
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelDial();cancelAnimationFrame(frameId);frameId=0;settleMotion()}else wakeMotion()});
 if('IntersectionObserver' in window)new IntersectionObserver(([entry])=>{wheelVisible=entry.isIntersecting;if(!wheelVisible)settleMotion()}).observe(wheel);
-const motionChanged=()=>{if(motionPreference.matches)settleMotion()};
+const motionChanged=()=>{if(motionPreference.matches){for(const axis of faceAxes)axis.target=0;settleMotion()}};
 if(motionPreference.addEventListener)motionPreference.addEventListener('change',motionChanged);else motionPreference.addListener(motionChanged);
 $('copy-result').addEventListener('click',async()=>{
 const d=state.day,m=matchDate(d),a=state.source,b=state.mode==='same'?a:state.target;

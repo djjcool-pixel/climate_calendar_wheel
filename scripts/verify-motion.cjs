@@ -50,6 +50,9 @@ async function verify(name, engine) {
     await page.waitForFunction(() => document.querySelector('.dial-marker'));
     await sleep(900);
     assert.equal(await page.locator('#city').inputValue(), 'chengdu');
+    assert.equal(await page.locator('#city-name').textContent(), '成都');
+    assert.equal(await page.locator('#city option').count(), 9);
+    assert.equal(await page.locator('#target-city option').count(), 9);
     const year = await page.locator('#date').inputValue().then(x => x.slice(0, 4));
     await date(page, `${year}-12-31`);
     const before = await angle(page);
@@ -80,7 +83,18 @@ async function verify(name, engine) {
     await page.mouse.move(0, 0); await settle(page);
     assert.equal(await page.locator('#day-slider').inputValue(), '170', 'Escape cancels a drag');
     assert.equal(await page.locator('.dial-active').count(), 0);
-    await page.locator('#wheel').focus(); await page.keyboard.press('ArrowRight'); await sleep(80);
+    for (const [day, axis, sign] of [[0, 'y', -1], [90, 'x', 1], [182, 'y', 1], [274, 'x', -1]]) {
+      const p = await point(page, day); await page.mouse.move(p.x, p.y); await page.mouse.down(); await settle(page);
+      const face = await page.locator('.dial-surface').evaluate(el => {
+        const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+        return { x: m.m41, y: m.m42, hasDepth: el.style.transform.includes('rotateX(') && el.style.transform.includes('rotateY(') };
+      });
+      assert.ok(face[axis] * sign > 1 && face.hasDepth, `dial must lean toward press direction ${day}`);
+      await page.keyboard.press('Escape'); await page.mouse.up(); await page.mouse.move(0, 0); await settle(page);
+      assert.equal(await page.locator('.dial-surface').evaluate(el => el.style.transform), 'none', 'release must return flat and drop the 3D transform');
+    }
+    await page.locator('#wheel').focus(); await page.keyboard.press('ArrowRight');
+    await page.waitForFunction(() => document.querySelector('#wheel').getAttribute('aria-valuenow') === '172');
     assert.equal(await page.locator('#wheel').getAttribute('aria-valuenow'), '172');
     await page.locator('#return-today').click(); await settle(page);
     assert.equal(await page.locator('#date').inputValue(), await page.evaluate(() => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }));
@@ -97,20 +111,44 @@ async function verify(name, engine) {
     assert.equal(await page.locator('[data-metric="high"]').getAttribute('aria-pressed'), 'true');
     assert.ok(await page.locator('#match-diff').textContent().then(x => x.includes('综合气候')));
     assert.equal(await page.locator('.tempbar').count(), 730);
+    for (const city of ['hami', 'kunming']) {
+      await page.locator('#city').selectOption('chengdu');
+      await page.locator('#target-city').selectOption(city); await settle(page);
+      assert.equal(await page.locator('#target-city-name').textContent(), city === 'hami' ? '哈密' : '昆明');
+      assert.ok(!/NaN|undefined/.test(await page.locator('.results').textContent()), `${city} comparison must contain valid values`);
+      await page.locator('#swap-cities').click(); await settle(page);
+      assert.equal(await page.locator('#city').inputValue(), city);
+      assert.equal(await page.locator('#city-name').textContent(), city === 'hami' ? '哈密' : '昆明');
+    }
     // Responsive checks include expanded cross-city settings.
     for (const width of [320, 360, 390, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 }); await sleep(80);
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `horizontal overflow at ${width}`);
       for (const id of ['prev-day', 'next-day', 'return-today']) assert.ok((await page.locator('#' + id).boundingBox()).height >= 44, `${id} needs a 44px hit area`);
+      for (const id of ['city', 'target-city']) {
+        const fit = await page.locator('#' + id).evaluate(el => {
+          const display = el.nextElementSibling, name = display.querySelector('.city-name'), english = display.querySelector('.city-en'), arrow = display.querySelector('.city-chevron');
+          return { nameRight: name.getBoundingClientRect().right, arrowLeft: arrow.getBoundingClientRect().left, englishDisplay: getComputedStyle(english).display, nativeFont: getComputedStyle(el).fontSize, height: el.getBoundingClientRect().height };
+        });
+        assert.ok(fit.nameRight + 8 <= fit.arrowLeft, `${id} city name collides with its arrow at ${width}`);
+        assert.equal(fit.nativeFont, '16px', 'native city picker must retain the iOS no-zoom font size');
+        assert.equal(fit.height, 44);
+        if (width <= 760) assert.equal(fit.englishDisplay, 'none', 'compact city label must omit the long English name');
+      }
     }
     await page.setViewportSize({ width: 390, height: 844 }); await page.locator('#mode-same').click(); await page.locator('#city').selectOption('chengdu'); await page.locator('#mapping-details > summary').click();
     await page.evaluate(() => scrollTo(0, 0)); await sleep(900);
     if (process.env.SCREENSHOTS_DIR) { fs.mkdirSync(process.env.SCREENSHOTS_DIR, {recursive:true}); await page.screenshot({ path: path.join(process.env.SCREENSHOTS_DIR, `${name}-mobile.png`), fullPage: true }); }
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await date(page, `${year}-03-15`);
+    const reducedPoint = await point(page, 90); await page.mouse.move(reducedPoint.x, reducedPoint.y); await page.mouse.down();
+    await page.evaluate(() => new Promise(requestAnimationFrame));
+    assert.equal(await page.locator('.dial-surface').evaluate(el => getComputedStyle(el).transform), 'none', 'reduced motion must disable face tilt');
+    await page.keyboard.press('Escape'); await page.mouse.up(); await page.mouse.move(0, 0); await settle(page);
     assert.ok(Math.abs((await angle(page) % 360 + 360) % 360 - 73/365*360) < .02, 'reduced motion must snap to the exact selected date');
     assert.equal(await page.evaluate(() => document.getAnimations().filter(a => a.playState === 'running').length), 0, 'reduced motion must stop CSS animations');
     await page.emulateMedia({ reducedMotion: 'no-preference' }); await sleep(950);
+    await page.waitForFunction(() => document.getAnimations().filter(a => a.playState === 'running').length === 0, {timeout: 5000});
     assert.equal(await page.evaluate(() => document.getAnimations().filter(a => a.playState === 'running').length), 0, 'idle dial must not run perpetual animations');
     assert.equal(await page.locator('.is-moving').count(), 0, 'motion loop must settle');
     assert.deepEqual(errors, []);

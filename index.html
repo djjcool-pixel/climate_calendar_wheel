@@ -222,6 +222,13 @@ select{-webkit-appearance:none;line-height:1.25}
 /* Preserve the native date editor and iOS's no-focus-zoom threshold. */
 @supports(-webkit-touch-callout:none){.primary-toolbar .date-row input{font-size:16px}}
 
+/* On compact screens the controls explain their purpose; keep labels available to assistive tech. */
+@media(max-width:760px){
+ .primary-toolbar .fieldlabel{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+ .toolbar-date{display:block}
+ .toolbar-date .date-row{width:100%;max-width:none}
+}
+
 .wheel-svg-wrap{perspective:1000px}
 .dial-surface{position:relative;isolation:isolate;width:100%;height:100%;transform-origin:50% 50%;transform:none}
 .dial-active .dial-surface,.is-tilting .dial-surface{will-change:transform}
@@ -268,7 +275,7 @@ select{-webkit-appearance:none;line-height:1.25}
 .outfit-notes p:before{content:'·';position:absolute;left:0;color:#b4d394}
 .outfit-footnote{margin:12px 0 0;padding-top:10px;border-top:1px solid #49656035;font-size:10px;line-height:1.6;color:#86a4ac}
 @media(max-width:760px){
- :root{--secondary-preview-height:196px}
+ :root{--secondary-preview-height:180px}
  .outfit-card{border-radius:16px}.outfit-summary{padding:17px 14px 14px}.outfit-details{padding:0 14px 14px}.outfit-head h2{font-size:16px}
  .outfit-card:not([open]) .outfit-summary{min-height:calc(var(--secondary-preview-height) - 2px);display:flex;flex-direction:column;justify-content:space-between}
  .outfit-card:not([open]) .outfit-summary>*,.outfit-head{width:100%}
@@ -276,6 +283,24 @@ select{-webkit-appearance:none;line-height:1.25}
  .outfit-toggle{margin-top:7px}
  .outfit-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.outfit-piece{padding:12px 10px;column-gap:8px;min-height:94px}.outfit-piece dd{font-size:12px;min-height:38px}
  .outfit-notes{grid-template-columns:1fr;gap:5px;margin-top:12px}.outfit-notes p{min-height:19px;font-size:10px}
+}
+/* Keep the established visual hierarchy, with less vertical space on phones. */
+@media(max-width:760px){
+ .primary-bar{padding:10px 14px}
+ .primary-bar .section-kicker,.spectrum-heading .section-kicker,.outfit-head .section-kicker{display:block;font-size:8px;line-height:1.25}
+ .primary-bar h2{margin-top:5px}
+ .primary-toolbar{margin-top:10px;row-gap:8px}
+ .wheel-top{padding-top:10px}
+ .wheel-legend{margin-top:-7px;margin-bottom:6px}
+ .wheel-sidebar{padding:12px 3px 11px;row-gap:4px}
+ .spectrum-card,.outfit-card,.mapping-panel{margin-top:10px}
+ .spectrum-body{margin-top:10px;gap:8px}
+ .spectrum-cityline{margin-bottom:8px}
+ .spectrum-month-labels span{font-size:9px;line-height:1.3}
+ .outfit-summary{padding:14px}
+ .outfit-head h2{margin-bottom:0}
+ .mapping-summary{padding:11px 13px}
+ .summary-icon{width:32px;height:32px;font-size:18px}
 }
 @media(prefers-reduced-motion:reduce){.outfit-toggle svg{transition:none}}
 </style>

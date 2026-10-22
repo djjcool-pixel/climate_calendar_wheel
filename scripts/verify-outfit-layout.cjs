@@ -21,7 +21,7 @@ async function verify(name) {
       assert.equal(await details.isVisible(), false);
       const outfitHeight = (await card.boundingBox()).height, spectrumHeight = (await page.locator('.spectrum-card').boundingBox()).height;
       assert.ok(Math.abs(outfitHeight - spectrumHeight) <= 1, `preview must match the spectrum height at ${width}: ${outfitHeight}/${spectrumHeight}`);
-      assert.ok(outfitHeight <= 200, 'secondary feature must stay compact');
+      assert.ok(outfitHeight <= 185, 'secondary feature must stay compact');
       assert.equal(await page.locator('#outfit-preview').isVisible(), true);
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await summary.click();
@@ -57,7 +57,7 @@ async function verify(name) {
       await card.screenshot({path:path.join(process.env.SCREENSHOTS_DIR,`${name}-preview.png`)});
     }
     assert.deepEqual(errors, []);
-    console.log(JSON.stringify({browser:name,passed:true,mobilePreviewHeight:196,matchingSpectrum:true,nativeClickAndKeyboard:true,dateUpdates:true,desktopExpanded:true}));
+    console.log(JSON.stringify({browser:name,passed:true,mobilePreviewHeight:180,matchingSpectrum:true,nativeClickAndKeyboard:true,dateUpdates:true,desktopExpanded:true}));
   } finally {await browser.close();}
 }
 (async () => {

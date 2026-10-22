@@ -118,6 +118,30 @@ select{width:100%;min-width:0;appearance:none;border-radius:9px;padding:12px 29p
 }
 @media(max-width:380px){.source-pill{font-size:7px}.intro h1{font-size:20px}.primary-bar h2{font-size:17px}.primary-toolbar .seg button{font-size:9px}.wheel-sidebar{padding:9px 5px}.sidebar-date strong{font-size:25px}.sidebar-match strong{font-size:19px}.wheel-legend{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.wheel-svg .point-halo{animation:none}.wheel-svg-wrap{will-change:auto}}
+
+/* v6 — tactile, beveled seasonal dial and return-to-today control */
+.today-btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:37px;padding:8px 15px;border:1px solid #789d9180;border-radius:999px;background:linear-gradient(145deg,#294a48,#1a363e);color:#e6f5e1;font-size:12px;font-weight:750;letter-spacing:.01em;white-space:nowrap;box-shadow:inset 0 1px #c2edc222,0 5px 13px #071b2550;transition:transform .19s cubic-bezier(.19,1,.22,1),background .2s,box-shadow .2s,border-color .2s}
+.today-btn:hover{background:linear-gradient(145deg,#3d6257,#24464b);border-color:#b7e49c;box-shadow:inset 0 1px #e1f8b540,0 7px 18px #071b2560;transform:translateY(-1px)}
+.today-btn:active{transform:translateY(2px) scale(.965);box-shadow:inset 0 3px 8px #03131b80}
+.today-icon{font-size:19px;line-height:1;color:#d4f18a;display:inline-block;transition:transform .45s cubic-bezier(.18,.8,.22,1)}
+.today-btn:hover .today-icon{transform:rotate(-25deg)}
+.today-btn.today-bounce .today-icon{animation:today-reset .52s cubic-bezier(.18,.8,.22,1)}
+@keyframes today-reset{from{transform:rotate(-250deg)}to{transform:rotate(0deg)}}
+.wheel-svg-wrap{position:relative;isolation:isolate;--touch-x:50%;--touch-y:50%;-webkit-tap-highlight-color:transparent}
+.wheel-svg-wrap:before{content:'';position:absolute;inset:7.4%;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle at 34% 20%,#a1d6da25 0%,#24424a30 39%,#05141ce0 100%);box-shadow:0 18px 27px #020e1780,0 4px 5px #081923ce,inset 0 3px 4px #c4f0e01b,inset 0 -13px 20px #000b12bb;transition:box-shadow .26s ease,transform .26s ease}
+.wheel-svg-wrap:after{content:'';position:absolute;inset:0;z-index:2;border-radius:50%;pointer-events:none;background:radial-gradient(circle 76px at var(--touch-x) var(--touch-y),#e5ffcc2e 0%,#cbf6ed0f 48%,transparent 100%);opacity:0;mix-blend-mode:screen;transition:opacity .22s ease}
+.wheel-panel.dial-hover .wheel-svg-wrap:after,.wheel-panel.dial-active .wheel-svg-wrap:after{opacity:1}
+.wheel-svg{position:relative;z-index:1;transform-origin:50% 50%;filter:drop-shadow(0 5px 2px #030d1450);transition:transform .24s cubic-bezier(.17,.86,.18,1.35),filter .24s ease;will-change:transform}
+.wheel-panel.dial-active .wheel-svg{transform:translateY(3px) scale(.992);filter:brightness(1.1) drop-shadow(0 1px 1px #0006);transition-duration:.09s}
+.wheel-panel.dial-active .wheel-svg-wrap:before{box-shadow:0 8px 12px #020e1785,inset 0 11px 20px #020c159e,inset 0 -6px 8px #c0e9c91b;transform:translateY(2px) scale(.993);transition-duration:.1s}
+.wheel-panel.dial-active .wheel-svg-wrap:after{background:radial-gradient(circle 104px at var(--touch-x) var(--touch-y),#f1ffd84b 0%,#caf9e519 40%,transparent 100%)}
+.dial-ripple{position:absolute;left:var(--touch-x);top:var(--touch-y);z-index:3;width:24px;height:24px;border-radius:50%;border:2px solid #e2ffc6;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.4);box-shadow:0 0 22px #daf8a999}
+.wheel-panel.dial-confirmed .dial-ripple{animation:dial-confirm .52s cubic-bezier(.12,.8,.3,1) forwards}
+@keyframes dial-confirm{0%{opacity:.95;transform:translate(-50%,-50%) scale(.5)}65%{opacity:.8}100%{opacity:0;transform:translate(-50%,-50%) scale(3.7)}}
+.wheel-svg .dial-platter{filter:drop-shadow(0 2px 3px #000b)}
+@media(max-width:760px){.primary-bar{align-items:center;gap:8px}.primary-bar h2{font-size:17px}.live-mark{font-size:8px;margin-left:3px;padding:3px 5px}.today-btn{min-height:39px;padding:7px 11px;font-size:11px;gap:5px}.today-icon{font-size:18px}}
+@media(max-width:380px){.primary-bar h2{font-size:15px}.today-btn{font-size:10px;padding:7px 9px}.live-mark{font-size:7px}}
+@media(prefers-reduced-motion:reduce){.wheel-svg,.wheel-svg-wrap:before,.wheel-svg-wrap:after,.today-btn,.today-icon{transition:none!important;animation:none!important}.wheel-panel.dial-confirmed .dial-ripple{animation:none!important}}
 </style>
 </head>
 <body>
@@ -126,14 +150,14 @@ select{width:100%;min-width:0;appearance:none;border-radius:9px;padding:12px 29p
 <main id="top">
 <section class="intro"><div><div class="eyebrow">SEASONAL ECHO / 气候年轮</div><h1>转动年轮，<em>遇见另一季节。</em></h1></div></section>
 <section class="primary-experience" aria-labelledby="wheel-title">
-<div class="primary-bar"><div><span class="section-kicker">SEASONAL ECHO</span><h2 id="wheel-title">同城季节映射 <span class="live-mark" id="interaction-indicator">● 已选定</span></h2></div><span class="wheel-explain">悬停预览 · 点击确认 · 手指拨动 <span aria-hidden="true">↗</span></span></div>
+<div class="primary-bar"><div><span class="section-kicker">SEASONAL ECHO</span><h2 id="wheel-title">同城季节映射 <span class="live-mark" id="interaction-indicator">● 已选定</span></h2></div><button id="return-today" class="today-btn" type="button" aria-label="返回今天的日期"><span class="today-icon" aria-hidden="true">↺</span><span>返回今日</span></button></div>
 <div class="primary-toolbar">
 <div class="toolbar-city"><label class="fieldlabel" for="city">城市</label><div class="select-wrap"><select id="city"><option value="tokyo">东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu">成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option><option value="wuhan">武汉 Wuhan</option></select></div><div class="city-info" id="city-detail">日本 · 东京站</div></div>
 <div class="toolbar-metric"><span class="fieldlabel">比较指标</span><div class="seg" role="group" aria-label="气温指标"><button type="button" data-metric="mean" class="active" aria-pressed="true">日均温</button><button type="button" data-metric="high" aria-pressed="false">日最高</button><button type="button" data-metric="low" aria-pressed="false">日最低</button></div></div>
 <div class="toolbar-date"><label class="fieldlabel" for="date">日期</label><div class="date-row"><button class="iconbtn" id="prev-day" type="button" aria-label="前一天">‹</button><input id="date" type="date" value="2025-11-15" min="2025-01-01" max="2025-12-31"/><button class="iconbtn" id="next-day" type="button" aria-label="后一天">›</button></div></div>
 </div>
 <div class="wheel-showcase">
-<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> 365 DAYS · 12 MONTHS</span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="group" aria-label="全年气候轮盘：沿外圈移动预览，点击或用手指拨动确认日期"></svg></div><div class="wheel-legend"><span>冷</span><span class="gradient"></span><span>热</span><span class="legend-separator"></span><span><span class="legend-dot"></span>起点</span><span><span class="legend-dot orange"></span>相似日</span><span id="ring-key">单城年轮</span></div></div>
+<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> 365 DAYS · 12 MONTHS</span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="group" aria-label="全年气候轮盘：沿外圈移动预览，点击或用手指拨动确认日期"></svg><span class="dial-ripple" aria-hidden="true"></span></div><div class="wheel-legend"><span>冷</span><span class="gradient"></span><span>热</span><span class="legend-separator"></span><span><span class="legend-dot"></span>起点</span><span><span class="legend-dot orange"></span>相似日</span><span id="ring-key">单城年轮</span></div></div>
 <div class="wheel-sidebar">
 <div class="sidebar-heading"><span>SELECTED DATE</span><strong>当前日期</strong></div>
 <div class="sidebar-date"><span id="sidebar-date">11月15日</span><strong id="sidebar-temp">12.5<small>°C</small></strong></div><p class="sidebar-lead" id="sidebar-lead">东京 · 秋季 · 日均温</p>
@@ -229,6 +253,16 @@ function drawWheel(){
  const key=[state.mode,state.source,state.target,state.metric].join('|');
  const aSeries=series(state.source,state.metric),bSeries=series(cross?state.target:state.source,state.metric);
  if(wheelBaseKey!==key){wheelBaseKey=key;wheel.replaceChildren();
+ const defs=svgEl('defs');
+ const metal=svgEl('linearGradient',{id:'dial-metal-rim',x1:'0%',y1:'0%',x2:'100%',y2:'100%'},defs);
+ for(const [offset,color] of [['0%','#8ba8a6'],['24%','#314f57'],['50%','#162d39'],['73%','#628a88'],['100%','#172b37']])svgEl('stop',{offset,'stop-color':color},metal);
+ const platter=svgEl('radialGradient',{id:'dial-platter',cx:'33%',cy:'24%',r:'90%'},defs);
+ for(const [offset,color] of [['0%','#26434a'],['58%','#19323e'],['83%','#102731'],['100%','#0b1b27']])svgEl('stop',{offset,'stop-color':color},platter);
+ const center=svgEl('radialGradient',{id:'dial-center',cx:'36%',cy:'20%',r:'92%'},defs);
+ for(const [offset,color] of [['0%','#223c46'],['63%','#142c38'],['100%','#0a1c28']])svgEl('stop',{offset,'stop-color':color},center);
+ svgEl('circle',{cx:360,cy:360,r:311,fill:'none',stroke:'#c6e8d0','stroke-width':1,opacity:.12,'pointer-events':'none'});
+ svgEl('circle',{cx:360,cy:360,r:305,fill:'url(#dial-platter)',stroke:'url(#dial-metal-rim)','stroke-width':5,class:'dial-platter','pointer-events':'none'});
+ svgEl('circle',{cx:360,cy:360,r:295,fill:'none',stroke:'#081c28','stroke-width':4,opacity:.65,'pointer-events':'none'});
  svgEl('circle',{cx:360,cy:360,r:cross?269:261,fill:'none',stroke:'#344f5a','stroke-width':cross?44:61,opacity:.52});
  svgEl('circle',{cx:360,cy:360,r:303,fill:'none',stroke:'#405a62','stroke-width':1,opacity:.5});
  svgEl('circle',{cx:360,cy:360,r:cross?205:221,fill:'none',stroke:'#49636e','stroke-width':1,opacity:.6});
@@ -248,7 +282,7 @@ function drawWheel(){
  svgEl('circle',{cx:p1.x,cy:p1.y,r:10,fill:'none',stroke:color,'stroke-width':1,opacity:.5,class:'point-halo'},overlayLayer);
  svgEl('circle',{cx:p1.x,cy:p1.y,r:6.4,fill:'#172833',stroke:color,'stroke-width':3},overlayLayer);
  }
- svgEl('circle',{cx:360,cy:360,r:177,fill:'#142934',stroke:'#46616a','stroke-width':1.5},overlayLayer);
+ svgEl('circle',{cx:360,cy:360,r:177,fill:'url(#dial-center)',stroke:'#72949b','stroke-width':1.5},overlayLayer);
  svgEl('circle',{cx:360,cy:360,r:165,fill:'none',stroke:'#3c5a61','stroke-width':1,'stroke-dasharray':'2 10'},overlayLayer);
  const label=(str,y,cls)=>{const e=svgEl('text',{x:360,y,class:cls},overlayLayer);e.textContent=str};
  label(cross?CITIES[state.source].name+'  →  '+CITIES[state.target].name:'S E A S O N A L  E C H O',277,'orbit');
@@ -322,26 +356,33 @@ document.querySelectorAll('[data-algorithm]').forEach(b=>b.addEventListener('cli
 $('date').addEventListener('change',e=>changeDay(dateToIdx(e.target.value)));
 $('day-slider').addEventListener('input',e=>changeDay(Number(e.target.value)));
 $('prev-day').addEventListener('click',()=>changeDay(state.day-1));$('next-day').addEventListener('click',()=>changeDay(state.day+1));
+$('return-today').addEventListener('click',()=>{const now=new Date();changeDay(starts[now.getMonth()]+Math.min(now.getDate(),daysInMonth[now.getMonth()])-1);const b=$('return-today');b.classList.remove('today-bounce');void b.offsetWidth;b.classList.add('today-bounce')});
 document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>changeDay(dateToIdx('2025-'+b.dataset.quick))));
 // Preview follows the pointer; commit only on release/click, including touch dial interactions.
 function dayFromPointer(e,allowOutside=false){const r=wheel.getBoundingClientRect();const x=(e.clientX-r.left)*720/r.width-360,y=(e.clientY-r.top)*720/r.height-360;const radius=Math.hypot(x,y);
  if(!allowOutside&&(radius<218||radius>347))return null;
  const ang=(Math.atan2(y,x)*180/Math.PI+90+360)%360;return Math.round(ang/360*365)%365}
-const setPreview=d=>{if(d===state.hover)return;state.hover=d;render(false)};
+const dialPanel=$('wheel-panel'),dialWrap=wheel.parentElement;
+const pointHighlight=e=>{const rect=dialWrap.getBoundingClientRect();dialWrap.style.setProperty('--touch-x',((e.clientX-rect.left)/rect.width*100).toFixed(2)+'%');dialWrap.style.setProperty('--touch-y',((e.clientY-rect.top)/rect.height*100).toFixed(2)+'%');};
+const setPreview=d=>{dialPanel.classList.toggle('dial-hover',d!==null);if(d===state.hover)return;state.hover=d;render(false)};
+const releaseDial=()=>dialPanel.classList.remove('dial-active');
+const confirmDial=()=>{dialPanel.classList.remove('dial-confirmed');void dialPanel.offsetWidth;dialPanel.classList.add('dial-confirmed')};
+dialWrap.querySelector('.dial-ripple').addEventListener('animationend',()=>dialPanel.classList.remove('dial-confirmed'));
 let activePointerId=null;
 wheel.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;const d=dayFromPointer(e);if(d===null)return;
- state.drag=true;activePointerId=e.pointerId;wheel.setPointerCapture(e.pointerId);setPreview(d);e.preventDefault()});
+ state.drag=true;activePointerId=e.pointerId;pointHighlight(e);dialPanel.classList.remove('dial-confirmed');dialPanel.classList.add('dial-active');wheel.setPointerCapture(e.pointerId);setPreview(d);e.preventDefault()});
 wheel.addEventListener('pointermove',e=>{
- if(state.drag){if(e.pointerId!==activePointerId)return;const d=dayFromPointer(e,true);if(d!==null)setPreview(d);return}
- if(e.pointerType==='mouse'||e.pointerType==='pen')setPreview(dayFromPointer(e));
+ if(state.drag){if(e.pointerId!==activePointerId)return;pointHighlight(e);const d=dayFromPointer(e,true);if(d!==null)setPreview(d);return}
+ if(e.pointerType==='mouse'||e.pointerType==='pen'){pointHighlight(e);setPreview(dayFromPointer(e));}
 });
 wheel.addEventListener('pointerup',e=>{if(!state.drag||e.pointerId!==activePointerId)return;
- const d=dayFromPointer(e,true)??state.hover;state.drag=false;activePointerId=null;
+ const d=dayFromPointer(e,true)??state.hover;state.drag=false;activePointerId=null;releaseDial();pointHighlight(e);
  if(wheel.hasPointerCapture(e.pointerId))wheel.releasePointerCapture(e.pointerId);
- if(d!==null)changeDay(d);
+ if(d!==null){changeDay(d);confirmDial();}
  if(e.pointerType==='mouse')setPreview(dayFromPointer(e));
 });
-wheel.addEventListener('pointercancel',e=>{if(e.pointerId!==activePointerId)return;state.drag=false;activePointerId=null;setPreview(null)});
+wheel.addEventListener('pointercancel',e=>{if(e.pointerId!==activePointerId)return;state.drag=false;activePointerId=null;releaseDial();setPreview(null)});
+wheel.addEventListener('lostpointercapture',()=>{if(state.drag){state.drag=false;activePointerId=null;releaseDial();setPreview(null)}});
 wheel.addEventListener('pointerleave',()=>{if(!state.drag)setPreview(null)});
 document.addEventListener('keydown',e=>{if(['INPUT','SELECT','BUTTON','TEXTAREA'].includes(document.activeElement?.tagName))return;if(e.key==='ArrowLeft'){e.preventDefault();changeDay(state.day-1)}if(e.key==='ArrowRight'){e.preventDefault();changeDay(state.day+1)}});
 $('copy-result').addEventListener('click',async()=>{

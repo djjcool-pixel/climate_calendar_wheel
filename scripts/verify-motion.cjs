@@ -15,6 +15,7 @@ async function settle(page) {
   await page.evaluate(() => new Promise(requestAnimationFrame));
   await page.waitForFunction(() => !document.querySelector('.is-moving'), {timeout: 10000});
 }
+const selectedDay = page => page.locator('#wheel').getAttribute('aria-valuenow').then(value => Number(value) - 1);
 const angle = page => page.locator('.dial-marker').first().getAttribute('transform').then(s => Number(s.match(/rotate\(([-\d.]+)/)[1]));
 async function date(page, value) { await page.locator('#date').fill(value); await page.locator('#date').dispatchEvent('change'); await settle(page); }
 async function point(page, day, radius = 280) {
@@ -36,7 +37,7 @@ async function verifyTouch(browser, url) {
     await send('touchStart', await point(page, 90));
     for (let i = 1; i <= 15; i++) { await send('touchMove', await point(page, 90 + i * 4)); await sleep(20); }
     await send('touchEnd'); await settle(page);
-    assert.equal(await page.locator('#day-slider').inputValue(), '150', 'native touch must commit rather than be cancelled by pan recognition');
+    assert.equal(await selectedDay(page), 150, 'native touch must commit rather than be cancelled by pan recognition');
     assert.equal(await page.evaluate(() => scrollY), 0, 'ring drag must not scroll the page');
   } finally { await page.close(); }
 }
@@ -76,7 +77,7 @@ async function verify(name, engine) {
     assert.ok(Math.abs(after - before) < 1.1, `year boundary must use the short arc: ${before} → ${after}; errors=${errors.join(',')}`);
     await page.evaluate(() => { for (let i = 0; i < 60; i++) document.querySelector('#next-day').click(); });
     await settle(page);
-    assert.equal(await page.locator('#day-slider').inputValue(), '60', 'rapid clicks must retain every date change');
+    assert.equal(await selectedDay(page), 60, 'rapid clicks must retain every date change');
     await page.evaluate(() => {
       window.savedDial = [document.querySelector('.connection-path'), ...document.querySelectorAll('.dial-marker'), ...document.querySelectorAll('.tempbar')];
       window.dialAdded = 0;
@@ -96,16 +97,16 @@ async function verify(name, engine) {
     const dragStart = await point(page, 90), dragEnd = await point(page, 170);
     const selectedClothes = await page.locator('#outfit-card').textContent();
     await page.mouse.move(dragStart.x, dragStart.y); await page.mouse.down(); await page.mouse.move(dragEnd.x, dragEnd.y, { steps: 15 }); await sleep(80);
-    assert.equal(await page.locator('#day-slider').inputValue(), '60', 'drag is preview-only before release');
+    assert.equal(await selectedDay(page), 60, 'drag is preview-only before release');
     assert.equal(await page.locator('#outfit-card').textContent(), selectedClothes, 'drag previews must defer wardrobe work until date confirmation');
     await page.mouse.up(); await settle(page);
-    assert.equal(await page.locator('#day-slider').inputValue(), '170');
+    assert.equal(await selectedDay(page), 170);
     assert.equal(await page.locator('#interaction-indicator').textContent(), '● 已选定');
     assert.equal(await page.locator('#outfit-context').textContent(), '成都 · 6月20日');
     assert.equal(await page.evaluate(() => window.outfitAdded), 0, 'confirmed wardrobe updates must reuse text nodes');
     await page.mouse.down(); await page.mouse.move(dragStart.x, dragStart.y); await page.keyboard.press('Escape'); await page.mouse.up();
     await page.mouse.move(0, 0); await settle(page);
-    assert.equal(await page.locator('#day-slider').inputValue(), '170', 'Escape cancels a drag');
+    assert.equal(await selectedDay(page), 170, 'Escape cancels a drag');
     assert.equal(await page.locator('#outfit-context').textContent(), '成都 · 6月20日');
     assert.equal(await page.locator('.dial-active').count(), 0);
     for (const [day, axis, sign] of [[0, 'y', -1], [90, 'x', 1], [182, 'y', 1], [274, 'x', -1]]) {
@@ -151,7 +152,7 @@ async function verify(name, engine) {
     for (const width of [320, 360, 390, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 }); await sleep(80);
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `horizontal overflow at ${width}`);
-      assert.ok(await page.locator('#outfit-card').evaluate(el => [...el.querySelectorAll('.outfit-piece, .outfit-piece dd, .outfit-weather')].every(item => item.scrollWidth <= item.clientWidth + 1)), `clothing text must fit at ${width}`);
+      assert.ok(await page.locator('#outfit-card').evaluate(el => [...el.querySelectorAll('.outfit-piece, .outfit-piece dd')].every(item => item.scrollWidth <= item.clientWidth + 1)), `clothing text must fit at ${width}`);
       for (const id of ['prev-day', 'next-day', 'return-today']) assert.ok((await page.locator('#' + id).boundingBox()).height >= 44, `${id} needs a 44px hit area`);
       for (const id of ['city', 'target-city']) {
         const fit = await page.locator('#' + id).evaluate(el => {

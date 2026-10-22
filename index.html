@@ -47,9 +47,6 @@ select{width:100%;min-width:0;appearance:none;border-radius:9px;padding:12px 29p
 .seg button.active{color:#e7f6cb;background:#3a5154}.seg button:focus-visible{outline-offset:0}
 .date-row{display:flex;gap:7px}.date-row input{border:1px solid #40566380;color:var(--text);background:#1d3340;border-radius:9px;padding:10px 6px;min-width:0;width:100%;font-size:13px;color-scheme:dark}
 .iconbtn{flex-shrink:0;width:36px;background:#1d3340;border:1px solid #40566380;border-radius:9px;font-size:21px;color:#c9d6d6}
-.shortcutrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.shortcutrow button{border-radius:20px;border:1px solid #40566390;background:transparent;color:#a7bdc3;font-size:10px;padding:6px 9px}
-.shortcutrow button:hover{color:white;background:#2b4551}
-.range{width:100%;accent-color:var(--green);margin:10px 0 5px;cursor:pointer}.rangehead{display:flex;justify-content:space-between;color:#728c99;font-size:9px}.rangehead span:nth-child(2){color:#b6cbcb}
 .control-hint{font-size:10px;line-height:1.6;color:#8aa2ab;padding-top:6px;border-top:1px solid var(--line)}
 .wheel-panel{padding:10px 9px 12px;background:radial-gradient(ellipse at 50% 45%,#203845 0%,#152936 60%,#11222e 100%);overflow:hidden}
 .wheel-top{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:9px 10px 0;font-size:10px;letter-spacing:.12em;color:#b4c8c9;font-weight:700}
@@ -90,14 +87,13 @@ select{width:100%;min-width:0;appearance:none;border-radius:9px;padding:12px 29p
 .primary-bar{display:flex;justify-content:space-between;gap:15px;align-items:end;padding:23px 28px 17px;border-bottom:1px solid #3b556035;position:relative}.section-kicker{font-size:9px;letter-spacing:.23em;font-weight:750;color:#accf88}.primary-bar h2,.spectrum-heading h2{font-size:19px;font-weight:800;line-height:1.3;letter-spacing:-.025em;margin:8px 0 0}.live-mark{display:inline-flex;font-size:9px;color:#a8d49d;background:#29423b;border:1px solid #56836a55;border-radius:99px;padding:4px 7px;margin-left:8px;font-weight:600;letter-spacing:.02em;vertical-align:middle}.wheel-explain{font-size:10px;color:#90a9af}
 .primary-toolbar{display:grid;grid-template-columns:minmax(190px,1fr) minmax(220px,1.08fr) minmax(218px,.93fr);gap:18px;align-items:start;margin:18px 28px 8px;position:relative}.primary-toolbar>.toolbar-city,.primary-toolbar>.toolbar-metric,.primary-toolbar>.toolbar-date{min-width:0}.primary-toolbar .fieldlabel{margin-bottom:8px;font-size:10px}.primary-toolbar .city-info{margin-top:6px;font-size:9px}.primary-toolbar select,.primary-toolbar input{height:43px}.primary-toolbar .date-row{height:43px}.primary-toolbar .iconbtn{width:38px;font-size:24px;line-height:1}.primary-toolbar .seg{height:43px}.primary-toolbar .seg button{font-size:12px}.primary-toolbar select{font-size:12px}
 .wheel-showcase{display:grid;grid-template-columns:minmax(0,1fr) 264px;gap:6px;max-width:1170px;margin:auto;align-items:center;padding:0 25px 5px}.wheel-panel{border:0;background:none;overflow:visible;padding:0;min-width:0}.wheel-top{max-width:725px;margin:auto;padding:14px 6px 2px;letter-spacing:.13em;font-size:10px}.wheel-top-dot{width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;box-shadow:0 0 10px #d4f18a77}.wheel-svg-wrap{max-width:710px;animation:wheel-enter .65s cubic-bezier(.2,.8,.2,1) both}.wheel-svg{touch-action:none}.wheel-svg .tempbar{transition:stroke .32s ease}.wheel-legend{margin:-8px 0 12px;gap:12px;font-size:10px}.wheel-legend #ring-key{color:#6f9297}.wheel-legend .gradient{width:116px}.legend-separator{height:10px;border-left:1px solid #52697370}
-.wheel-sidebar{align-self:stretch;display:flex;flex-direction:column;justify-content:center;max-width:264px;margin:auto;padding:16px 10px 35px;animation:fade-up .75s .14s both}.sidebar-heading span{font-size:9px;letter-spacing:.2em;color:#8fb2b0;font-weight:800;display:block}.sidebar-heading strong{font-size:13px;display:block;margin-top:6px}.sidebar-date{margin-top:22px}.sidebar-date>span{display:block;font-size:28px;font-weight:800;letter-spacing:-.06em;white-space:nowrap}.sidebar-date strong{display:block;color:var(--green);font-size:48px;letter-spacing:-.075em;font-weight:780;line-height:1.15;margin-top:5px;font-variant-numeric:tabular-nums}.sidebar-date strong small{font-size:20px;margin-left:6px;font-weight:500}.sidebar-lead{font-size:11px;color:#93aeb6}.sidebar-divider{height:1px;background:#58707950;margin:28px 0 21px}.sidebar-subtitle{font-size:10px;color:#89a5af;margin-bottom:12px}.sidebar-match{display:flex;align-items:center;gap:11px}.sidebar-match strong{display:block;font-size:23px;color:#f9e1cb;letter-spacing:-.04em}.sidebar-match small{display:block;font-size:11px;color:#8dacb3;margin-top:6px}.match-orbit-dot{height:10px;width:10px;flex-shrink:0;background:var(--orange);border:3px solid #253842;border-radius:50%;box-shadow:0 0 0 2px #f8b188c9,0 0 20px #f8b18850}.sidebar-arrow{font-size:21px;margin-left:auto;color:#f8b188}.sidebar-hint{color:#819ba6;font-size:11px;line-height:1.85;margin-top:28px}.sidebar-explore{margin-top:14px;padding:12px 14px;border:1px solid #7b9b88aa;color:#dcf4b9;background:#203d3d;border-radius:10px;font-size:12px;font-weight:750;display:flex;align-items:center;justify-content:space-between;transition:background .2s,transform .2s,box-shadow .2s}.sidebar-explore:hover{background:#325a4d;transform:translateY(-2px);box-shadow:0 8px 22px #07130e50}
-.wheel-navigation{margin:0 29px 22px;border-top:1px solid #3e55623a;padding:14px 2px 0;display:grid;grid-template-columns:auto 1fr auto;gap:8px 16px;align-items:center}.wheel-navigation>label{grid-column:1;grid-row:1;font-size:11px;color:#a5b8bd}.wheel-navigation>#slider-label{grid-column:3;grid-row:1;font-size:10px;color:#a3c58b}.wheel-navigation .range{grid-column:1/4;grid-row:2;margin:0;width:100%}.wheel-navigation .rangehead{grid-column:1/4;grid-row:3;display:flex;align-items:center;justify-content:space-between;color:#708f99}.wheel-navigation .shortcutrow{margin:0}.wheel-navigation .shortcutrow button{font-size:10px;padding:5px 12px}
+.wheel-sidebar{align-self:stretch;display:flex;flex-direction:column;justify-content:center;max-width:264px;margin:auto;padding:16px 10px 35px;animation:fade-up .75s .14s both}.sidebar-heading span{font-size:9px;letter-spacing:.2em;color:#8fb2b0;font-weight:800;display:block}.sidebar-heading strong{font-size:13px;display:block;margin-top:6px}.sidebar-date{margin-top:22px}.sidebar-date>span{display:block;font-size:28px;font-weight:800;letter-spacing:-.06em;white-space:nowrap}.sidebar-date strong{display:block;color:var(--green);font-size:48px;letter-spacing:-.075em;font-weight:780;line-height:1.15;margin-top:5px;font-variant-numeric:tabular-nums}.sidebar-date strong small{font-size:20px;margin-left:6px;font-weight:500}.sidebar-lead{font-size:11px;color:#93aeb6}.sidebar-divider{height:1px;background:#58707950;margin:28px 0 21px}.sidebar-subtitle{font-size:10px;color:#89a5af;margin-bottom:12px}.sidebar-match{display:flex;align-items:center;gap:11px}.sidebar-match strong{display:block;font-size:23px;color:#f9e1cb;letter-spacing:-.04em}.sidebar-match small{display:block;font-size:11px;color:#8dacb3;margin-top:6px}.match-orbit-dot{height:10px;width:10px;flex-shrink:0;background:var(--orange);border:3px solid #253842;border-radius:50%;box-shadow:0 0 0 2px #f8b188c9,0 0 20px #f8b18850}.sidebar-arrow{font-size:21px;margin-left:auto;color:#f8b188}.sidebar-hint{color:#819ba6;font-size:11px;line-height:1.85;margin-top:28px}
 .spectrum-card{margin-top:16px;padding:23px 29px 25px;background:#142934;border:1px solid var(--line);border-radius:18px;animation:fade-up .7s .14s both}.spectrum-heading{display:flex;justify-content:space-between;align-items:end;gap:16px}.spectrum-heading h2{font-size:18px}.spectrum-heading .foot-data{font-size:11px}.spectrum-card>p{font-size:11px;color:#8faab3;margin:11px 0 21px}.spectrum-body{display:grid;gap:15px}.spectrum-cityline{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.spectrum-cityline strong{font-size:11px;color:#d0e5e1}.spectrum-cityline span{font-size:10px;color:#83a4ad}.spectrum-gradient-track{position:relative;width:100%;height:27px;border-radius:8px;display:flex;overflow:hidden;outline:1px solid #8ea4ae3b;cursor:crosshair;box-shadow:inset 0 0 10px #060d1570;transition:filter .2s,transform .2s}.spectrum-gradient-track:hover{filter:brightness(1.16)}.spectrum-gradient-track>span{flex:1 1 0;min-width:0;height:100%;pointer-events:none}.spectrum-gradient-track::after{content:'';position:absolute;left:calc(var(--position,87.4%));top:0;bottom:0;width:3px;transform:translateX(-1.5px);background:#f5ffe0;box-shadow:0 0 0 1px #08212d,0 0 12px #ffffff99;z-index:1;pointer-events:none;transition:none}.spectrum-gradient-track.is-target{height:17px;cursor:default}.spectrum-gradient-track.is-target:after{background:var(--orange)}.spectrum-month-labels{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));margin-top:9px}.spectrum-month-labels span{text-align:left;font-size:10px;color:#748f99}.spectrum-month-labels span:last-child{text-align:right}.target-spectrum{padding-top:4px}
 .mapping-panel{margin-top:16px;background:#132631;border:1px solid var(--line);border-radius:18px;overflow:hidden}.mapping-summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:17px;padding:22px 28px;transition:background .2s}.mapping-summary::-webkit-details-marker{display:none}.mapping-summary:hover{background:#1a323f}.summary-icon{width:47px;height:47px;border:1px solid #59786caa;background:#203c40;border-radius:13px;display:grid;place-items:center;font-size:23px;color:var(--green);flex-shrink:0}.summary-text{display:flex;flex-direction:column;gap:5px;min-width:0}.summary-text small{font-size:9px;letter-spacing:.15em;color:#9cbc99;font-weight:800}.summary-text strong{font-size:16px;letter-spacing:-.015em}.summary-text>span{font-size:10px;color:#819da7}.summary-status{margin-left:auto;white-space:nowrap;font-size:10px;color:#96afa9}.summary-chevron{margin-left:auto;font-size:29px;color:#d5edbd;transition:transform .3s ease;line-height:1}.mapping-panel[open] .summary-chevron{transform:rotate(180deg)}.mapping-panel[open] .mapping-summary{border-bottom:1px solid #3c596240}.mapping-panel[open] .mapping-content{animation:panel-open .36s cubic-bezier(.16,.75,.2,1) both}.mapping-content{padding:20px 28px 28px}.mapping-content .mode-switch{max-width:none;margin:0;gap:10px}.mapping-settings{display:flex;align-items:end;flex-wrap:wrap;gap:14px;margin:15px 0}.mapping-settings>.field{width:240px}.mapping-settings .control-block{width:260px;margin-left:auto}.mapping-settings .control-block .seg{height:44px}.mapping-settings .swap-button{max-width:220px;height:44px}.results{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:12px}.details-card{min-height:220px}.mapping-insight{margin-top:12px;background:#1b323c;border:1px solid #3a566055;border-radius:13px;padding:17px 19px}.mapping-insight .foot-top strong{font-size:13px}.mapping-insight .insight-text{margin:11px 0 6px!important}.mapping-insight #match-method-note{font-size:10px;line-height:1.7;color:#8aa2ab;margin:0}.footer{margin-top:19px}
 @keyframes wheel-enter{from{opacity:0;transform:translateY(10px) scale(.965);}to{opacity:1;transform:translateY(0) scale(1);}}@keyframes wheel-change{from{opacity:.7;transform:scale(.987)}to{opacity:1;transform:scale(1)}}@keyframes fade-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes panel-open{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:translateY(0)}}@keyframes link-drift{from{stroke-dashoffset:0}to{stroke-dashoffset:-48}}@keyframes marker-pulse{0%,100%{stroke-opacity:1}50%{stroke-opacity:.5}}
 
 @media(max-width:1100px){.shell{padding:0 22px 22px}.wheel-showcase{grid-template-columns:minmax(0,1fr) 235px;padding:0 15px}.wheel-sidebar{padding:0 6px 25px}.sidebar-date strong{font-size:41px}.intro-aside{display:none}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1;min-height:0}.metric-grid{grid-template-columns:170px 1fr 1fr}}
-@media(max-width:760px){.shell{padding:0 12px 18px}.topbar{height:56px}.source-pill{font-size:8px;letter-spacing:.04em}.intro{padding:17px 2px 14px}.intro h1{font-size:23px}.intro p{font-size:10px}.primary-experience{border-radius:16px}.primary-bar{padding:17px 16px 13px}.primary-bar h2{font-size:17px}.wheel-explain{display:none}.primary-toolbar{margin:13px 13px 0;gap:9px;grid-template-columns:1fr 1fr}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1}.primary-toolbar .fieldlabel{font-size:9px}.primary-toolbar .city-info{display:none}.primary-toolbar select,.primary-toolbar .seg,.primary-toolbar .date-row{height:40px}.primary-toolbar .seg{padding:3px}.primary-toolbar .seg button{font-size:10px;padding:8px 2px}.primary-toolbar .date-row{max-width:none}.wheel-showcase{display:flex;flex-direction:column;gap:0;padding:2px 4px 5px}.wheel-panel{width:100%}.wheel-top{padding:14px 13px 0;font-size:9px}.wheel-svg-wrap{width:100%;max-width:600px}.wheel-legend{margin:-1px auto 12px;font-size:9px;gap:8px}.wheel-sidebar{width:calc(100% - 25px);max-width:none;padding:16px 8px 12px;margin:0 12px;border-top:1px solid #46636c60;display:grid;grid-template-columns:1fr 1fr;gap:5px 16px;align-items:start}.sidebar-heading{grid-column:1/-1}.sidebar-heading span{font-size:8px}.sidebar-heading strong{display:none}.sidebar-date{margin:2px 0 0}.sidebar-date>span{font-size:19px}.sidebar-date strong{font-size:30px;margin-top:2px}.sidebar-date strong small{font-size:14px}.sidebar-lead{grid-column:1;grid-row:3;margin:0;font-size:10px}.sidebar-divider{display:none}.sidebar-subtitle{grid-column:2;grid-row:2;margin:0;font-size:9px}.sidebar-match{grid-column:2;grid-row:3;align-items:start}.sidebar-match strong{font-size:19px}.sidebar-match small{font-size:9px}.sidebar-arrow{font-size:17px}.sidebar-hint{display:none}.sidebar-explore{grid-column:1/-1;margin-top:10px;padding:10px 13px;font-size:11px}.wheel-navigation{margin:4px 15px 15px;padding:11px 0 0}.wheel-navigation .rangehead{font-size:8px}.wheel-navigation .shortcutrow button{padding:4px 10px;font-size:9px}.spectrum-card{padding:18px 16px;margin-top:12px}.spectrum-heading h2{font-size:16px}.spectrum-card>p{margin-bottom:18px}.spectrum-gradient-track{height:26px}.spectrum-month-labels span{font-size:9px}.mapping-panel{margin-top:12px}.mapping-summary{padding:18px 15px;gap:10px}.summary-icon{width:40px;height:40px;font-size:19px;border-radius:10px}.summary-text strong{font-size:13px}.summary-text>span{font-size:9px}.summary-status{display:none}.summary-chevron{font-size:24px;margin-left:auto}.mapping-content{padding:15px}.mapping-settings>.field{flex:1;min-width:180px}.mapping-settings .control-block{flex:1;margin-left:0;min-width:180px}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1}.footer{padding-top:12px}}
+@media(max-width:760px){.shell{padding:0 12px 18px}.topbar{height:56px}.source-pill{font-size:8px;letter-spacing:.04em}.intro{padding:17px 2px 14px}.intro h1{font-size:23px}.intro p{font-size:10px}.primary-experience{border-radius:16px}.primary-bar{padding:17px 16px 13px}.primary-bar h2{font-size:17px}.wheel-explain{display:none}.primary-toolbar{margin:13px 13px 0;gap:9px;grid-template-columns:1fr 1fr}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1}.primary-toolbar .fieldlabel{font-size:9px}.primary-toolbar .city-info{display:none}.primary-toolbar select,.primary-toolbar .seg,.primary-toolbar .date-row{height:40px}.primary-toolbar .seg{padding:3px}.primary-toolbar .seg button{font-size:10px;padding:8px 2px}.primary-toolbar .date-row{max-width:none}.wheel-showcase{display:flex;flex-direction:column;gap:0;padding:2px 4px 5px}.wheel-panel{width:100%}.wheel-top{padding:14px 13px 0;font-size:9px}.wheel-svg-wrap{width:100%;max-width:600px}.wheel-legend{margin:-1px auto 12px;font-size:9px;gap:8px}.wheel-sidebar{width:calc(100% - 25px);max-width:none;padding:16px 8px 12px;margin:0 12px;border-top:1px solid #46636c60;display:grid;grid-template-columns:1fr 1fr;gap:5px 16px;align-items:start}.sidebar-heading{grid-column:1/-1}.sidebar-heading span{font-size:8px}.sidebar-heading strong{display:none}.sidebar-date{margin:2px 0 0}.sidebar-date>span{font-size:19px}.sidebar-date strong{font-size:30px;margin-top:2px}.sidebar-date strong small{font-size:14px}.sidebar-lead{grid-column:1;grid-row:3;margin:0;font-size:10px}.sidebar-divider{display:none}.sidebar-subtitle{grid-column:2;grid-row:2;margin:0;font-size:9px}.sidebar-match{grid-column:2;grid-row:3;align-items:start}.sidebar-match strong{font-size:19px}.sidebar-match small{font-size:9px}.sidebar-arrow{font-size:17px}.sidebar-hint{display:none}.spectrum-card{padding:18px 16px;margin-top:12px}.spectrum-heading h2{font-size:16px}.spectrum-card>p{margin-bottom:18px}.spectrum-gradient-track{height:26px}.spectrum-month-labels span{font-size:9px}.mapping-panel{margin-top:12px}.mapping-summary{padding:18px 15px;gap:10px}.summary-icon{width:40px;height:40px;font-size:19px;border-radius:10px}.summary-text strong{font-size:13px}.summary-text>span{font-size:9px}.summary-status{display:none}.summary-chevron{font-size:24px;margin-left:auto}.mapping-content{padding:15px}.mapping-settings>.field{flex:1;min-width:180px}.mapping-settings .control-block{flex:1;margin-left:0;min-width:180px}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1}.footer{padding-top:12px}}
 @media(max-width:410px){.shell{padding:0 8px 14px}.brand-word{font-size:13px}.brand-mark{width:30px;height:30px}.source-pill{font-size:7px;padding:6px 7px}.intro{padding:14px 4px 12px}.intro h1{font-size:21px}.primary-bar{padding:15px 12px 12px}.primary-bar h2{font-size:16px}.live-mark{font-size:8px;margin-left:4px}.primary-toolbar{margin:11px 10px 0;gap:8px}.primary-toolbar select{font-size:11px;padding-left:8px;padding-right:22px}.primary-toolbar .seg button{font-size:9px}.wheel-top{padding:11px 10px 0;font-size:8px}.wheel-svg .monthlabel{font-size:17px}.wheel-legend{gap:6px;font-size:8px}.wheel-legend .gradient{width:65px}.sidebar-date strong{font-size:28px}.sidebar-match strong{font-size:18px}.spectrum-card{padding:16px 12px}.spectrum-month-labels span{font-size:8px}.mapping-summary{padding:15px 12px}.summary-icon{width:35px;height:35px}.summary-text strong{font-size:12px}.summary-text>span{font-size:8px}.mode-option{padding:10px}.mode-option b{font-size:11px}.mode-option small{font-size:9px}.results .result-card{padding:13px}.metric-grid{grid-template-columns:90px 1fr 1fr}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
@@ -108,13 +104,12 @@ select{width:100%;min-width:0;appearance:none;border-radius:9px;padding:12px 29p
 .wheel-svg{cursor:default;touch-action:pan-y}.wheel-svg .connection-path{stroke:#d3e9bd;stroke-width:2.2;opacity:.7}
 .wheel-svg-wrap{max-width:760px}.wheel-panel{position:relative}.wheel-top{padding:5px 10px 0}
 .live-mark{background:#1b4237;color:#d1f2af;transition:background .15s,color .15s}.live-mark.is-preview{color:#ffe7b0;background:#594331}
-.sidebar-hint,.intro-aside,.spectrum-card>p,.detail-caption,.fine-print,#match-method-note,.city-info,.wheel-navigation .shortcutrow{display:none!important}
-.wheel-sidebar{padding-bottom:4px}.sidebar-date{margin-top:13px}.sidebar-divider{margin:18px 0 17px}.sidebar-heading strong{font-size:12px}.sidebar-date strong{font-size:44px}.sidebar-subtitle{margin-bottom:10px}.sidebar-match strong{font-size:27px}.sidebar-explore{background:transparent;border-color:#4b6a6680;font-size:11px}
-.wheel-navigation{margin-bottom:14px}.spectrum-card{margin-top:12px;padding:18px 24px}.spectrum-heading h2{margin:4px 0 0;font-size:16px}.spectrum-body{margin-top:18px}.spectrum-card .foot-data{font-size:10px}
+.sidebar-hint,.intro-aside,.spectrum-card>p,.detail-caption,.fine-print,#match-method-note,.city-info{display:none!important}
+.wheel-sidebar{padding-bottom:4px}.sidebar-date{margin-top:13px}.sidebar-divider{margin:18px 0 17px}.sidebar-heading strong{font-size:12px}.sidebar-date strong{font-size:44px}.sidebar-subtitle{margin-bottom:10px}.sidebar-match strong{font-size:27px}.spectrum-card{margin-top:12px;padding:18px 24px}.spectrum-heading h2{margin:4px 0 0;font-size:16px}.spectrum-body{margin-top:18px}.spectrum-card .foot-data{font-size:10px}
 .mapping-panel{margin-top:12px}.mapping-summary{padding:15px 24px}.summary-text strong{font-size:14px}.summary-icon{width:36px;height:36px;font-size:20px}.summary-text>span{display:none}
 .footer{justify-content:space-between;font-size:10px;opacity:.66;margin-top:12px}
 @media(max-width:760px){
- .shell{padding:0 10px 20px}.topbar{height:52px}.intro{padding:12px 4px 10px}.intro h1{font-size:21px;margin:0}.primary-bar{padding:13px 14px 9px}.primary-bar h2{font-size:18px}.primary-toolbar{margin:10px 12px 0;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:10px}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1;display:flex;align-items:center;gap:12px}.toolbar-date .fieldlabel{margin:0;white-space:nowrap}.toolbar-date .date-row{flex:1;height:34px}.primary-toolbar select,.primary-toolbar .seg{height:38px}.primary-toolbar .date-row input{height:34px}.primary-toolbar .iconbtn{height:34px}.wheel-showcase{padding:0 2px 4px}.wheel-top{padding:8px 12px 0}.wheel-legend{margin:-10px 0 3px}.wheel-sidebar{border-top:1px solid #46636c60;width:calc(100% - 24px);margin:0 12px;padding:12px 6px;gap:4px 10px}.sidebar-heading{display:none}.sidebar-date{margin:0}.sidebar-date>span{font-size:15px}.sidebar-date strong{font-size:28px}.sidebar-lead{font-size:9px}.sidebar-subtitle{font-size:9px;margin:0}.sidebar-match strong{font-size:21px}.sidebar-explore{margin-top:7px}.wheel-navigation{margin:0 17px 12px;padding-top:8px}.wheel-navigation .rangehead{padding-top:1px}.spectrum-card{padding:14px 13px}.spectrum-body{margin-top:14px}.mapping-summary{padding:12px 13px}.summary-text strong{font-size:13px}.footer{font-size:9px}
+ .shell{padding:0 10px 20px}.topbar{height:52px}.intro{padding:12px 4px 10px}.intro h1{font-size:21px;margin:0}.primary-bar{padding:13px 14px 9px}.primary-bar h2{font-size:18px}.primary-toolbar{margin:10px 12px 0;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:10px}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1;display:flex;align-items:center;gap:12px}.toolbar-date .fieldlabel{margin:0;white-space:nowrap}.toolbar-date .date-row{flex:1;height:34px}.primary-toolbar select,.primary-toolbar .seg{height:38px}.primary-toolbar .date-row input{height:34px}.primary-toolbar .iconbtn{height:34px}.wheel-showcase{padding:0 2px 4px}.wheel-top{padding:8px 12px 0}.wheel-legend{margin:-10px 0 3px}.wheel-sidebar{border-top:1px solid #46636c60;width:calc(100% - 24px);margin:0 12px;padding:12px 6px;gap:4px 10px}.sidebar-heading{display:none}.sidebar-date{margin:0}.sidebar-date>span{font-size:15px}.sidebar-date strong{font-size:28px}.sidebar-lead{font-size:9px}.sidebar-subtitle{font-size:9px;margin:0}.sidebar-match strong{font-size:21px}.spectrum-card{padding:14px 13px}.spectrum-body{margin-top:14px}.mapping-summary{padding:12px 13px}.summary-text strong{font-size:13px}.footer{font-size:9px}
 }
 @media(max-width:380px){.source-pill{font-size:7px}.intro h1{font-size:20px}.primary-bar h2{font-size:17px}.primary-toolbar .seg button{font-size:9px}.wheel-sidebar{padding:9px 5px}.sidebar-date strong{font-size:25px}.sidebar-match strong{font-size:19px}.wheel-legend{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.wheel-svg .point-halo{animation:none}.wheel-svg-wrap{will-change:auto}}
@@ -139,16 +134,8 @@ select{-webkit-appearance:none;line-height:1.25}
 .today-icon{width:18px;height:18px;display:block;color:var(--green);flex-shrink:0}
 .today-icon svg{display:block;width:100%;height:100%}
 .today-bounce .today-icon{animation:today-reset .5s var(--ease-out)}
-@keyframes today-reset{from{transform:rotate(-180deg)}to{transform:rotate(0)}}
-.sidebar-explore,.swap-button,.cta,.mode-option{min-height:44px}
-.sidebar-explore{transition:background-color .18s,border-color .18s,transform .18s var(--ease-out)}
+@keyframes today-reset{from{transform:rotate(-180deg)}to{transform:rotate(0)}}.swap-button,.cta,.mode-option{min-height:44px}
 .mode-option{transition:border-color .22s,background-color .22s}
-.range{appearance:none;-webkit-appearance:none;height:28px;min-height:28px;margin:0;background:transparent;touch-action:pan-y}
-.range::-webkit-slider-runnable-track{height:4px;border-radius:99px;background:linear-gradient(90deg,var(--green) var(--progress,0%),#40545f var(--progress,0%))}
-.range::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:16px;height:16px;margin-top:-6px;border:0;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px #d4f18a12}
-.range::-moz-range-track{height:4px;border-radius:99px;background:#40545f}
-.range::-moz-range-progress{height:4px;border-radius:99px;background:var(--green)}
-.range::-moz-range-thumb{width:16px;height:16px;border:0;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px #d4f18a12}
 .wheel-svg-wrap{position:relative;isolation:isolate;--touch-x:0px;--touch-y:0px;-webkit-tap-highlight-color:transparent}
 .dial-surface:before{content:'';position:absolute;inset:7.4%;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle at 34% 20%,#a1d6da20,#102731 70%);box-shadow:0 14px 23px #020b146b,inset 0 2px 3px #d7f3df24,inset 0 -9px 16px #000b1290}
 .dial-surface:after{content:'';position:absolute;left:0;top:0;width:130px;height:130px;z-index:2;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#e5ffcc25,transparent 68%);opacity:0;transform:translate3d(calc(var(--touch-x) - 65px),calc(var(--touch-y) - 65px),0);transition:opacity .2s}
@@ -166,10 +153,9 @@ select{-webkit-appearance:none;line-height:1.25}
 @media(hover:hover) and (pointer:fine){
  .today-btn:hover,.iconbtn:hover{border-color:#a7c798;background-color:#294a48;transform:translateY(-1px)}
  .today-btn:hover{background:linear-gradient(145deg,#34564e,#234249)}
- .sidebar-explore:hover{background:#294a45;border-color:#8eaf90;transform:translateY(-1px);box-shadow:none}
  .seg button:hover{color:#f0f8e6}.mode-option:hover{border-color:#69877f}
 }
-@media(hover:none){.sidebar-explore:hover{transform:none;box-shadow:none}.dial-surface:after{display:none}}
+@media(hover:none){.dial-surface:after{display:none}}
 @media(max-width:760px){
  .primary-toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:10px}
  .primary-toolbar .date-row input{font-size:14px}
@@ -181,7 +167,6 @@ select{-webkit-appearance:none;line-height:1.25}
  .sidebar-date{grid-area:1/1/3/2}.sidebar-date>span{font-size:17px}.sidebar-date strong{font-size:31px}
  .sidebar-subtitle{grid-area:1/2/2/3;align-self:end}.sidebar-match{grid-area:2/2/4/3;align-items:center;align-self:start}
  .sidebar-match strong{font-size:22px}.sidebar-match small{line-height:1.5}.sidebar-lead{grid-area:3/1/4/2}
- .sidebar-explore{grid-area:4/1/5/3;margin-top:9px}
  .spectrum-gradient-track:not(.is-target){height:32px}
 }
 @media(max-width:380px){
@@ -222,7 +207,7 @@ select{-webkit-appearance:none;line-height:1.25}
  .wheel-legend{font-size:9px;gap:7px;margin:-5px 0 8px}
  .wheel-sidebar{padding:14px 3px 13px;gap:6px 12px}.sidebar-date>span{font-size:17px;font-weight:650}.sidebar-match strong{font-size:21px;font-weight:650}
  .sidebar-subtitle{font-size:10px;color:#9bb4bb}.sidebar-lead,.sidebar-match small{font-size:10px;color:#90adb6}
- .sidebar-arrow{opacity:.65}.sidebar-explore{font-weight:600}
+ .sidebar-arrow{opacity:.65}
  .spectrum-card,.mapping-panel{border-radius:16px}
  .spectrum-cityline span,.spectrum-month-labels span{color:#8daab3}
 }
@@ -243,6 +228,21 @@ select{-webkit-appearance:none;line-height:1.25}
 @media(prefers-reduced-motion:reduce){.dial-surface{transform:none!important;will-change:auto!important}}
 
 /* Wardrobe suggestions reuse the selected day's local climate series. */
+.spectrum-body{margin-top:12px;gap:10px}
+.spectrum-month-labels{margin-top:3px}
+#months{overflow:visible;cursor:grab;transition:none}
+#months:hover{filter:none}
+#months:after{display:none}
+.spectrum-slider{-webkit-appearance:none;appearance:none;position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:48px;margin:0;padding:0;background:transparent;border:0;cursor:grab;touch-action:none}
+.spectrum-slider::-webkit-slider-runnable-track{height:32px;border:0;background:transparent}
+.spectrum-slider::-moz-range-track,.spectrum-slider::-moz-range-progress{height:32px;border:0;background:transparent}
+.spectrum-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:22px;height:38px;margin-top:-3px;border:2px solid #f2f8de;border-radius:9px;background:#e2edcb linear-gradient(90deg,transparent 25%,#59715d66 25%,#59715d66 35%,transparent 35%,transparent 65%,#59715d66 65%,#59715d66 75%,transparent 75%) center/10px 12px no-repeat;box-shadow:0 2px 4px #07182088,0 0 0 1px #28433999;transition:transform .12s ease}
+.spectrum-slider::-moz-range-thumb{box-sizing:border-box;width:22px;height:38px;border:2px solid #f2f8de;border-radius:9px;background:#e2edcb linear-gradient(90deg,transparent 25%,#59715d66 25%,#59715d66 35%,transparent 35%,transparent 65%,#59715d66 65%,#59715d66 75%,transparent 75%) center/10px 12px no-repeat;box-shadow:0 2px 4px #07182088,0 0 0 1px #28433999;transition:transform .12s ease}
+.is-scrubbing,.is-scrubbing .spectrum-slider{cursor:grabbing}
+.is-scrubbing .spectrum-slider::-webkit-slider-thumb{transform:scale(1.08)}
+.is-scrubbing .spectrum-slider::-moz-range-thumb{transform:scale(1.08)}
+.spectrum-slider:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:10px}
+.outfit-brief{color:#93aeb3;font-size:11px;line-height:1.65;margin:0}
 .outfit-card{margin-top:12px;background:linear-gradient(130deg,#19333b,#142b36 78%);border:1px solid #47635b70;border-radius:18px;min-width:0}
 .outfit-summary{padding:22px 24px 17px;list-style:none;cursor:pointer;border-radius:inherit;-webkit-tap-highlight-color:transparent}
 .outfit-summary::-webkit-details-marker{display:none}
@@ -253,15 +253,11 @@ select{-webkit-appearance:none;line-height:1.25}
 .outfit-toggle svg{width:16px;height:16px;flex:none;transition:transform .18s ease}
 .outfit-preview-note{margin-left:auto;color:#83a2a8;font-size:9px}
 .outfit-close-label{display:none}
-.outfit-card[open] .outfit-open-label,.outfit-card[open] .outfit-preview{display:none}
+.outfit-card[open] .outfit-open-label,.outfit-card[open] .outfit-preview,.outfit-card[open] .outfit-brief{display:none}
 .outfit-card[open] .outfit-close-label{display:inline}
 .outfit-card[open] .outfit-toggle svg{transform:rotate(180deg)}
 .outfit-head{display:flex;align-items:center;justify-content:space-between;gap:14px}
 .outfit-head h2{font-size:18px;font-weight:700;letter-spacing:-.02em;margin:5px 0 6px}
-.outfit-context{margin:0;color:#99b6bb;font-size:11px;line-height:1.5;min-height:17px}
-.outfit-badge{font-size:11px;font-weight:600;color:#d5ebb5;background:#28433b;border:1px solid #6a8b6755;border-radius:99px;padding:7px 10px;white-space:nowrap}
-.outfit-weather{display:grid;grid-template-columns:repeat(3,max-content);gap:24px;border-top:1px solid #49656045;padding-top:12px;margin:15px 0 14px;color:#89a8b0;font-size:10px;line-height:1.5}
-.outfit-weather span{white-space:nowrap}.outfit-weather b{font-size:12px;font-weight:500;color:#cddfdc;margin-left:7px;font-variant-numeric:tabular-nums}
 .outfit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0}
 .outfit-piece{display:grid;grid-template-columns:24px minmax(0,1fr);column-gap:10px;row-gap:5px;align-content:center;min-height:86px;min-width:0;padding:14px;background:#203a4155;border:1px solid #58716738;border-radius:11px}
 .outfit-piece svg{grid-area:1/1/3/2;align-self:center;width:24px;height:24px;fill:none;stroke:#a6c89f;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
@@ -272,12 +268,11 @@ select{-webkit-appearance:none;line-height:1.25}
 .outfit-notes p:before{content:'·';position:absolute;left:0;color:#b4d394}
 .outfit-footnote{margin:12px 0 0;padding-top:10px;border-top:1px solid #49656035;font-size:10px;line-height:1.6;color:#86a4ac}
 @media(max-width:760px){
- :root{--secondary-preview-height:216px}
- .outfit-card{border-radius:16px}.outfit-summary{padding:17px 14px 14px}.outfit-details{padding:0 14px 14px}.outfit-head h2{font-size:16px}.outfit-badge{font-size:10px;padding:6px 9px}
+ :root{--secondary-preview-height:196px}
+ .outfit-card{border-radius:16px}.outfit-summary{padding:17px 14px 14px}.outfit-details{padding:0 14px 14px}.outfit-head h2{font-size:16px}
  .outfit-card:not([open]) .outfit-summary{min-height:calc(var(--secondary-preview-height) - 2px);display:flex;flex-direction:column;justify-content:space-between}
  .outfit-card:not([open]) .outfit-summary>*,.outfit-head{width:100%}
  .spectrum-card{min-height:var(--secondary-preview-height)}
- .outfit-weather{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:11px 0 10px;padding-top:10px}.outfit-weather b{font-size:11px;margin-left:5px}
  .outfit-toggle{margin-top:7px}
  .outfit-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.outfit-piece{padding:12px 10px;column-gap:8px;min-height:94px}.outfit-piece dd{font-size:12px;min-height:38px}
  .outfit-notes{grid-template-columns:1fr;gap:5px;margin-top:12px}.outfit-notes p{min-height:19px;font-size:10px}
@@ -305,17 +300,15 @@ select{-webkit-appearance:none;line-height:1.25}
 <div class="sidebar-divider"></div>
 <div class="sidebar-subtitle">另一季节的同温日</div><div class="sidebar-match"><span class="match-orbit-dot"></span><div><strong id="sidebar-match-date">4月5日</strong><small id="sidebar-match-text">参考气温 ≈ 12.5°C</small></div><span class="sidebar-arrow">↗</span></div>
 
-<button type="button" id="open-mapping" class="sidebar-explore">更多比较 <span>↗</span></button>
 </div>
 </div>
-<div class="wheel-navigation"><label for="day-slider">沿着一年滑动</label><span id="slider-label">DAY 319 / 365</span><input class="range" id="day-slider" type="range" min="0" max="364" value="318" aria-label="选择一年中的某一天"/><div class="rangehead"><span>01 JAN</span><div class="shortcutrow"><button type="button" data-quick="03-15">3 月</button><button type="button" data-quick="08-15">8 月</button><button type="button" data-quick="11-15">11 月</button></div><span>31 DEC</span></div></div>
 </section>
+<section class="spectrum-card" aria-labelledby="spectrum-title"><div class="spectrum-heading"><div><span class="section-kicker">TEMPERATURE SPECTRUM</span><h2 id="spectrum-title">全年温度光谱</h2></div><span class="foot-data" id="annual-average">年均 15.8°C</span></div><p id="spectrum-caption" hidden></p><div class="spectrum-body"><div class="spectrum-cityline"><strong id="spectrum-city">成都</strong><span id="spectrum-current">当前所选日期</span></div><div class="spectrum-gradient-track" id="months"><input class="spectrum-slider" id="spectrum-slider" type="range" min="0" max="364" step="any" value="318" aria-label="拖动全年温度光谱选择日期" aria-valuetext="11月15日" /></div><div class="spectrum-month-labels" aria-hidden="true"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></div><div class="target-spectrum target-field" id="target-month-row" hidden><div class="spectrum-cityline"><strong id="target-spectrum-city">东京</strong><span>目标城市</span></div><div class="spectrum-gradient-track is-target" id="target-months" aria-hidden="true"></div></div></div></section>
 <details class="outfit-card" id="outfit-card" aria-labelledby="outfit-title" open>
 <summary class="outfit-summary">
-<div class="outfit-head"><div><span class="section-kicker">WHAT TO WEAR</span><h2 id="outfit-title">服装推荐</h2><p class="outfit-context" id="outfit-context">根据所选城市与日期提供参考</p></div><span class="outfit-badge" id="outfit-badge">日常穿搭</span></div>
-<div class="outfit-weather" aria-label="推荐参考气温"><span>日均<b id="outfit-mean">—</b></span><span>低温<b id="outfit-low">—</b></span><span>高温<b id="outfit-high">—</b></span></div>
-<p class="outfit-preview" id="outfit-preview">穿搭建议</p>
-<span class="outfit-toggle"><span class="outfit-open-label">展开穿搭详情</span><span class="outfit-close-label">收起详情</span><span class="outfit-preview-note">气候参考</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></span>
+<div class="outfit-head"><div><span class="section-kicker">WHAT TO WEAR</span><h2 id="outfit-title">服装推荐</h2></div></div><p class="sr-only" id="outfit-context">所选日期的穿搭建议</p>
+<p class="outfit-preview" id="outfit-preview">穿搭建议</p><p class="outfit-brief" id="outfit-brief">按体感灵活增减衣层。</p>
+<span class="outfit-toggle"><span class="outfit-open-label">展开详情</span><span class="outfit-close-label">收起详情</span><span class="outfit-preview-note">气候参考</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></span>
 </summary>
 <div class="outfit-details">
 <dl class="outfit-grid"><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4-5 3 3 5 2-1v9h8v-9l2 1 3-5-5-3c-1 3-7 3-8 0Z"/></svg><dt>上装</dt><dd id="outfit-top">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 3-5 4-1 12 5 1 1-9v10h6V11l1 9 5-1-1-12-5-4-3 4-3-4Z"/><path d="M12 7v14M9 3l3 8 3-8"/></svg><dt>外搭</dt><dd id="outfit-outer">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12l1 18h-6l-1-11-1 11H5L6 3Z"/><path d="M6 7h12M12 3v4"/></svg><dt>下装</dt><dd id="outfit-bottom">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h5l2 6 4 2 5 1 1 4H3V9l1-2Z"/><path d="M3 17h17M10 12l3-2M12 14l3-2"/></svg><dt>鞋履</dt><dd id="outfit-shoes">—</dd></div></dl>
@@ -323,7 +316,7 @@ select{-webkit-appearance:none;line-height:1.25}
 <p class="outfit-footnote">按历史气候均值提供日常穿搭参考，出门前请结合实时天气与个人体感调整。</p>
 </div>
 </details>
-<section class="spectrum-card" aria-labelledby="spectrum-title"><div class="spectrum-heading"><div><span class="section-kicker">TEMPERATURE SPECTRUM</span><h2 id="spectrum-title">全年温度光谱</h2></div><span class="foot-data" id="annual-average">年均 15.8°C</span></div><p id="spectrum-caption" hidden></p><div class="spectrum-body"><div class="spectrum-cityline"><strong id="spectrum-city">成都</strong><span id="spectrum-current">当前所选日期</span></div><div class="spectrum-gradient-track" id="months" tabindex="0" role="slider" aria-label="按全年温度光谱选择日期" aria-valuemin="1" aria-valuemax="365" aria-valuenow="319" aria-valuetext="11月15日"></div><div class="spectrum-month-labels" aria-hidden="true"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></div><div class="target-spectrum target-field" id="target-month-row" hidden><div class="spectrum-cityline"><strong id="target-spectrum-city">东京</strong><span>目标城市</span></div><div class="spectrum-gradient-track is-target" id="target-months" aria-hidden="true"></div></div></div></section>
+
 <details class="mapping-panel" id="mapping-details"><summary class="mapping-summary"><span class="summary-icon">⇄</span><span class="summary-text"><small>MORE OPTIONS</small><strong>更多日期比较</strong></span><span class="summary-chevron">⌄</span></summary>
 <div class="mapping-content"><nav class="mode-switch" aria-label="探索模式"><button id="mode-same" type="button" class="mode-option active" aria-pressed="true"><span class="mode-icon" aria-hidden="true">◎</span><span><b>同城 · 季节映射</b><small>在春秋之间寻找相近的气候</small></span></button><button id="mode-cross" type="button" class="mode-option" aria-pressed="false"><span class="mode-icon" aria-hidden="true">⇄</span><span><b>跨城市 · 日期映射</b><small>同样的温度，发生在哪一天？</small></span></button></nav>
 <div class="mapping-settings"><div class="target-field field" id="target-field" hidden><label class="fieldlabel" for="target-city">目标城市</label><div class="select-wrap city-select"><select id="target-city"><option value="tokyo" selected>东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu">成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option><option value="wuhan">武汉 Wuhan</option><option value="hami">哈密 Hami</option><option value="kunming">昆明 Kunming</option></select><span class="city-display" aria-hidden="true"><span class="city-name" id="target-city-name">东京</span><span class="city-en" id="target-city-en">Tokyo</span><svg class="city-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 8 4 4 4-4"/></svg></span></div><span class="city-info target-info" id="target-detail">日本 · 东京</span></div><button type="button" id="swap-cities" class="swap-button target-field" hidden>⇄ 交换起点和目标城市</button><div class="control-block"><span class="fieldlabel">日期匹配依据</span><div class="seg two" role="group" aria-label="匹配方式"><button type="button" data-algorithm="temp" class="active" aria-pressed="true">温度优先</button><button type="button" data-algorithm="climate" aria-pressed="false">综合气候</button></div></div></div>
@@ -432,8 +425,7 @@ function renderClothing(day){
  const advice=clothingAdvice(climate);
  setText($('outfit-context'),CITIES[city].name+' · '+dateStr(day));
  setText($('outfit-preview'),advice.items[0]+' · '+advice.items[1]);
- setText($('outfit-badge'),advice.label);$('outfit-card').dataset.tier=advice.id;
- for(const key of ['mean','low','high'])setText($('outfit-'+key),climate[key].toFixed(1)+'°C');
+ $('outfit-card').dataset.tier=advice.id;setText($('outfit-brief'),advice.layer);
  ['top','outer','bottom','shoes'].forEach((key,i)=>setText($('outfit-'+key),advice.items[i]));
  setText($('outfit-layer-note'),advice.layer);setText($('outfit-extra-note'),advice.extra);
 }
@@ -547,7 +539,6 @@ function paintDial(){if(!wheelParts)return;
  if(paintedFace!==transform){paintedFace=transform;dialSurface.style.transform=transform}
  const a=angleDay(dialMotion.source.position),b=angleDay(dialMotion.match.position),cross=wheelParts.cross;
  const geometry=[a.toFixed(3),b.toFixed(3),cross].join('|');if(paintedGeometry===geometry)return;paintedGeometry=geometry;
- $('months').style.setProperty('--position',((wrapDay(dialMotion.source.position)+.5)/365*100).toFixed(3)+'%');
  if(wheelParts.cross)$('target-months').style.setProperty('--position',((wrapDay(dialMotion.match.position)+.5)/365*100).toFixed(3)+'%');
  wheelParts.sourceMarker.group.setAttribute('transform',`rotate(${a.toFixed(3)} 360 360)`);
  wheelParts.targetMarker.group.setAttribute('transform',`rotate(${b.toFixed(3)} 360 360)`);
@@ -589,7 +580,7 @@ function renderResults(){const d=state.hover===null?state.day:state.hover,m=matc
 function renderMonthRow(city,container,interactive){
  const track=$(container),key=city+'|'+state.metric;
  if(track.dataset.key!==key){track.dataset.key=key;track.style.backgroundImage='linear-gradient(90deg,'+series(city,state.metric).map(colorFor).join(',')+')'}
- if(interactive){track.setAttribute('aria-valuenow',String(state.day+1));track.setAttribute('aria-valuetext',dateStr(state.day))}
+ if(interactive){const day=state.hover??state.day;if(spectrumPointer===null)spectrumInput.value=String(day);spectrumInput.setAttribute('aria-valuetext',dateStr(day))}
 }
 function render(sync=true){const cross=state.mode==='cross',day=state.hover??state.day;if(sync){activeClasses();
  $('target-field').hidden=!cross;$('swap-cities').hidden=!cross;$('target-month-row').hidden=!cross;
@@ -597,11 +588,10 @@ function render(sync=true){const cross=state.mode==='cross',day=state.hover??sta
  for(const [id,key] of [['city',state.source],['target-city',state.target]]){setText($(id+'-name'),CITIES[key].name);setText($(id+'-en'),CITIES[key].en)}
  setText($('city-detail'),CITIES[state.source].region);setText($('target-detail'),CITIES[state.target].region);
  const date=idxToDate(state.day);$('date').value=calendarYear+'-'+String(date.month).padStart(2,'0')+'-'+String(date.day).padStart(2,'0');
- $('day-slider').value=state.day;$('day-slider').style.setProperty('--progress',(state.day/364*100).toFixed(3)+'%');setText($('slider-label'),'DAY '+(state.day+1)+' / 365');
  setText($('view-mode'),metricLabels[state.metric]+' · '+(cross?'跨城市':'同城季节'));
  const title=cross?'跨城市日期映射 ':'同城季节映射 ';if($('wheel-title').firstChild.nodeValue!==title)$('wheel-title').firstChild.nodeValue=title;
  const avg=CITIES[state.source].mean.reduce((sum,x)=>sum+x,0)/12;
- setText($('annual-average'),CITIES[state.source].name+' 年均 '+avg.toFixed(1)+'°C');
+ setText($('annual-average'),'年均 '+avg.toFixed(1)+'°C');
  setText($('spectrum-city'),CITIES[state.source].name);setText($('target-spectrum-city'),CITIES[state.target].name);
  setText($('sr-status'),CITIES[state.source].name+' '+dateStr(state.day)+' 的气候匹配与服装推荐已更新');
  renderClothing(state.day);
@@ -613,17 +603,38 @@ function render(sync=true){const cross=state.mode==='cross',day=state.hover??sta
  $('interaction-indicator').classList.toggle('is-preview',state.hover!==null);
  if(pendingHighlight){dialWrap.style.setProperty('--touch-x',pendingHighlight.x+'px');dialWrap.style.setProperty('--touch-y',pendingHighlight.y+'px');pendingHighlight=null}
 }
-$('open-mapping').addEventListener('click',()=>{$('mapping-details').open=true;requestRender(false);$('mapping-details').scrollIntoView({behavior:motionPreference.matches?'auto':'smooth',block:'start'})});
 $('mapping-details').addEventListener('toggle',()=>{if($('mapping-details').open)requestRender(false)});
-$('months').addEventListener('pointerdown',e=>{if(e.button!==0)return;const r=$('months').getBoundingClientRect();changeDay(Math.floor(clamp((e.clientX-r.left)/r.width,0,.999999)*365))});
+// Native range follows the finger continuously; climate work is coalesced into the shared frame.
+const spectrumInput=$('spectrum-slider'),spectrumTrack=$('months');
+let spectrumPointer=null,spectrumCancelled=null;
+const spectrumDay=()=>Math.round(clamp(Number(spectrumInput.value),0,364));
+function cancelSpectrum(){if(spectrumPointer===null)return;spectrumCancelled=spectrumPointer;spectrumPointer=null;
+ spectrumTrack.classList.remove('is-scrubbing');state.hover=null;spectrumInput.value=String(state.day);
+ requestRender(false);
+}
+spectrumInput.addEventListener('pointerdown',e=>{if(e.button!==0||e.isPrimary===false||spectrumPointer!==null)return;
+ cancelDial();spectrumCancelled=null;spectrumPointer=e.pointerId;spectrumTrack.classList.add('is-scrubbing');state.hover=spectrumDay();requestRender(false);
+});
+spectrumInput.addEventListener('input',()=>{if(spectrumCancelled!==null){spectrumInput.value=String(state.day);return}const day=spectrumDay();if(spectrumPointer===null){changeDay(day);return}
+ if(state.hover!==day){state.hover=day;requestRender(false)}
+});
+window.addEventListener('pointerup',e=>{if(e.pointerId!==spectrumPointer)return;spectrumPointer=null;
+ spectrumTrack.classList.remove('is-scrubbing');changeDay(spectrumDay());
+});
+spectrumInput.addEventListener('change',()=>{if(spectrumCancelled!==null){spectrumInput.value=String(state.day);return}if(spectrumPointer===null&&spectrumDay()!==state.day)changeDay(spectrumDay())});
+spectrumInput.addEventListener('pointercancel',e=>{if(e.pointerId===spectrumPointer)cancelSpectrum()});
+spectrumInput.addEventListener('lostpointercapture',e=>{if(e.pointerId===spectrumPointer)cancelSpectrum()});
+// Ignore the rest of a cancelled native gesture until its release, including late input/change events.
+const endCancelledSpectrum=e=>{if(e.pointerId===spectrumCancelled){spectrumCancelled=null;spectrumInput.value=String(state.day)}};
+window.addEventListener('pointerup',endCancelledSpectrum);window.addEventListener('pointercancel',endCancelledSpectrum);
 function dateKeys(e){let day=null;
  if(e.key==='ArrowRight'||e.key==='ArrowUp')day=state.day+1;
  if(e.key==='ArrowLeft'||e.key==='ArrowDown')day=state.day-1;
  if(e.key==='Home')day=0;if(e.key==='End')day=364;
  if(e.key==='PageUp')day=state.day+30;if(e.key==='PageDown')day=state.day-30;
- if(day!==null){e.preventDefault();e.stopPropagation();changeDay(day)}
+ if(day!==null){e.preventDefault();e.stopPropagation();if(e.currentTarget===spectrumInput){cancelSpectrum();day=clamp(day,0,364)}changeDay(day)}
 }
-$('months').addEventListener('keydown',dateKeys);wheel.addEventListener('keydown',dateKeys);
+spectrumInput.addEventListener('keydown',dateKeys);wheel.addEventListener('keydown',dateKeys);
 function configure(change){cancelDial();change();requestRender()}
 $('mode-same').addEventListener('click',()=>configure(()=>{state.mode='same'}));
 $('mode-cross').addEventListener('click',()=>configure(()=>{state.mode='cross';if(state.target===state.source)state.target=Object.keys(CITIES).find(k=>k!==state.source)}));
@@ -636,12 +647,10 @@ for(const seg of segmentedControls){const pill=document.createElement('span');pi
 document.querySelectorAll('[data-metric]').forEach(b=>b.addEventListener('click',()=>configure(()=>{state.metric=b.dataset.metric})));
 document.querySelectorAll('[data-algorithm]').forEach(b=>b.addEventListener('click',()=>configure(()=>{state.algorithm=b.dataset.algorithm})));
 $('date').addEventListener('change',e=>{if(e.target.value)changeDay(dateToIdx(e.target.value))});
-$('day-slider').addEventListener('input',e=>changeDay(Number(e.target.value)));
 $('prev-day').addEventListener('click',()=>changeDay(state.day-1));$('next-day').addEventListener('click',()=>changeDay(state.day+1));
 let todayTimer=0;
 $('return-today').addEventListener('click',()=>{cancelDial();const now=new Date();changeDay(starts[now.getMonth()]+Math.min(now.getDate(),daysInMonth[now.getMonth()])-1);
  const b=$('return-today');b.classList.add('today-bounce');clearTimeout(todayTimer);todayTimer=setTimeout(()=>b.classList.remove('today-bounce'),550)});
-document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>changeDay(dateToIdx('2025-'+b.dataset.quick))));
 const dialPanel=$('wheel-panel'),dialSurface=wheel.parentElement,dialWrap=dialSurface.parentElement;
 let dialRect=null,pendingHighlight=null,activePointerId=null,confirmTimer=0;
 function invalidateDialRect(){dialRect=null}
@@ -660,7 +669,7 @@ function pointHighlight(e){const {rect,x,y}=pointerPosition(e);pendingHighlight=
 }
 function setPreview(d){if(d===state.day&&!state.drag)d=null;dialPanel.classList.toggle('dial-hover',d!==null);if(d===state.hover)return;state.hover=d;requestRender(false)}
 function releaseDial(){dialPanel.classList.remove('dial-active');for(const axis of faceAxes)axis.target=0;wakeMotion()}
-function cancelDial(){const id=activePointerId;state.drag=false;activePointerId=null;releaseDial();setPreview(null);
+function cancelDial(){cancelSpectrum();const id=activePointerId;state.drag=false;activePointerId=null;releaseDial();setPreview(null);
  if(id!==null&&wheel.hasPointerCapture?.(id))wheel.releasePointerCapture(id);
 }
 wheel.addEventListener('pointerdown',e=>{if(state.drag||e.button!==0||e.isPrimary===false)return;invalidateDialRect();const d=dayFromPointer(e);if(d===null)return;

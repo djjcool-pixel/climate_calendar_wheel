@@ -100,41 +100,59 @@ select{width:100%;min-width:0;appearance:none;border-radius:9px;padding:12px 29p
 @media(max-width:760px){.shell{padding:0 12px 18px}.topbar{height:56px}.source-pill{font-size:8px;letter-spacing:.04em}.intro{padding:17px 2px 14px}.intro h1{font-size:23px}.intro p{font-size:10px}.primary-experience{border-radius:16px}.primary-bar{padding:17px 16px 13px}.primary-bar h2{font-size:17px}.wheel-explain{display:none}.primary-toolbar{margin:13px 13px 0;gap:9px;grid-template-columns:1fr 1fr}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1}.primary-toolbar .fieldlabel{font-size:9px}.primary-toolbar .city-info{display:none}.primary-toolbar select,.primary-toolbar .seg,.primary-toolbar .date-row{height:40px}.primary-toolbar .seg{padding:3px}.primary-toolbar .seg button{font-size:10px;padding:8px 2px}.primary-toolbar .date-row{max-width:none}.wheel-showcase{display:flex;flex-direction:column;gap:0;padding:2px 4px 5px}.wheel-panel{width:100%}.wheel-top{padding:14px 13px 0;font-size:9px}.wheel-svg-wrap{width:100%;max-width:600px}.wheel-legend{margin:-1px auto 12px;font-size:9px;gap:8px}.wheel-sidebar{width:calc(100% - 25px);max-width:none;padding:16px 8px 12px;margin:0 12px;border-top:1px solid #46636c60;display:grid;grid-template-columns:1fr 1fr;gap:5px 16px;align-items:start}.sidebar-heading{grid-column:1/-1}.sidebar-heading span{font-size:8px}.sidebar-heading strong{display:none}.sidebar-date{margin:2px 0 0}.sidebar-date>span{font-size:19px}.sidebar-date strong{font-size:30px;margin-top:2px}.sidebar-date strong small{font-size:14px}.sidebar-lead{grid-column:1;grid-row:3;margin:0;font-size:10px}.sidebar-divider{display:none}.sidebar-subtitle{grid-column:2;grid-row:2;margin:0;font-size:9px}.sidebar-match{grid-column:2;grid-row:3;align-items:start}.sidebar-match strong{font-size:19px}.sidebar-match small{font-size:9px}.sidebar-arrow{font-size:17px}.sidebar-hint{display:none}.sidebar-explore{grid-column:1/-1;margin-top:10px;padding:10px 13px;font-size:11px}.wheel-navigation{margin:4px 15px 15px;padding:11px 0 0}.wheel-navigation .rangehead{font-size:8px}.wheel-navigation .shortcutrow button{padding:4px 10px;font-size:9px}.spectrum-card{padding:18px 16px;margin-top:12px}.spectrum-heading h2{font-size:16px}.spectrum-card>p{margin-bottom:18px}.spectrum-gradient-track{height:26px}.spectrum-month-labels span{font-size:9px}.mapping-panel{margin-top:12px}.mapping-summary{padding:18px 15px;gap:10px}.summary-icon{width:40px;height:40px;font-size:19px;border-radius:10px}.summary-text strong{font-size:13px}.summary-text>span{font-size:9px}.summary-status{display:none}.summary-chevron{font-size:24px;margin-left:auto}.mapping-content{padding:15px}.mapping-settings>.field{flex:1;min-width:180px}.mapping-settings .control-block{flex:1;margin-left:0;min-width:180px}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1}.footer{padding-top:12px}}
 @media(max-width:410px){.shell{padding:0 8px 14px}.brand-word{font-size:13px}.brand-mark{width:30px;height:30px}.source-pill{font-size:7px;padding:6px 7px}.intro{padding:14px 4px 12px}.intro h1{font-size:21px}.primary-bar{padding:15px 12px 12px}.primary-bar h2{font-size:16px}.live-mark{font-size:8px;margin-left:4px}.primary-toolbar{margin:11px 10px 0;gap:8px}.primary-toolbar select{font-size:11px;padding-left:8px;padding-right:22px}.primary-toolbar .seg button{font-size:9px}.wheel-top{padding:11px 10px 0;font-size:8px}.wheel-svg .monthlabel{font-size:17px}.wheel-legend{gap:6px;font-size:8px}.wheel-legend .gradient{width:65px}.sidebar-date strong{font-size:28px}.sidebar-match strong{font-size:18px}.spectrum-card{padding:16px 12px}.spectrum-month-labels span{font-size:8px}.mapping-summary{padding:15px 12px}.summary-icon{width:35px;height:35px}.summary-text strong{font-size:12px}.summary-text>span{font-size:8px}.mode-option{padding:10px}.mode-option b{font-size:11px}.mode-option small{font-size:9px}.results .result-card{padding:13px}.metric-grid{grid-template-columns:90px 1fr 1fr}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* v5: same-city seasonal wheel is the primary interaction */
+.intro{padding:12px 0 10px}.intro h1{font-size:clamp(20px,2.1vw,27px)}.intro .eyebrow{display:none}
+.primary-experience{background:radial-gradient(ellipse at 35% 32%,#1c3742 0%,#112632 65%,#0e212c 100%)}
+.primary-bar{padding:18px 25px 13px}.primary-bar h2{font-size:21px;margin-top:4px}.primary-toolbar{margin:12px 25px 0}
+.wheel-svg{cursor:crosshair;touch-action:none}.wheel-svg:active{cursor:grabbing}.wheel-svg .connection-path{stroke:#d3e9bd;stroke-width:2.8;opacity:.8}.wheel-svg .point-halo{animation:marker-pulse 1.5s ease-in-out infinite}
+.wheel-svg-wrap{max-width:760px;will-change:transform}.wheel-panel{position:relative}.wheel-top{padding:5px 10px 0}
+.live-mark{background:#1b4237;color:#d1f2af;transition:background .15s,color .15s}.live-mark.is-preview{color:#ffe7b0;background:#594331}
+.sidebar-hint,.intro-aside,.spectrum-card>p,.detail-caption,.fine-print,#match-method-note,.city-info,.wheel-navigation .shortcutrow{display:none!important}
+.wheel-sidebar{padding-bottom:4px}.sidebar-date{margin-top:13px}.sidebar-divider{margin:18px 0 17px}.sidebar-heading strong{font-size:12px}.sidebar-date strong{font-size:44px}.sidebar-subtitle{margin-bottom:10px}.sidebar-match strong{font-size:27px}.sidebar-explore{background:transparent;border-color:#4b6a6680;font-size:11px}
+.wheel-navigation{margin-bottom:14px}.spectrum-card{margin-top:12px;padding:18px 24px}.spectrum-heading h2{margin:4px 0 0;font-size:16px}.spectrum-body{margin-top:18px}.spectrum-card .foot-data{font-size:10px}
+.mapping-panel{margin-top:12px}.mapping-summary{padding:15px 24px}.summary-text strong{font-size:14px}.summary-icon{width:36px;height:36px;font-size:20px}.summary-text>span{display:none}
+.footer{justify-content:space-between;font-size:10px;opacity:.66;margin-top:12px}
+@media(max-width:760px){
+ .shell{padding:0 10px 20px}.topbar{height:52px}.intro{padding:12px 4px 10px}.intro h1{font-size:21px;margin:0}.primary-bar{padding:13px 14px 9px}.primary-bar h2{font-size:18px}.primary-toolbar{margin:10px 12px 0;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:10px}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1;display:flex;align-items:center;gap:12px}.toolbar-date .fieldlabel{margin:0;white-space:nowrap}.toolbar-date .date-row{flex:1;height:34px}.primary-toolbar select,.primary-toolbar .seg{height:38px}.primary-toolbar .date-row input{height:34px}.primary-toolbar .iconbtn{height:34px}.wheel-showcase{padding:0 2px 4px}.wheel-top{padding:8px 12px 0}.wheel-legend{margin:-10px 0 3px}.wheel-sidebar{border-top:1px solid #46636c60;width:calc(100% - 24px);margin:0 12px;padding:12px 6px;gap:4px 10px}.sidebar-heading{display:none}.sidebar-date{margin:0}.sidebar-date>span{font-size:15px}.sidebar-date strong{font-size:28px}.sidebar-lead{font-size:9px}.sidebar-subtitle{font-size:9px;margin:0}.sidebar-match strong{font-size:21px}.sidebar-explore{margin-top:7px}.wheel-navigation{margin:0 17px 12px;padding-top:8px}.wheel-navigation .rangehead{padding-top:1px}.spectrum-card{padding:14px 13px}.spectrum-body{margin-top:14px}.mapping-summary{padding:12px 13px}.summary-text strong{font-size:13px}.footer{font-size:9px}
+}
+@media(max-width:380px){.source-pill{font-size:7px}.intro h1{font-size:20px}.primary-bar h2{font-size:17px}.primary-toolbar .seg button{font-size:9px}.wheel-sidebar{padding:9px 5px}.sidebar-date strong{font-size:25px}.sidebar-match strong{font-size:19px}.wheel-legend{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.wheel-svg .point-halo{animation:none}.wheel-svg-wrap{will-change:auto}}
 </style>
 </head>
 <body>
 <div class="shell">
-<header class="topbar"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-word">季节回声<small>CLIMATE CALENDAR</small></span></a><span class="source-pill">CLIMATE NORMALS · 1991—2020</span></header>
+<header class="topbar"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-word">季节回声<small>CLIMATE CALENDAR</small></span></a><span class="source-pill">365 DAYS · 7 CITIES</span></header>
 <main id="top">
-<section class="intro"><div><div class="eyebrow">SEASONAL ECHO / 气候年轮</div><h1>一年四季，<em>尽在一圈之间。</em></h1><p>拨动年轮，探索气温的涨落与相似的日子。</p></div><span class="intro-aside">365 DAYS · 6 CITIES · ONE WHEEL</span></section>
+<section class="intro"><div><div class="eyebrow">SEASONAL ECHO / 气候年轮</div><h1>转动年轮，<em>遇见另一季节。</em></h1></div></section>
 <section class="primary-experience" aria-labelledby="wheel-title">
-<div class="primary-bar"><div><span class="section-kicker">THE CLIMATE WHEEL</span><h2 id="wheel-title">全年气温轮盘 <span class="live-mark">● 交互探索</span></h2></div><span class="wheel-explain">点按或拖动外圈刻度，选择一年中的任意一天 <span aria-hidden="true">↗</span></span></div>
+<div class="primary-bar"><div><span class="section-kicker">SEASONAL ECHO</span><h2 id="wheel-title">同城季节映射 <span class="live-mark" id="interaction-indicator">● 已选定</span></h2></div><span class="wheel-explain">悬停预览 · 点击确认 · 手指拨动 <span aria-hidden="true">↗</span></span></div>
 <div class="primary-toolbar">
-<div class="toolbar-city"><label class="fieldlabel" for="city">探索城市</label><div class="select-wrap"><select id="city"><option value="tokyo">东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu">成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option></select></div><div class="city-info" id="city-detail">日本 · 东京站</div></div>
-<div class="toolbar-metric"><span class="fieldlabel">气温视角</span><div class="seg" role="group" aria-label="气温指标"><button type="button" data-metric="mean" class="active" aria-pressed="true">日均温</button><button type="button" data-metric="high" aria-pressed="false">日最高</button><button type="button" data-metric="low" aria-pressed="false">日最低</button></div></div>
-<div class="toolbar-date"><label class="fieldlabel" for="date">选定日期</label><div class="date-row"><button class="iconbtn" id="prev-day" type="button" aria-label="前一天">‹</button><input id="date" type="date" value="2025-11-15" min="2025-01-01" max="2025-12-31"/><button class="iconbtn" id="next-day" type="button" aria-label="后一天">›</button></div></div>
+<div class="toolbar-city"><label class="fieldlabel" for="city">城市</label><div class="select-wrap"><select id="city"><option value="tokyo">东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu">成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option><option value="wuhan">武汉 Wuhan</option></select></div><div class="city-info" id="city-detail">日本 · 东京站</div></div>
+<div class="toolbar-metric"><span class="fieldlabel">比较指标</span><div class="seg" role="group" aria-label="气温指标"><button type="button" data-metric="mean" class="active" aria-pressed="true">日均温</button><button type="button" data-metric="high" aria-pressed="false">日最高</button><button type="button" data-metric="low" aria-pressed="false">日最低</button></div></div>
+<div class="toolbar-date"><label class="fieldlabel" for="date">日期</label><div class="date-row"><button class="iconbtn" id="prev-day" type="button" aria-label="前一天">‹</button><input id="date" type="date" value="2025-11-15" min="2025-01-01" max="2025-12-31"/><button class="iconbtn" id="next-day" type="button" aria-label="后一天">›</button></div></div>
 </div>
 <div class="wheel-showcase">
-<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> 365 DAYS · 12 MONTHS</span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="img" aria-label="365天气温轮盘，可拖动外圈选择起点日期，选择日期也可用输入框或滑动条。"></svg></div><div class="wheel-legend"><span>冷</span><span class="gradient"></span><span>热</span><span class="legend-separator"></span><span><span class="legend-dot"></span>起点</span><span><span class="legend-dot orange"></span>相似日</span><span id="ring-key">单城年轮</span></div></div>
+<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> 365 DAYS · 12 MONTHS</span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="group" aria-label="全年气候轮盘：沿外圈移动预览，点击或用手指拨动确认日期"></svg></div><div class="wheel-legend"><span>冷</span><span class="gradient"></span><span>热</span><span class="legend-separator"></span><span><span class="legend-dot"></span>起点</span><span><span class="legend-dot orange"></span>相似日</span><span id="ring-key">单城年轮</span></div></div>
 <div class="wheel-sidebar">
-<div class="sidebar-heading"><span>DATE SNAPSHOT</span><strong>此刻的气候</strong></div>
+<div class="sidebar-heading"><span>SELECTED DATE</span><strong>当前日期</strong></div>
 <div class="sidebar-date"><span id="sidebar-date">11月15日</span><strong id="sidebar-temp">12.5<small>°C</small></strong></div><p class="sidebar-lead" id="sidebar-lead">东京 · 秋季 · 日均温</p>
 <div class="sidebar-divider"></div>
-<div class="sidebar-subtitle">与另一段时节呼应</div><div class="sidebar-match"><span class="match-orbit-dot"></span><div><strong id="sidebar-match-date">4月5日</strong><small id="sidebar-match-text">参考气温 ≈ 12.5°C</small></div><span class="sidebar-arrow">↗</span></div>
-<div class="sidebar-hint">点击年轮上的任意日期，即时探索气温与季节的变化。</div>
-<button type="button" id="open-mapping" class="sidebar-explore">探索日期映射 <span>↗</span></button>
+<div class="sidebar-subtitle">另一季节的同温日</div><div class="sidebar-match"><span class="match-orbit-dot"></span><div><strong id="sidebar-match-date">4月5日</strong><small id="sidebar-match-text">参考气温 ≈ 12.5°C</small></div><span class="sidebar-arrow">↗</span></div>
+
+<button type="button" id="open-mapping" class="sidebar-explore">更多比较 <span>↗</span></button>
 </div>
 </div>
 <div class="wheel-navigation"><label for="day-slider">沿着一年滑动</label><span id="slider-label">DAY 319 / 365</span><input class="range" id="day-slider" type="range" min="0" max="364" value="318" aria-label="选择一年中的某一天"/><div class="rangehead"><span>01 JAN</span><div class="shortcutrow"><button type="button" data-quick="03-15">3 月</button><button type="button" data-quick="08-15">8 月</button><button type="button" data-quick="11-15">11 月</button></div><span>31 DEC</span></div></div>
 </section>
-<section class="spectrum-card" aria-labelledby="spectrum-title"><div class="spectrum-heading"><div><span class="section-kicker">TEMPERATURE SPECTRUM</span><h2 id="spectrum-title">十二个月的温度光谱</h2></div><span class="foot-data" id="annual-average">年均 15.8°C</span></div><p id="spectrum-caption">从冬日的冷蓝到盛夏的暖红，点击光谱也能跳转日期。</p><div class="spectrum-body"><div class="spectrum-cityline"><strong id="spectrum-city">东京</strong><span id="spectrum-current">当前所选日期</span></div><div class="spectrum-gradient-track" id="months" tabindex="0" role="slider" aria-label="按全年温度光谱选择日期" aria-valuemin="1" aria-valuemax="365" aria-valuenow="319" aria-valuetext="11月15日"></div><div class="spectrum-month-labels" aria-hidden="true"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></div><div class="target-spectrum target-field" id="target-month-row" hidden><div class="spectrum-cityline"><strong id="target-spectrum-city">成都</strong><span>目标城市</span></div><div class="spectrum-gradient-track is-target" id="target-months" aria-hidden="true"></div></div></div></section>
-<details class="mapping-panel" id="mapping-details"><summary class="mapping-summary"><span class="summary-icon">⇄</span><span class="summary-text"><small>ADVANCED EXPLORER</small><strong>日期映射 · 发现气候相近的另一日</strong><span>同城季节回声 · 跨城市日期对照 · 综合气候分析</span></span><span class="summary-status">点击展开</span><span class="summary-chevron">⌄</span></summary>
+<section class="spectrum-card" aria-labelledby="spectrum-title"><div class="spectrum-heading"><div><span class="section-kicker">TEMPERATURE SPECTRUM</span><h2 id="spectrum-title">全年温度光谱</h2></div><span class="foot-data" id="annual-average">年均 15.8°C</span></div><p id="spectrum-caption" hidden></p><div class="spectrum-body"><div class="spectrum-cityline"><strong id="spectrum-city">东京</strong><span id="spectrum-current">当前所选日期</span></div><div class="spectrum-gradient-track" id="months" tabindex="0" role="slider" aria-label="按全年温度光谱选择日期" aria-valuemin="1" aria-valuemax="365" aria-valuenow="319" aria-valuetext="11月15日"></div><div class="spectrum-month-labels" aria-hidden="true"><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span></div><div class="target-spectrum target-field" id="target-month-row" hidden><div class="spectrum-cityline"><strong id="target-spectrum-city">成都</strong><span>目标城市</span></div><div class="spectrum-gradient-track is-target" id="target-months" aria-hidden="true"></div></div></div></section>
+<details class="mapping-panel" id="mapping-details"><summary class="mapping-summary"><span class="summary-icon">⇄</span><span class="summary-text"><small>MORE OPTIONS</small><strong>更多日期比较</strong></span><span class="summary-chevron">⌄</span></summary>
 <div class="mapping-content"><nav class="mode-switch" aria-label="探索模式"><button id="mode-same" type="button" class="mode-option active" aria-pressed="true"><span class="mode-icon" aria-hidden="true">◎</span><span><b>同城 · 季节映射</b><small>在春秋之间寻找相近的气候</small></span></button><button id="mode-cross" type="button" class="mode-option" aria-pressed="false"><span class="mode-icon" aria-hidden="true">⇄</span><span><b>跨城市 · 日期映射</b><small>同样的温度，发生在哪一天？</small></span></button></nav>
-<div class="mapping-settings"><div class="target-field field" id="target-field" hidden><label class="fieldlabel" for="target-city">目标城市</label><div class="select-wrap"><select id="target-city"><option value="tokyo">东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu" selected>成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option></select></div><span class="city-info target-info" id="target-detail">中国 · 成都</span></div><button type="button" id="swap-cities" class="swap-button target-field" hidden>⇄ 交换起点和目标城市</button><div class="control-block"><span class="fieldlabel">日期匹配依据</span><div class="seg two" role="group" aria-label="匹配方式"><button type="button" data-algorithm="temp" class="active" aria-pressed="true">温度优先</button><button type="button" data-algorithm="climate" aria-pressed="false">综合气候</button></div></div></div>
-<div class="results" aria-live="polite"><section class="panel result-card"><div class="result-top"><span>01 / 起点日期</span><span>ORIGINAL</span></div><div class="overline" id="selected-subtitle">东京 · 秋季</div><div class="big-date" id="selected-date">11月15日</div><div class="big-temp" id="selected-temp">≈ 12.5 °C</div><div class="fine-print">气候参考日期，而非当天实时天气。</div></section><section class="panel result-card match-card"><div class="result-top"><span>02 / 最佳对应</span><span>CLIMATE MATCH</span></div><div class="overline" id="matched-subtitle">东京 · 春季</div><div class="big-date" id="matched-date">4月5日</div><div class="big-temp" id="matched-temp">≈ 12.5 °C</div><div class="diff" id="match-diff">气温差约 <b>0.0°C</b></div></section><section class="panel details-card"><div class="details-head"><b>气候差异一览</b><small id="metric-note">起点 vs 匹配日</small></div><div class="metric-grid" id="metric-grid"></div><p class="detail-caption" id="detail-caption">日高/低温为插值参考；湿度与降水对比以气候月均值为单位。</p></section></div>
-<div class="mapping-insight"><div class="foot-top"><strong id="insight-title">温度相似，季节不同</strong><button type="button" id="copy-result" class="cta">复制对比结果 ↗</button></div><p class="insight-text" id="insight-text">请选择日期查看季节匹配的详细说明。</p><p id="match-method-note">匹配基于气候参考值，综合气候匹配同时衡量平均温度、最高温、最低温、湿度及降水。</p></div></div></details>
+<div class="mapping-settings"><div class="target-field field" id="target-field" hidden><label class="fieldlabel" for="target-city">目标城市</label><div class="select-wrap"><select id="target-city"><option value="tokyo">东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu" selected>成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option><option value="wuhan">武汉 Wuhan</option></select></div><span class="city-info target-info" id="target-detail">中国 · 成都</span></div><button type="button" id="swap-cities" class="swap-button target-field" hidden>⇄ 交换起点和目标城市</button><div class="control-block"><span class="fieldlabel">日期匹配依据</span><div class="seg two" role="group" aria-label="匹配方式"><button type="button" data-algorithm="temp" class="active" aria-pressed="true">温度优先</button><button type="button" data-algorithm="climate" aria-pressed="false">综合气候</button></div></div></div>
+<div class="results" aria-live="polite"><section class="panel result-card"><div class="result-top"><span>01 / 起点日期</span><span>ORIGINAL</span></div><div class="overline" id="selected-subtitle">东京 · 秋季</div><div class="big-date" id="selected-date">11月15日</div><div class="big-temp" id="selected-temp">≈ 12.5 °C</div></section><section class="panel result-card match-card"><div class="result-top"><span>02 / 最佳对应</span><span>CLIMATE MATCH</span></div><div class="overline" id="matched-subtitle">东京 · 春季</div><div class="big-date" id="matched-date">4月5日</div><div class="big-temp" id="matched-temp">≈ 12.5 °C</div><div class="diff" id="match-diff">气温差约 <b>0.0°C</b></div></section><section class="panel details-card"><div class="details-head"><b>气候差异一览</b><small id="metric-note">起点 vs 匹配日</small></div><div class="metric-grid" id="metric-grid"></div><p class="detail-caption" id="detail-caption" hidden></p></section></div>
+<div class="mapping-insight"><div class="foot-top"><strong id="insight-title">温度相似，季节不同</strong><button type="button" id="copy-result" class="cta">复制对比结果 ↗</button></div><p class="insight-text" id="insight-text">请选择日期查看季节匹配的详细说明。</p><p id="match-method-note" hidden></p></div></div></details>
 </main>
-<footer class="footer"><span>SEASONAL ECHO © 2026 · 非闰年 365 日。逐日温度由月度平年值平滑插值，仅用于气候对比，不是逐日实测或天气预报。</span><span>数据：<a href="https://www.data.jma.go.jp/stats/en/normal/normal.html" target="_blank" rel="noopener">JMA ↗</a> · <a href="https://ds.data.jma.go.jp/tcc/tcc/products/climate/climatview/frame.php" target="_blank" rel="noopener">ClimatView ↗</a> · <a href="https://www.climate-zone.com/" target="_blank" rel="noopener">Climate Zone ↗</a>。部分湿度、降水资料为估算或历史样本。</span></footer>
+<footer class="footer"><span>季节回声 © 2026</span><span>气候平均值 · 非实时天气</span></footer>
 </div>
 <div id="sr-status" class="sr-only" role="status" aria-live="polite"></div>
 <script>
@@ -145,6 +163,7 @@ const CITIES={
   hefei:{name:'合肥',en:'Hefei',region:'中国 · 安徽 · 合肥站 58321',mean:[3.1,5.7,10.6,16.8,22.2,25.6,28.6,27.9,23.6,17.9,11.4,5.3],high:[7.2,10.2,15.5,21.9,27.1,29.7,32.6,32.1,28.2,22.9,16.4,9.9],low:[-0.1,2.2,6.6,12.4,17.8,21.9,25.4,24.7,20.1,13.9,7.4,1.7]},
   chengdu:{name:'成都',en:'Chengdu',region:'中国 · 四川 · 温江站 56187',mean:[5.7,8.0,12.6,17.6,21.4,24.1,25.6,25.4,21.7,17.3,12.3,7.0],high:[9.3,12.1,16.8,22.5,26.3,28.3,30.0,29.9,25.7,20.7,16.0,10.7],low:[2.7,4.9,8.4,12.9,17.2,20.5,22.1,21.7,18.9,14.7,9.6,4.2]},
   xian:{name:'西安',en:'Xi’an',region:'中国 · 陕西 · 泾河站 57131（部分项目16年样本）',mean:[0.5,4.3,10.9,16.8,21.5,26.1,27.8,26.1,20.8,15.2,8.3,2.3],high:[4.9,9.2,16.6,23.0,27.6,32.1,32.8,30.9,25.4,19.7,12.9,6.8],low:[-3.1,0.3,6.1,11.6,16.4,21.0,23.4,22.2,17.3,11.5,4.8,-1.5]},
+  wuhan:{name:'武汉',en:'Wuhan',region:'中国 · 湖北 · 武汉',mean:[4.2,7.0,11.6,17.9,22.7,26.3,29.3,28.7,24.2,18.4,12.1,6.2],high:[8.3,11.4,16.3,22.7,27.3,30.4,33.2,32.8,28.9,23.3,17.1,10.8],low:[1.0,3.6,7.9,13.7,18.8,23.0,26.2,25.4,20.8,14.8,8.4,2.8]},
   guangzhou:{name:'广州',en:'Guangzhou',region:'中国 · 广东 · 广州站 59287',mean:[13.8,15.5,18.3,22.5,26.0,27.9,28.9,28.6,27.4,24.5,20.1,15.5],high:[18.7,20.0,22.3,26.4,30.0,32.0,33.3,33.2,32.0,29.3,25.3,20.7],low:[10.6,12.5,15.5,19.6,23.1,25.1,25.8,25.5,24.2,20.9,16.7,11.9]}
 };
 Object.assign(CITIES.tokyo,{"humidity":[51,52,57,62,68,75,76,74,75,71,64,56],"rain":[59.7,56.5,116.0,133.7,139.7,167.8,156.2,154.7,224.9,234.8,96.3,57.9]});
@@ -152,6 +171,7 @@ Object.assign(CITIES.beijing,{"humidity":[51,48,43,38,39,50,65,68,61,56,56,54],"
 Object.assign(CITIES.hefei,{"humidity":[75,74,74,71,70,73,80,79,75,71,73,74],"rain":[47,51,82,80,90,162,180,140,65,56,54,37]});
 Object.assign(CITIES.chengdu,{"humidity":[75,73,68,65,64,68,75,79,80,80,77,76],"rain":[7,12,19,44,60,114,179,211,94,36,14,6]});
 Object.assign(CITIES.xian,{"humidity":[59,58,54,50,49,51,59,61,65,64,63,59],"rain":[7,8,27,36,51,64,96,84,80,62,21,7]});
+Object.assign(CITIES.wuhan,{humidity:[73,73,75,74,75,78,82,77,72,69,71,72],rain:[52.6,67.8,90.9,136.9,166.0,216.7,269.0,113.4,70.3,64.2,59.7,30.4]});
 Object.assign(CITIES.guangzhou,{"humidity":[68,72,74,78,82,87,87,86,83,76,70,66],"rain":[58,64,81,206,333,368,231,254,213,69,38,30]});
 const daysInMonth=[31,28,31,30,31,30,31,31,30,31,30,31];
 const starts=[0];for(let i=0;i<12;i++)starts[i+1]=starts[i]+daysInMonth[i];
@@ -161,7 +181,9 @@ const metricLabels={mean:'日均温',high:'日最高',low:'日最低'};
 const $=id=>document.getElementById(id);
 const wheel=$('wheel');const svgNS='http://www.w3.org/2000/svg';
 const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
-const state={mode:'same',source:'tokyo',target:'chengdu',metric:'mean',algorithm:'temp',day:starts[10]+14,hover:null,drag:false};
+const now=new Date();const todayMonth=now.getMonth();const todayDay=Math.min(now.getDate(),daysInMonth[todayMonth]);const todayIndex=starts[todayMonth]+todayDay-1;
+const calendarYear=now.getFullYear();
+const state={mode:'same',source:'tokyo',target:'chengdu',metric:'mean',algorithm:'temp',day:todayIndex,hover:null,drag:false};
 const seriesCache={};
 function idxToDate(d){let m=0;while(m<11 && starts[m+1]<=d)m++;return{month:m+1,day:d-starts[m]+1,monthIndex:m}}
 function dateStr(d){const x=idxToDate(d);return x.month+'月'+x.day+'日'}
@@ -234,9 +256,9 @@ function drawWheel(){
  svgEl('line',{x1:312,y1:403,x2:408,y2:403,stroke:'#526a71','stroke-width':1},overlayLayer);
  label(cross?'目标城市 · 最相近日期':'另一季节 · 最相近日期',433,'center-sub');
  label(dateStr(m),479,'center-date');label(cross?CITIES[state.target].name+' · ≈ '+bSeries[m].toFixed(1)+' °C':'≈ '+bSeries[m].toFixed(1)+' °C',511,'center-num orange');
- label(cross?'外圈起点 / 内圈目标':'拖动年轮，探索日期',544,'center-foot');
+ label(cross?'外圈起点 / 内圈目标':(state.hover!==null?'预览中 · 点击确认':'沿外圈拨动日期'),544,'center-foot');
  wheel.querySelectorAll('.monthlabel').forEach(el=>el.classList.toggle('selectedMonth',Number(el.dataset.month)===idxToDate(d).monthIndex));
- $('ring-key').textContent=cross?'外圈起点 · 内圈目标':'单城年轮';
+ $('ring-key').textContent=cross?'双城对照':'春秋同温';
 }
 function changeDay(day){state.day=((day%365)+365)%365;state.hover=null;render()}
 function activeClasses(){for(const [attr,val] of [['data-metric',state.metric],['data-algorithm',state.algorithm]]){document.querySelectorAll('['+attr+']').forEach(btn=>{const active=btn.getAttribute(attr)===val;btn.classList.toggle('active',active);btn.setAttribute('aria-pressed',String(active))})}
@@ -267,24 +289,24 @@ function renderResults(){const d=state.hover===null?state.day:state.hover,m=matc
 function renderMonthRow(city,container,interactive,activeIndex){
  const track=$(container),key=city+'|'+state.metric;
  if(track.dataset.key!==key){track.dataset.key=key;track.replaceChildren();const frag=document.createDocumentFragment();for(let i=0;i<365;i++){const seg=document.createElement('span');seg.style.background=colorFor(value(city,state.metric,i));frag.appendChild(seg)}track.appendChild(frag)}
- const current=interactive?state.day:matchDate(state.day);track.style.setProperty('--position',((current+.5)/365*100).toFixed(3)+'%');
+ const current=interactive?(state.hover??state.day):matchDate(state.hover??state.day);track.style.setProperty('--position',((current+.5)/365*100).toFixed(3)+'%');
  if(interactive){track.setAttribute('aria-valuenow',String(state.day+1));track.setAttribute('aria-valuetext',dateStr(state.day));}
 }
 function render(sync=true){const cross=state.mode==='cross';activeClasses();if(sync){
  $('target-field').hidden=!cross;$('swap-cities').hidden=!cross;$('target-month-row').hidden=!cross;
  $('city').value=state.source;$('target-city').value=state.target;
  $('city-detail').textContent=CITIES[state.source].region;$('target-detail').textContent=CITIES[state.target].region;
- const date=idxToDate(state.day);$('date').value='2025-'+String(date.month).padStart(2,'0')+'-'+String(date.day).padStart(2,'0');
+ const date=idxToDate(state.day);$('date').value=calendarYear+'-'+String(date.month).padStart(2,'0')+'-'+String(date.day).padStart(2,'0');
  $('day-slider').value=state.day;$('slider-label').textContent='DAY '+(state.day+1)+' / 365';
- $('view-mode').textContent=metricLabels[state.metric]+' · '+(cross?'双城市年轮':'单城市年轮');
+ $('view-mode').textContent=metricLabels[state.metric]+' · '+(cross?'跨城市':'同城季节');$('wheel-title').firstChild.textContent=cross?'跨城市日期映射 ':'同城季节映射 ';
  const avg=CITIES[state.source].mean.reduce((sum,x)=>sum+x,0)/12;
  $('annual-average').textContent=CITIES[state.source].name+' 年均 '+avg.toFixed(1)+'°C';
- $('spectrum-city').textContent=CITIES[state.source].name;$('spectrum-current').textContent=dateStr(state.day)+' · '+value(state.source,state.metric,state.day).toFixed(1)+'°C';$('target-spectrum-city').textContent=CITIES[state.target].name;
+ $('spectrum-city').textContent=CITIES[state.source].name;$('spectrum-current').textContent=dateStr(state.hover??state.day)+' · '+value(state.source,state.metric,state.hover??state.day).toFixed(1)+'°C';$('target-spectrum-city').textContent=CITIES[state.target].name;
  renderMonthRow(state.source,'months',true,date.monthIndex);
  if(cross)renderMonthRow(state.target,'target-months',false,idxToDate(matchDate(state.day)).monthIndex);
- $('spectrum-caption').textContent=cross?'两行分别表示起点与目标城市的月度温度；点击第一行可选日期。':'按月度气候平年值着色；点击月份可跳转到当月 15 日。';
+ 
  }
- drawWheel();renderResults();if(!sync){renderMonthRow(state.source,'months',true,idxToDate(state.day).monthIndex);if(cross)renderMonthRow(state.target,'target-months',false,idxToDate(matchDate(state.day)).monthIndex)}if(sync)$('sr-status').textContent=CITIES[state.source].name+' '+dateStr(state.day)+' 的气候匹配已更新';
+ drawWheel();renderResults();$('interaction-indicator').textContent=state.hover!==null?'◉ 预览中':'● 已选定';$('interaction-indicator').classList.toggle('is-preview',state.hover!==null);if(!sync){renderMonthRow(state.source,'months',true,idxToDate(state.hover??state.day).monthIndex);if(cross)renderMonthRow(state.target,'target-months',false,idxToDate(matchDate(state.hover??state.day)).monthIndex);$('spectrum-current').textContent=dateStr(state.hover??state.day)+' · '+value(state.source,state.metric,state.hover??state.day).toFixed(1)+'°C'}if(sync)$('sr-status').textContent=CITIES[state.source].name+' '+dateStr(state.day)+' 的气候匹配已更新';
 }
 $('open-mapping').addEventListener('click',()=>{$('mapping-details').open=true;$('mapping-details').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});});
 $('months').addEventListener('pointerdown',e=>{const r=$('months').getBoundingClientRect();changeDay(Math.floor(clamp((e.clientX-r.left)/r.width,0,.999999)*365))});
@@ -301,21 +323,33 @@ $('date').addEventListener('change',e=>changeDay(dateToIdx(e.target.value)));
 $('day-slider').addEventListener('input',e=>changeDay(Number(e.target.value)));
 $('prev-day').addEventListener('click',()=>changeDay(state.day-1));$('next-day').addEventListener('click',()=>changeDay(state.day+1));
 document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>changeDay(dateToIdx('2025-'+b.dataset.quick))));
-// Hit-test a full-size ring by angle: on mobile the individual daily strokes are too small to tap reliably.
-function dayFromPointer(e){const r=wheel.getBoundingClientRect();const x=(e.clientX-r.left)*720/r.width-360,y=(e.clientY-r.top)*720/r.height-360;const radius=Math.hypot(x,y);
-if(radius<235||radius>342)return null;const ang=(Math.atan2(y,x)*180/Math.PI+90+360)%360;return Math.round(ang/360*365)%365}
-wheel.addEventListener('pointerdown',e=>{const d=dayFromPointer(e);if(d===null)return;state.drag=true;wheel.setPointerCapture(e.pointerId);changeDay(d);e.preventDefault()});
-wheel.addEventListener('pointermove',e=>{const d=dayFromPointer(e);if(state.drag){if(d!==null&&d!==state.day)changeDay(d);return}
-if(e.pointerType==='mouse'){if(state.hover!==d){state.hover=d;render(false)}}});
-function endDrag(e){if(state.drag){state.drag=false;if(wheel.hasPointerCapture(e.pointerId))wheel.releasePointerCapture(e.pointerId)}}
-wheel.addEventListener('pointerup',endDrag);wheel.addEventListener('pointercancel',endDrag);
-wheel.addEventListener('pointerleave',()=>{if(state.drag)return;if(state.hover!==null){state.hover=null;render(false)}});
+// Preview follows the pointer; commit only on release/click, including touch dial interactions.
+function dayFromPointer(e,allowOutside=false){const r=wheel.getBoundingClientRect();const x=(e.clientX-r.left)*720/r.width-360,y=(e.clientY-r.top)*720/r.height-360;const radius=Math.hypot(x,y);
+ if(!allowOutside&&(radius<218||radius>347))return null;
+ const ang=(Math.atan2(y,x)*180/Math.PI+90+360)%360;return Math.round(ang/360*365)%365}
+const setPreview=d=>{if(d===state.hover)return;state.hover=d;render(false)};
+let activePointerId=null;
+wheel.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;const d=dayFromPointer(e);if(d===null)return;
+ state.drag=true;activePointerId=e.pointerId;wheel.setPointerCapture(e.pointerId);setPreview(d);e.preventDefault()});
+wheel.addEventListener('pointermove',e=>{
+ if(state.drag){if(e.pointerId!==activePointerId)return;const d=dayFromPointer(e,true);if(d!==null)setPreview(d);return}
+ if(e.pointerType==='mouse'||e.pointerType==='pen')setPreview(dayFromPointer(e));
+});
+wheel.addEventListener('pointerup',e=>{if(!state.drag||e.pointerId!==activePointerId)return;
+ const d=dayFromPointer(e,true)??state.hover;state.drag=false;activePointerId=null;
+ if(wheel.hasPointerCapture(e.pointerId))wheel.releasePointerCapture(e.pointerId);
+ if(d!==null)changeDay(d);
+ if(e.pointerType==='mouse')setPreview(dayFromPointer(e));
+});
+wheel.addEventListener('pointercancel',e=>{if(e.pointerId!==activePointerId)return;state.drag=false;activePointerId=null;setPreview(null)});
+wheel.addEventListener('pointerleave',()=>{if(!state.drag)setPreview(null)});
 document.addEventListener('keydown',e=>{if(['INPUT','SELECT','BUTTON','TEXTAREA'].includes(document.activeElement?.tagName))return;if(e.key==='ArrowLeft'){e.preventDefault();changeDay(state.day-1)}if(e.key==='ArrowRight'){e.preventDefault();changeDay(state.day+1)}});
 $('copy-result').addEventListener('click',async()=>{
 const d=state.day,m=matchDate(d),a=state.source,b=state.mode==='same'?a:state.target;
 const text=`季节回声｜${state.mode==='same'?'同城季节映射':'跨城市日期映射'}\n起点：${CITIES[a].name} ${dateStr(d)} · ${metricLabels[state.metric]}约 ${value(a,state.metric,d).toFixed(1)}°C\n对应：${CITIES[b].name} ${dateStr(m)} · ${metricLabels[state.metric]}约 ${value(b,state.metric,m).toFixed(1)}°C\n平均最高：${value(a,'high',d).toFixed(1)} / ${value(b,'high',m).toFixed(1)}°C\n平均最低：${value(a,'low',d).toFixed(1)} / ${value(b,'low',m).toFixed(1)}°C\n月均相对湿度：${CITIES[a].humidity[idxToDate(d).monthIndex]} / ${CITIES[b].humidity[idxToDate(m).monthIndex]}%\n月降水量：${CITIES[a].rain[idxToDate(d).monthIndex]} / ${CITIES[b].rain[idxToDate(m).monthIndex]} mm\n匹配方式：${state.algorithm==='temp'?'温度优先':'综合气候'}；参考气候平年值与月度插值，并非逐日实测或天气预报。`;
  const btn=$('copy-result');try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(text);else{const area=document.createElement('textarea');area.value=text;document.body.appendChild(area);area.select();if(!document.execCommand('copy'))throw new Error('复制失败');area.remove()}btn.textContent='已复制 ✓'}catch(err){btn.textContent='复制失败'}setTimeout(()=>btn.textContent='复制对比结果 ↗',1800);
 });
+$('date').min=calendarYear+'-01-01';$('date').max=calendarYear+'-12-31';$('date').setAttribute('aria-label','选择日期（'+calendarYear+'年）');
 render();
 })();
 </script>

@@ -20,7 +20,7 @@ button{-webkit-tap-highlight-color:transparent}
 .brand-mark:before{content:'';width:18px;height:18px;border:1.5px solid var(--green);border-radius:50%}
 .brand-mark:after{content:'';height:5px;width:5px;border-radius:50%;background:var(--green);position:absolute;right:2px;top:3px}
 .brand-word{font-size:16px;font-weight:800;letter-spacing:.03em}.brand-word small{display:block;font-size:8px;color:#8397a0;letter-spacing:.24em;font-weight:700;margin-top:3px}
-.source-pill{padding:8px 13px;color:#bdcad0;border:1px solid var(--line);font-size:10px;border-radius:20px;white-space:nowrap}
+
 .intro{padding:24px 0 12px;display:flex;align-items:end;justify-content:space-between;gap:20px}
 .eyebrow{color:var(--green);font-size:10px;letter-spacing:.2em;font-weight:800}
 .intro h1{margin:7px 0;font-size:clamp(24px,2.5vw,34px);font-weight:830;letter-spacing:-.045em;line-height:1.2}.intro h1 em{font-style:normal;color:var(--green)}
@@ -75,26 +75,26 @@ select{width:100%;min-width:0;appearance:none;border-radius:9px;padding:12px 29p
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 @media(max-width:1160px){.shell{padding:0 22px 24px}.workspace{grid-template-columns:235px minmax(0,1fr)}.results{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1.6fr}.result-card{padding:18px}.intro-aside{display:none}}
 @media(max-width:760px){.shell{padding:0 14px 24px}.topbar{height:62px}.intro{padding:20px 0 10px}.intro h1{font-size:27px}.mode-switch{max-width:none}.workspace{grid-template-columns:1fr;gap:11px;margin-top:12px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:13px;padding:15px;grid-row:1}.controls>.section-title,.source-target,.controls>.control-hint{grid-column:1/-1}.source-target{grid-template-columns:1fr 1fr;align-items:start;gap:10px}.swap-button{grid-column:1/-1;padding:7px}.wheel-panel{grid-row:2;padding:8px 2px}.wheel-svg-wrap{max-width:610px}.results{grid-row:3;grid-column:auto;grid-template-columns:1fr 1fr;gap:10px}.details-card{grid-column:1/-1}.metric-grid{grid-template-columns:130px 1fr 1fr}.under{grid-template-columns:1fr}.bottom-card{padding:18px}.footer{margin-top:15px}.control-hint{display:none}}
-@media(max-width:440px){.brand-word{font-size:14px}.source-pill{font-size:9px;padding:7px 9px}.intro{padding:16px 0 6px}.intro h1{font-size:24px;margin:5px 0}.intro p{font-size:11px}.eyebrow{font-size:9px}.mode-switch{gap:7px;margin-top:9px}.mode-option{padding:10px 9px;gap:7px;border-radius:11px}.mode-option .mode-icon{font-size:18px;flex-basis:23px}.mode-option b{font-size:12px}.mode-option small{font-size:9px}.controls{padding:13px;gap:12px}.source-target{gap:8px}.source-target select{font-size:12px;padding-left:8px;padding-right:23px}.fieldlabel{font-size:10px}.city-info{font-size:9px}.wheel-top{padding:7px 14px 0;font-size:9px}.wheel-top .right{font-size:9px}.wheel-svg .monthlabel{font-size:19px}.wheel-svg .center-date{font-size:41px}.wheel-svg .orbit{font-size:11px}.wheel-legend{font-size:9px;gap:6px}.gradient{width:68px}.result-card{padding:13px 12px}.result-top{margin-bottom:10px}.result-top span:first-child{font-size:10px}.result-top span:last-child{font-size:8px}.big-date{font-size:24px}.big-temp{font-size:20px}.fine-print{font-size:9px}.metric-grid{grid-template-columns:85px 1fr 1fr}.months{gap:3px}.monthmini .txt{font-size:8px}.month-row{grid-template-columns:44px 1fr}.month-city{font-size:9px}}
+@media(max-width:440px){.brand-word{font-size:14px}.intro{padding:16px 0 6px}.intro h1{font-size:24px;margin:5px 0}.intro p{font-size:11px}.eyebrow{font-size:9px}.mode-switch{gap:7px;margin-top:9px}.mode-option{padding:10px 9px;gap:7px;border-radius:11px}.mode-option .mode-icon{font-size:18px;flex-basis:23px}.mode-option b{font-size:12px}.mode-option small{font-size:9px}.controls{padding:13px;gap:12px}.source-target{gap:8px}.source-target select{font-size:12px;padding-left:8px;padding-right:23px}.fieldlabel{font-size:10px}.city-info{font-size:9px}.wheel-top{padding:7px 14px 0;font-size:9px}.wheel-top .right{font-size:9px}.wheel-svg .monthlabel{font-size:19px}.wheel-svg .center-date{font-size:41px}.wheel-svg .orbit{font-size:11px}.wheel-legend{font-size:9px;gap:6px}.gradient{width:68px}.result-card{padding:13px 12px}.result-top{margin-bottom:10px}.result-top span:first-child{font-size:10px}.result-top span:last-child{font-size:8px}.big-date{font-size:24px}.big-temp{font-size:20px}.fine-print{font-size:9px}.metric-grid{grid-template-columns:85px 1fr 1fr}.months{gap:3px}.monthmini .txt{font-size:8px}.month-row{grid-template-columns:44px 1fr}.month-city{font-size:9px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
 
 /* v4 — wheel first, spectrum second, optional date mapping */
 :root{--panel:#152935;--line:#36535b65;--green:#d4f18a;--orange:#f8b188}
-.shell{max-width:1380px;padding:0 32px 22px}.topbar{height:61px}.source-pill{font-size:9px;letter-spacing:.1em;color:#a5b9b9}
+.shell{max-width:1380px;padding:0 32px 22px}.topbar{height:61px}
 .intro{padding:19px 0 19px;align-items:center}.intro h1{margin:5px 0;font-size:clamp(23px,2.1vw,29px)}.intro p{font-size:11px}.intro-aside{display:block;border:0;padding:0;max-width:none;font-size:10px;letter-spacing:.15em;color:#738f99}
 .primary-experience{background:linear-gradient(135deg,#142a36,#0f222e 90%);border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;box-shadow:0 24px 58px #07111a35}
 .primary-experience:before{content:'';position:absolute;pointer-events:none;width:560px;height:560px;left:24%;top:100px;border-radius:50%;background:#bfe68b08;filter:blur(60px)}
 .primary-bar{display:flex;justify-content:space-between;gap:15px;align-items:end;padding:23px 28px 17px;border-bottom:1px solid #3b556035;position:relative}.section-kicker{font-size:9px;letter-spacing:.23em;font-weight:750;color:#accf88}.primary-bar h2,.spectrum-heading h2{font-size:19px;font-weight:800;line-height:1.3;letter-spacing:-.025em;margin:8px 0 0}.live-mark{display:inline-flex;font-size:9px;color:#a8d49d;background:#29423b;border:1px solid #56836a55;border-radius:99px;padding:4px 7px;margin-left:8px;font-weight:600;letter-spacing:.02em;vertical-align:middle}.wheel-explain{font-size:10px;color:#90a9af}
 .primary-toolbar{display:grid;grid-template-columns:minmax(190px,1fr) minmax(220px,1.08fr) minmax(218px,.93fr);gap:18px;align-items:start;margin:18px 28px 8px;position:relative}.primary-toolbar>.toolbar-city,.primary-toolbar>.toolbar-metric,.primary-toolbar>.toolbar-date{min-width:0}.primary-toolbar .fieldlabel{margin-bottom:8px;font-size:10px}.primary-toolbar .city-info{margin-top:6px;font-size:9px}.primary-toolbar select,.primary-toolbar input{height:43px}.primary-toolbar .date-row{height:43px}.primary-toolbar .iconbtn{width:38px;font-size:24px;line-height:1}.primary-toolbar .seg{height:43px}.primary-toolbar .seg button{font-size:12px}.primary-toolbar select{font-size:12px}
-.wheel-showcase{display:grid;grid-template-columns:minmax(0,1fr) 264px;gap:6px;max-width:1170px;margin:auto;align-items:center;padding:0 25px 5px}.wheel-panel{border:0;background:none;overflow:visible;padding:0;min-width:0}.wheel-top{max-width:725px;margin:auto;padding:14px 6px 2px;letter-spacing:.13em;font-size:10px}.wheel-top-dot{width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;box-shadow:0 0 10px #d4f18a77}.wheel-svg-wrap{max-width:710px;animation:wheel-enter .65s cubic-bezier(.2,.8,.2,1) both}.wheel-svg{touch-action:none}.wheel-svg .tempbar{transition:stroke .32s ease}.wheel-legend{margin:-8px 0 12px;gap:12px;font-size:10px}.wheel-legend #ring-key{color:#6f9297}.wheel-legend .gradient{width:116px}.legend-separator{height:10px;border-left:1px solid #52697370}
+.wheel-showcase{display:grid;grid-template-columns:minmax(0,1fr) 264px;gap:6px;max-width:1170px;margin:auto;align-items:center;padding:0 25px 5px}.wheel-panel{border:0;background:none;overflow:visible;padding:0;min-width:0}.wheel-top{max-width:725px;margin:auto;padding:14px 6px 2px;letter-spacing:.13em;font-size:10px}.wheel-top-dot{width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;box-shadow:0 0 10px #d4f18a77}.wheel-svg-wrap{max-width:710px;animation:wheel-enter .65s cubic-bezier(.2,.8,.2,1) both}.wheel-svg{touch-action:none}.wheel-svg .tempbar{transition:stroke .32s ease}.wheel-legend{margin:-8px 0 12px;gap:12px;font-size:10px}.wheel-legend .gradient{width:116px}.legend-separator{height:10px;border-left:1px solid #52697370}
 .wheel-sidebar{align-self:stretch;display:flex;flex-direction:column;justify-content:center;max-width:264px;margin:auto;padding:16px 10px 35px;animation:fade-up .75s .14s both}.sidebar-heading span{font-size:9px;letter-spacing:.2em;color:#8fb2b0;font-weight:800;display:block}.sidebar-heading strong{font-size:13px;display:block;margin-top:6px}.sidebar-date{margin-top:22px}.sidebar-date>span{display:block;font-size:28px;font-weight:800;letter-spacing:-.06em;white-space:nowrap}.sidebar-date strong{display:block;color:var(--green);font-size:48px;letter-spacing:-.075em;font-weight:780;line-height:1.15;margin-top:5px;font-variant-numeric:tabular-nums}.sidebar-date strong small{font-size:20px;margin-left:6px;font-weight:500}.sidebar-lead{font-size:11px;color:#93aeb6}.sidebar-divider{height:1px;background:#58707950;margin:28px 0 21px}.sidebar-subtitle{font-size:10px;color:#89a5af;margin-bottom:12px}.sidebar-match{display:flex;align-items:center;gap:11px}.sidebar-match strong{display:block;font-size:23px;color:#f9e1cb;letter-spacing:-.04em}.sidebar-match small{display:block;font-size:11px;color:#8dacb3;margin-top:6px}.match-orbit-dot{height:10px;width:10px;flex-shrink:0;background:var(--orange);border:3px solid #253842;border-radius:50%;box-shadow:0 0 0 2px #f8b188c9,0 0 20px #f8b18850}.sidebar-arrow{font-size:21px;margin-left:auto;color:#f8b188}.sidebar-hint{color:#819ba6;font-size:11px;line-height:1.85;margin-top:28px}
 .spectrum-card{margin-top:16px;padding:23px 29px 25px;background:#142934;border:1px solid var(--line);border-radius:18px;animation:fade-up .7s .14s both}.spectrum-heading{display:flex;justify-content:space-between;align-items:end;gap:16px}.spectrum-heading h2{font-size:18px}.spectrum-heading .foot-data{font-size:11px}.spectrum-card>p{font-size:11px;color:#8faab3;margin:11px 0 21px}.spectrum-body{display:grid;gap:15px}.spectrum-cityline{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.spectrum-cityline strong{font-size:11px;color:#d0e5e1}.spectrum-cityline span{font-size:10px;color:#83a4ad}.spectrum-gradient-track{position:relative;width:100%;height:27px;border-radius:8px;display:flex;overflow:hidden;outline:1px solid #8ea4ae3b;cursor:crosshair;box-shadow:inset 0 0 10px #060d1570;transition:filter .2s,transform .2s}.spectrum-gradient-track:hover{filter:brightness(1.16)}.spectrum-gradient-track>span{flex:1 1 0;min-width:0;height:100%;pointer-events:none}.spectrum-gradient-track::after{content:'';position:absolute;left:calc(var(--position,87.4%));top:0;bottom:0;width:3px;transform:translateX(-1.5px);background:#f5ffe0;box-shadow:0 0 0 1px #08212d,0 0 12px #ffffff99;z-index:1;pointer-events:none;transition:none}.spectrum-gradient-track.is-target{height:17px;cursor:default}.spectrum-gradient-track.is-target:after{background:var(--orange)}.spectrum-month-labels{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));margin-top:9px}.spectrum-month-labels span{text-align:left;font-size:10px;color:#748f99}.spectrum-month-labels span:last-child{text-align:right}.target-spectrum{padding-top:4px}
 .mapping-panel{margin-top:16px;background:#132631;border:1px solid var(--line);border-radius:18px;overflow:hidden}.mapping-summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:17px;padding:22px 28px;transition:background .2s}.mapping-summary::-webkit-details-marker{display:none}.mapping-summary:hover{background:#1a323f}.summary-icon{width:47px;height:47px;border:1px solid #59786caa;background:#203c40;border-radius:13px;display:grid;place-items:center;font-size:23px;color:var(--green);flex-shrink:0}.summary-text{display:flex;flex-direction:column;gap:5px;min-width:0}.summary-text small{font-size:9px;letter-spacing:.15em;color:#9cbc99;font-weight:800}.summary-text strong{font-size:16px;letter-spacing:-.015em}.summary-text>span{font-size:10px;color:#819da7}.summary-status{margin-left:auto;white-space:nowrap;font-size:10px;color:#96afa9}.summary-chevron{margin-left:auto;font-size:29px;color:#d5edbd;transition:transform .3s ease;line-height:1}.mapping-panel[open] .summary-chevron{transform:rotate(180deg)}.mapping-panel[open] .mapping-summary{border-bottom:1px solid #3c596240}.mapping-panel[open] .mapping-content{animation:panel-open .36s cubic-bezier(.16,.75,.2,1) both}.mapping-content{padding:20px 28px 28px}.mapping-content .mode-switch{max-width:none;margin:0;gap:10px}.mapping-settings{display:flex;align-items:end;flex-wrap:wrap;gap:14px;margin:15px 0}.mapping-settings>.field{width:240px}.mapping-settings .control-block{width:260px;margin-left:auto}.mapping-settings .control-block .seg{height:44px}.mapping-settings .swap-button{max-width:220px;height:44px}.results{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:12px}.details-card{min-height:220px}.mapping-insight{margin-top:12px;background:#1b323c;border:1px solid #3a566055;border-radius:13px;padding:17px 19px}.mapping-insight .foot-top strong{font-size:13px}.mapping-insight .insight-text{margin:11px 0 6px!important}.mapping-insight #match-method-note{font-size:10px;line-height:1.7;color:#8aa2ab;margin:0}.footer{margin-top:19px}
 @keyframes wheel-enter{from{opacity:0;transform:translateY(10px) scale(.965);}to{opacity:1;transform:translateY(0) scale(1);}}@keyframes wheel-change{from{opacity:.7;transform:scale(.987)}to{opacity:1;transform:scale(1)}}@keyframes fade-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes panel-open{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:translateY(0)}}@keyframes link-drift{from{stroke-dashoffset:0}to{stroke-dashoffset:-48}}@keyframes marker-pulse{0%,100%{stroke-opacity:1}50%{stroke-opacity:.5}}
 
 @media(max-width:1100px){.shell{padding:0 22px 22px}.wheel-showcase{grid-template-columns:minmax(0,1fr) 235px;padding:0 15px}.wheel-sidebar{padding:0 6px 25px}.sidebar-date strong{font-size:41px}.intro-aside{display:none}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1;min-height:0}.metric-grid{grid-template-columns:170px 1fr 1fr}}
-@media(max-width:760px){.shell{padding:0 12px 18px}.topbar{height:56px}.source-pill{font-size:8px;letter-spacing:.04em}.intro{padding:17px 2px 14px}.intro h1{font-size:23px}.intro p{font-size:10px}.primary-experience{border-radius:16px}.primary-bar{padding:17px 16px 13px}.primary-bar h2{font-size:17px}.wheel-explain{display:none}.primary-toolbar{margin:13px 13px 0;gap:9px;grid-template-columns:1fr 1fr}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1}.primary-toolbar .fieldlabel{font-size:9px}.primary-toolbar .city-info{display:none}.primary-toolbar select,.primary-toolbar .seg,.primary-toolbar .date-row{height:40px}.primary-toolbar .seg{padding:3px}.primary-toolbar .seg button{font-size:10px;padding:8px 2px}.primary-toolbar .date-row{max-width:none}.wheel-showcase{display:flex;flex-direction:column;gap:0;padding:2px 4px 5px}.wheel-panel{width:100%}.wheel-top{padding:14px 13px 0;font-size:9px}.wheel-svg-wrap{width:100%;max-width:600px}.wheel-legend{margin:-1px auto 12px;font-size:9px;gap:8px}.wheel-sidebar{width:calc(100% - 25px);max-width:none;padding:16px 8px 12px;margin:0 12px;border-top:1px solid #46636c60;display:grid;grid-template-columns:1fr 1fr;gap:5px 16px;align-items:start}.sidebar-heading{grid-column:1/-1}.sidebar-heading span{font-size:8px}.sidebar-heading strong{display:none}.sidebar-date{margin:2px 0 0}.sidebar-date>span{font-size:19px}.sidebar-date strong{font-size:30px;margin-top:2px}.sidebar-date strong small{font-size:14px}.sidebar-lead{grid-column:1;grid-row:3;margin:0;font-size:10px}.sidebar-divider{display:none}.sidebar-subtitle{grid-column:2;grid-row:2;margin:0;font-size:9px}.sidebar-match{grid-column:2;grid-row:3;align-items:start}.sidebar-match strong{font-size:19px}.sidebar-match small{font-size:9px}.sidebar-arrow{font-size:17px}.sidebar-hint{display:none}.spectrum-card{padding:18px 16px;margin-top:12px}.spectrum-heading h2{font-size:16px}.spectrum-card>p{margin-bottom:18px}.spectrum-gradient-track{height:26px}.spectrum-month-labels span{font-size:9px}.mapping-panel{margin-top:12px}.mapping-summary{padding:18px 15px;gap:10px}.summary-icon{width:40px;height:40px;font-size:19px;border-radius:10px}.summary-text strong{font-size:13px}.summary-text>span{font-size:9px}.summary-status{display:none}.summary-chevron{font-size:24px;margin-left:auto}.mapping-content{padding:15px}.mapping-settings>.field{flex:1;min-width:180px}.mapping-settings .control-block{flex:1;margin-left:0;min-width:180px}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1}.footer{padding-top:12px}}
-@media(max-width:410px){.shell{padding:0 8px 14px}.brand-word{font-size:13px}.brand-mark{width:30px;height:30px}.source-pill{font-size:7px;padding:6px 7px}.intro{padding:14px 4px 12px}.intro h1{font-size:21px}.primary-bar{padding:15px 12px 12px}.primary-bar h2{font-size:16px}.live-mark{font-size:8px;margin-left:4px}.primary-toolbar{margin:11px 10px 0;gap:8px}.primary-toolbar select{font-size:11px;padding-left:8px;padding-right:22px}.primary-toolbar .seg button{font-size:9px}.wheel-top{padding:11px 10px 0;font-size:8px}.wheel-svg .monthlabel{font-size:17px}.wheel-legend{gap:6px;font-size:8px}.wheel-legend .gradient{width:65px}.sidebar-date strong{font-size:28px}.sidebar-match strong{font-size:18px}.spectrum-card{padding:16px 12px}.spectrum-month-labels span{font-size:8px}.mapping-summary{padding:15px 12px}.summary-icon{width:35px;height:35px}.summary-text strong{font-size:12px}.summary-text>span{font-size:8px}.mode-option{padding:10px}.mode-option b{font-size:11px}.mode-option small{font-size:9px}.results .result-card{padding:13px}.metric-grid{grid-template-columns:90px 1fr 1fr}}
+@media(max-width:760px){.shell{padding:0 12px 18px}.topbar{height:56px}.intro{padding:17px 2px 14px}.intro h1{font-size:23px}.intro p{font-size:10px}.primary-experience{border-radius:16px}.primary-bar{padding:17px 16px 13px}.primary-bar h2{font-size:17px}.wheel-explain{display:none}.primary-toolbar{margin:13px 13px 0;gap:9px;grid-template-columns:1fr 1fr}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1}.primary-toolbar .fieldlabel{font-size:9px}.primary-toolbar .city-info{display:none}.primary-toolbar select,.primary-toolbar .seg,.primary-toolbar .date-row{height:40px}.primary-toolbar .seg{padding:3px}.primary-toolbar .seg button{font-size:10px;padding:8px 2px}.primary-toolbar .date-row{max-width:none}.wheel-showcase{display:flex;flex-direction:column;gap:0;padding:2px 4px 5px}.wheel-panel{width:100%}.wheel-top{padding:14px 13px 0;font-size:9px}.wheel-svg-wrap{width:100%;max-width:600px}.wheel-legend{margin:-1px auto 12px;font-size:9px;gap:8px}.wheel-sidebar{width:calc(100% - 25px);max-width:none;padding:16px 8px 12px;margin:0 12px;border-top:1px solid #46636c60;display:grid;grid-template-columns:1fr 1fr;gap:5px 16px;align-items:start}.sidebar-heading{grid-column:1/-1}.sidebar-heading span{font-size:8px}.sidebar-heading strong{display:none}.sidebar-date{margin:2px 0 0}.sidebar-date>span{font-size:19px}.sidebar-date strong{font-size:30px;margin-top:2px}.sidebar-date strong small{font-size:14px}.sidebar-lead{grid-column:1;grid-row:3;margin:0;font-size:10px}.sidebar-divider{display:none}.sidebar-subtitle{grid-column:2;grid-row:2;margin:0;font-size:9px}.sidebar-match{grid-column:2;grid-row:3;align-items:start}.sidebar-match strong{font-size:19px}.sidebar-match small{font-size:9px}.sidebar-arrow{font-size:17px}.sidebar-hint{display:none}.spectrum-card{padding:18px 16px;margin-top:12px}.spectrum-heading h2{font-size:16px}.spectrum-card>p{margin-bottom:18px}.spectrum-gradient-track{height:26px}.spectrum-month-labels span{font-size:9px}.mapping-panel{margin-top:12px}.mapping-summary{padding:18px 15px;gap:10px}.summary-icon{width:40px;height:40px;font-size:19px;border-radius:10px}.summary-text strong{font-size:13px}.summary-text>span{font-size:9px}.summary-status{display:none}.summary-chevron{font-size:24px;margin-left:auto}.mapping-content{padding:15px}.mapping-settings>.field{flex:1;min-width:180px}.mapping-settings .control-block{flex:1;margin-left:0;min-width:180px}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1}.footer{padding-top:12px}}
+@media(max-width:410px){.shell{padding:0 8px 14px}.brand-word{font-size:13px}.brand-mark{width:30px;height:30px}.intro{padding:14px 4px 12px}.intro h1{font-size:21px}.primary-bar{padding:15px 12px 12px}.primary-bar h2{font-size:16px}.live-mark{font-size:8px;margin-left:4px}.primary-toolbar{margin:11px 10px 0;gap:8px}.primary-toolbar select{font-size:11px;padding-left:8px;padding-right:22px}.primary-toolbar .seg button{font-size:9px}.wheel-top{padding:11px 10px 0;font-size:8px}.wheel-svg .monthlabel{font-size:17px}.wheel-legend{gap:6px;font-size:8px}.wheel-legend .gradient{width:65px}.sidebar-date strong{font-size:28px}.sidebar-match strong{font-size:18px}.spectrum-card{padding:16px 12px}.spectrum-month-labels span{font-size:8px}.mapping-summary{padding:15px 12px}.summary-icon{width:35px;height:35px}.summary-text strong{font-size:12px}.summary-text>span{font-size:8px}.mode-option{padding:10px}.mode-option b{font-size:11px}.mode-option small{font-size:9px}.results .result-card{padding:13px}.metric-grid{grid-template-columns:90px 1fr 1fr}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 /* v5: same-city seasonal wheel is the primary interaction */
@@ -111,7 +111,7 @@ select{width:100%;min-width:0;appearance:none;border-radius:9px;padding:12px 29p
 @media(max-width:760px){
  .shell{padding:0 10px 20px}.topbar{height:52px}.intro{padding:12px 4px 10px}.intro h1{font-size:21px;margin:0}.primary-bar{padding:13px 14px 9px}.primary-bar h2{font-size:18px}.primary-toolbar{margin:10px 12px 0;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:10px}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1;display:flex;align-items:center;gap:12px}.toolbar-date .fieldlabel{margin:0;white-space:nowrap}.toolbar-date .date-row{flex:1;height:34px}.primary-toolbar select,.primary-toolbar .seg{height:38px}.primary-toolbar .date-row input{height:34px}.primary-toolbar .iconbtn{height:34px}.wheel-showcase{padding:0 2px 4px}.wheel-top{padding:8px 12px 0}.wheel-legend{margin:-10px 0 3px}.wheel-sidebar{border-top:1px solid #46636c60;width:calc(100% - 24px);margin:0 12px;padding:12px 6px;gap:4px 10px}.sidebar-heading{display:none}.sidebar-date{margin:0}.sidebar-date>span{font-size:15px}.sidebar-date strong{font-size:28px}.sidebar-lead{font-size:9px}.sidebar-subtitle{font-size:9px;margin:0}.sidebar-match strong{font-size:21px}.spectrum-card{padding:14px 13px}.spectrum-body{margin-top:14px}.mapping-summary{padding:12px 13px}.summary-text strong{font-size:13px}.footer{font-size:9px}
 }
-@media(max-width:380px){.source-pill{font-size:7px}.intro h1{font-size:20px}.primary-bar h2{font-size:17px}.primary-toolbar .seg button{font-size:9px}.wheel-sidebar{padding:9px 5px}.sidebar-date strong{font-size:25px}.sidebar-match strong{font-size:19px}.wheel-legend{font-size:8px}}
+@media(max-width:380px){.intro h1{font-size:20px}.primary-bar h2{font-size:17px}.primary-toolbar .seg button{font-size:9px}.wheel-sidebar{padding:9px 5px}.sidebar-date strong{font-size:25px}.sidebar-match strong{font-size:19px}.wheel-legend{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.wheel-svg .point-halo{animation:none}.wheel-svg-wrap{will-change:auto}}
 
 /* Dial surfaces share a restrained depth, consistent hit areas and interruptible motion. */
@@ -303,11 +303,39 @@ select{-webkit-appearance:none;line-height:1.25}
  .summary-icon{width:32px;height:32px;font-size:18px}
 }
 @media(prefers-reduced-motion:reduce){.outfit-toggle svg{transition:none}}
+/* Wardrobe cues share the existing ink, rings and on-demand motion. */
+.icon-sprite{position:absolute;width:0;height:0;overflow:hidden}
+.wardrobe-toggle{display:flex;align-items:center;min-height:44px;padding:0;border:0;border-radius:999px;background:none;color:#c5dbae}
+.wardrobe-toggle-body{display:flex;align-items:center;gap:6px;padding:7px 11px;border:1px solid #65846688;border-radius:999px;background:#28403566;font-size:10px;font-weight:600;line-height:1.4}
+.wardrobe-toggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.wardrobe-toggle[aria-pressed="false"]{color:#8fa6ac}.wardrobe-toggle[aria-pressed="false"] .wardrobe-toggle-body{border-color:#36535b;background:transparent}
+.wardrobe-legend{display:inline-flex;align-items:center;gap:4px;color:#b6c8a7}.wardrobe-legend[hidden]{display:none}
+.wardrobe-legend svg{width:9px;height:11px;fill:#dbe7bd}
+.wardrobe-arc{fill:none;stroke:#dbe7bd;stroke-width:3;stroke-linecap:round;opacity:.55}
+.wardrobe-diamond{fill:#cbdab5;stroke:#19343a;stroke-width:1.5}
+.wardrobe-mark.is-near .wardrobe-arc{opacity:1;stroke-width:4}
+.wardrobe-mark.is-near .wardrobe-diamond{fill:#effbcf}
+.season-ping{fill:none;stroke:#dfedc4;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center}
+.wardrobe-marks.is-visible .wardrobe-mark.is-near .season-ping{animation:season-ping .65s ease-out 1}
+@keyframes season-ping{from{opacity:.65;transform:scale(.8)}to{opacity:0;transform:scale(1.6)}}
+.wheel-svg .center-date{font-size:38px}
+.wheel-svg .center-num{font-size:30px}
+.wheel-svg .center-match-date{font-size:30px;font-weight:700;letter-spacing:-.04em;text-anchor:middle;fill:#f2e3d3}
+.wheel-svg .center-match-num{font-size:24px;font-weight:650;text-anchor:middle;fill:var(--orange)}
+.wheel-svg .center-sub{font-size:13px;fill:#9db7bc}
+.wheel-svg .orbit{font-size:14px;letter-spacing:.08em;fill:#b5cea8;font-weight:500}
+.center-hanger{fill:none;stroke:#b5cea8;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.outfit-preview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;overflow:visible;-webkit-line-clamp:unset}
+.outfit-quick-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:52px;color:#b8cfb0;font-size:10px;line-height:1.4;text-align:center}
+.outfit-quick-item>svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.outfit-quick-item>span:last-child{white-space:nowrap}
+@media(max-width:380px){.wheel-legend{gap:5px}.wardrobe-toggle-body{padding:6px 9px}}
 </style>
 </head>
 <body>
+<svg class="icon-sprite" aria-hidden="true" width="0" height="0"><defs><symbol id="clothes-top" viewBox="0 0 24 24"><path d="m8 4-5 3 3 5 2-1v9h8v-9l2 1 3-5-5-3c-1 3-7 3-8 0Z"/></symbol><symbol id="clothes-outer" viewBox="0 0 24 24"><path d="m9 3-5 4-1 12 5 1 1-9v10h6V11l1 9 5-1-1-12-5-4-3 4-3-4Z"/><path d="M12 7v14M9 3l3 8 3-8"/></symbol><symbol id="clothes-bottom" viewBox="0 0 24 24"><path d="M6 3h12l1 18h-6l-1-11-1 11H5L6 3Z"/><path d="M6 7h12M12 3v4"/></symbol><symbol id="clothes-shoes" viewBox="0 0 24 24"><path d="M4 7h5l2 6 4 2 5 1 1 4H3V9l1-2Z"/><path d="M3 17h17M10 12l3-2M12 14l3-2"/></symbol><symbol id="clothes-hanger" viewBox="0 0 24 24"><path d="M10 6a2 2 0 1 1 3 1.7L12 9v2L3 17a1 1 0 0 0 .6 1.8h16.8A1 1 0 0 0 21 17l-9-6"/></symbol></defs></svg>
 <div class="shell">
-<header class="topbar"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-word">季节回声<small>CLIMATE CALENDAR</small></span></a><span class="source-pill">365 DAYS · 9 CITIES</span></header>
+<header class="topbar"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span class="brand-word">季节回声<small>CLIMATE CALENDAR</small></span></a><button class="wardrobe-toggle" id="wardrobe-toggle" type="button" aria-pressed="true" aria-label="换季参考" title="根据历史日均温显示换季参考"><span class="wardrobe-toggle-body"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#clothes-hanger"/></svg><span>换季</span></span></button></header>
 <main id="top">
 <section class="intro"><div><div class="eyebrow">SEASONAL ECHO / 气候年轮</div><h1>转动年轮，<em>遇见另一季节。</em></h1></div></section>
 <section class="primary-experience" aria-labelledby="wheel-title">
@@ -318,7 +346,7 @@ select{-webkit-appearance:none;line-height:1.25}
 <div class="toolbar-date"><label class="fieldlabel" for="date">日期</label><div class="date-row"><button class="iconbtn" id="prev-day" type="button" aria-label="前一天"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><input id="date" type="date" value="2025-11-15" min="2025-01-01" max="2025-12-31"/><button class="iconbtn" id="next-day" type="button" aria-label="后一天"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></div></div>
 </div>
 <div class="wheel-showcase">
-<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> 365 DAYS · 12 MONTHS</span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><div class="dial-surface"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="slider" tabindex="0" aria-valuemin="1" aria-valuemax="365" aria-valuenow="1" aria-orientation="horizontal" aria-label="全年气候轮盘：沿外圈拨动，或用方向键选择日期"></svg><span class="dial-scroll-zone" aria-hidden="true"></span><span class="dial-ripple" aria-hidden="true"></span></div></div><div class="wheel-legend"><span>冷</span><span class="gradient"></span><span>热</span><span class="legend-separator"></span><span><span class="legend-dot"></span>起点</span><span><span class="legend-dot orange"></span>相似日</span><span id="ring-key">单城年轮</span></div></div>
+<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> 365 DAYS · 12 MONTHS</span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><div class="dial-surface"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="slider" tabindex="0" aria-valuemin="1" aria-valuemax="365" aria-valuenow="1" aria-orientation="horizontal" aria-label="全年气候轮盘：沿外圈拨动，或用方向键选择日期"></svg><span class="dial-scroll-zone" aria-hidden="true"></span><span class="dial-ripple" aria-hidden="true"></span></div></div><div class="wheel-legend"><span>冷</span><span class="gradient"></span><span>热</span><span class="legend-separator"></span><span><span class="legend-dot"></span>起点</span><span><span class="legend-dot orange"></span>相似日</span><span class="wardrobe-legend" id="wardrobe-legend" title="历史气候换季参考"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="m7 1 4 6-4 6-4-6Z"/></svg><span>换季</span></span></div></div>
 <div class="wheel-sidebar">
 <div class="sidebar-heading"><span>SELECTED DATE</span><strong>当前日期</strong></div>
 <div class="sidebar-date"><span id="sidebar-date">11月15日</span><strong id="sidebar-temp"><span id="sidebar-temp-value">12.5</span><small>°C</small></strong></div><p class="sidebar-lead" id="sidebar-lead">成都 · 秋季 · 日均温</p>
@@ -332,17 +360,17 @@ select{-webkit-appearance:none;line-height:1.25}
 <details class="outfit-card" id="outfit-card" aria-labelledby="outfit-title" open>
 <summary class="outfit-summary">
 <div class="outfit-head"><div><span class="section-kicker">WHAT TO WEAR</span><h2 id="outfit-title">服装推荐</h2></div></div><p class="sr-only" id="outfit-context">所选日期的穿搭建议</p>
-<p class="outfit-preview" id="outfit-preview">穿搭建议</p><p class="outfit-brief" id="outfit-brief">按体感灵活增减衣层。</p>
+<div class="outfit-preview" id="outfit-preview"><span class="outfit-quick-item" id="quick-item-top"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#clothes-top"/></svg><span class="sr-only">上装：</span><span id="outfit-quick-top">—</span></span><span class="outfit-quick-item" id="quick-item-outer"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#clothes-outer"/></svg><span class="sr-only">外搭：</span><span id="outfit-quick-outer">—</span></span><span class="outfit-quick-item" id="quick-item-bottom"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#clothes-bottom"/></svg><span class="sr-only">下装：</span><span id="outfit-quick-bottom">—</span></span><span class="outfit-quick-item" id="quick-item-shoes"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#clothes-shoes"/></svg><span class="sr-only">鞋履：</span><span id="outfit-quick-shoes">—</span></span></div><p class="outfit-brief" id="outfit-brief">按体感灵活增减衣层。</p>
 <span class="outfit-toggle"><span class="outfit-open-label">展开详情</span><span class="outfit-close-label">收起详情</span><span class="outfit-preview-note">气候参考</span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></span>
 </summary>
 <div class="outfit-details">
-<dl class="outfit-grid"><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4-5 3 3 5 2-1v9h8v-9l2 1 3-5-5-3c-1 3-7 3-8 0Z"/></svg><dt>上装</dt><dd id="outfit-top">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 3-5 4-1 12 5 1 1-9v10h6V11l1 9 5-1-1-12-5-4-3 4-3-4Z"/><path d="M12 7v14M9 3l3 8 3-8"/></svg><dt>外搭</dt><dd id="outfit-outer">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12l1 18h-6l-1-11-1 11H5L6 3Z"/><path d="M6 7h12M12 3v4"/></svg><dt>下装</dt><dd id="outfit-bottom">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h5l2 6 4 2 5 1 1 4H3V9l1-2Z"/><path d="M3 17h17M10 12l3-2M12 14l3-2"/></svg><dt>鞋履</dt><dd id="outfit-shoes">—</dd></div></dl>
+<dl class="outfit-grid"><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#clothes-top"/></svg><dt>上装</dt><dd id="outfit-top">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#clothes-outer"/></svg><dt>外搭</dt><dd id="outfit-outer">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#clothes-bottom"/></svg><dt>下装</dt><dd id="outfit-bottom">—</dd></div><div class="outfit-piece"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#clothes-shoes"/></svg><dt>鞋履</dt><dd id="outfit-shoes">—</dd></div></dl>
 <div class="outfit-notes"><p id="outfit-layer-note">按体感灵活增减衣层。</p><p id="outfit-extra-note">外出前留意实时天气。</p></div>
 <p class="outfit-footnote">按历史气候均值提供日常穿搭参考，出门前请结合实时天气与个人体感调整。</p>
 </div>
 </details>
 
-<details class="mapping-panel" id="mapping-details"><summary class="mapping-summary"><span class="summary-icon">⇄</span><span class="summary-text"><small>MORE OPTIONS</small><strong>更多日期比较</strong></span><span class="summary-chevron">⌄</span></summary>
+<details class="mapping-panel" id="mapping-details"><summary class="mapping-summary"><span class="summary-icon">⇄</span><span class="summary-text"><small>ADVANCED</small><strong>高级功能</strong></span><span class="summary-chevron">⌄</span></summary>
 <div class="mapping-content"><nav class="mode-switch" aria-label="探索模式"><button id="mode-same" type="button" class="mode-option active" aria-pressed="true"><span class="mode-icon" aria-hidden="true">◎</span><span><b>同城 · 季节映射</b><small>在春秋之间寻找相近的气候</small></span></button><button id="mode-cross" type="button" class="mode-option" aria-pressed="false"><span class="mode-icon" aria-hidden="true">⇄</span><span><b>跨城市 · 日期映射</b><small>同样的温度，发生在哪一天？</small></span></button></nav>
 <div class="mapping-settings"><div class="target-field field" id="target-field" hidden><label class="fieldlabel" for="target-city">目标城市</label><div class="select-wrap city-select"><select id="target-city"><option value="tokyo" selected>东京 Tokyo</option><option value="beijing">北京 Beijing</option><option value="hefei">合肥 Hefei</option><option value="chengdu">成都 Chengdu</option><option value="xian">西安 Xi'an</option><option value="guangzhou">广州 Guangzhou</option><option value="wuhan">武汉 Wuhan</option><option value="hami">哈密 Hami</option><option value="kunming">昆明 Kunming</option></select><span class="city-display" aria-hidden="true"><span class="city-name" id="target-city-name">东京</span><span class="city-en" id="target-city-en">Tokyo</span><svg class="city-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 8 4 4 4-4"/></svg></span></div><span class="city-info target-info" id="target-detail">日本 · 东京</span></div><button type="button" id="swap-cities" class="swap-button target-field" hidden>⇄ 交换起点和目标城市</button><div class="control-block"><span class="fieldlabel">日期匹配依据</span><div class="seg two" role="group" aria-label="匹配方式"><button type="button" data-algorithm="temp" class="active" aria-pressed="true">温度优先</button><button type="button" data-algorithm="climate" aria-pressed="false">综合气候</button></div></div></div>
 <div class="results"><section class="panel result-card"><div class="result-top"><span>01 / 起点日期</span><span>ORIGINAL</span></div><div class="overline" id="selected-subtitle">东京 · 秋季</div><div class="big-date" id="selected-date">11月15日</div><div class="big-temp" id="selected-temp">≈ 12.5 °C</div></section><section class="panel result-card match-card"><div class="result-top"><span>02 / 最佳对应</span><span>CLIMATE MATCH</span></div><div class="overline" id="matched-subtitle">东京 · 春季</div><div class="big-date" id="matched-date">4月5日</div><div class="big-temp" id="matched-temp">≈ 12.5 °C</div><div class="diff" id="match-diff">气温差约 <b>0.0°C</b></div></section><section class="panel details-card"><div class="details-head"><b>气候差异一览</b><small id="metric-note">起点 vs 匹配日</small></div><div class="metric-grid" id="metric-grid"></div><p class="detail-caption" id="detail-caption" hidden></p></section></div>
@@ -385,7 +413,7 @@ const wheel=$('wheel');const svgNS='http://www.w3.org/2000/svg';
 const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
 const now=new Date();const todayMonth=now.getMonth();const todayDay=Math.min(now.getDate(),daysInMonth[todayMonth]);const todayIndex=starts[todayMonth]+todayDay-1;
 const calendarYear=now.getFullYear();
-const state={mode:'same',source:'chengdu',target:'tokyo',metric:'mean',algorithm:'temp',day:todayIndex,hover:null,drag:false};
+const state={mode:'same',source:'chengdu',target:'tokyo',metric:'mean',algorithm:'temp',day:todayIndex,hover:null,drag:false,wardrobe:true};
 const seriesCache={};
 function idxToDate(d){let m=0;while(m<11 && starts[m+1]<=d)m++;return{month:m+1,day:d-starts[m]+1,monthIndex:m}}
 function dateStr(d){const x=idxToDate(d);return x.month+'月'+x.day+'日'}
@@ -428,20 +456,37 @@ for(let i=0;i<365;i++){
 return dates[d]=best?best.index:(d+182)%365}
 // Simple, local wardrobe rules: no network requests or per-frame recommendation engine.
 const OUTFIT_PRESETS=[
- {max:-5,id:'freezing',label:'严寒保暖',items:['保暖打底＋羊毛衫','加厚羽绒服','保暖打底＋厚长裤','保暖靴']},
- {max:5,id:'cold',label:'保暖叠穿',items:['保暖内衣＋针织衫','羽绒服或厚大衣','厚长裤','保暖包脚鞋']},
- {max:12,id:'chilly',label:'偏冷加衣',items:['针织衫或厚卫衣','毛呢外套或轻羽绒','长裤','运动鞋或短靴']},
- {max:18,id:'cool',label:'微凉叠穿',items:['长袖T恤或薄针织','夹克或风衣','长裤','运动鞋或休闲鞋']},
- {max:24,id:'mild',label:'温和轻装',items:['薄衬衫或长袖T恤','薄开衫或衬衫外搭','轻薄长裤','透气休闲鞋']},
- {max:28,id:'warm',label:'轻薄透气',items:['短袖T恤或薄衬衫','轻薄外搭（备用）','薄长裤或长裙','透气运动鞋']},
- {max:Infinity,id:'hot',label:'清凉防晒',items:['轻薄透气短袖','户外可备防晒衫','短裤或轻薄长裙','透气凉鞋或运动鞋']}
+ {max:-5,id:'freezing',quick:['保暖内搭','厚羽绒','保暖裤','保暖靴'],label:'严寒保暖',items:['保暖打底＋羊毛衫','加厚羽绒服','保暖打底＋厚长裤','保暖靴']},
+ {max:5,id:'cold',quick:['针织叠穿','羽绒外套','厚长裤','保暖鞋'],label:'保暖叠穿',items:['保暖内衣＋针织衫','羽绒服或厚大衣','厚长裤','保暖包脚鞋']},
+ {max:12,id:'chilly',quick:['针织卫衣','保暖外套','长裤','运动鞋'],label:'偏冷加衣',items:['针织衫或厚卫衣','毛呢外套或轻羽绒','长裤','运动鞋或短靴']},
+ {max:18,id:'cool',quick:['长袖','轻外套','长裤','休闲鞋'],label:'微凉叠穿',items:['长袖T恤或薄针织','夹克或风衣','长裤','运动鞋或休闲鞋']},
+ {max:24,id:'mild',quick:['薄长袖','薄开衫','薄长裤','休闲鞋'],label:'温和轻装',items:['薄衬衫或长袖T恤','薄开衫或衬衫外搭','轻薄长裤','透气休闲鞋']},
+ {max:28,id:'warm',quick:['短袖','备用外搭','轻薄下装','透气鞋'],label:'轻薄透气',items:['短袖T恤或薄衬衫','轻薄外搭（备用）','薄长裤或长裙','透气运动鞋']},
+ {max:Infinity,id:'hot',quick:['透气短袖','防晒衫','轻薄下装','凉鞋'],label:'清凉防晒',items:['轻薄透气短袖','户外可备防晒衫','短裤或轻薄长裙','透气凉鞋或运动鞋']}
 ];
 function clothingAdvice({mean,low,high,humidity,rain}){
- const preset=OUTFIT_PRESETS.find(p=>mean<p.max),items=[...preset.items],spread=high-low;
- if(mean>=12&&low<8)items[1]='夹克或薄棉外套';else if(mean>=18&&low<14)items[1]='薄夹克或针织开衫';
+ const preset=OUTFIT_PRESETS.find(p=>mean<p.max),items=[...preset.items],quick=[...preset.quick],spread=high-low;
+ if(mean>=12&&low<8){items[1]='夹克或薄棉外套';quick[1]='保暖外套'}else if(mean>=18&&low<14){items[1]='薄夹克或针织开衫';quick[1]='薄外套'}
  const layer=low<5?'参考低温约'+low.toFixed(0)+'°C，外出留意头颈和手部保暖。':spread>=10?'昼夜温差约'+spread.toFixed(0)+'°C，建议分层穿，早晚加一件。':high>=30?'白天参考高温约'+high.toFixed(0)+'°C，宜选透气衣物。':'可根据活动量增减外搭，室内外灵活切换。';
  const extra=rain>=100?'该月降水参考偏多，可备雨具和易干鞋袜。':humidity>=75&&mean<18?'该月湿度较高，内层可选排汗材质并留意保暖。':high>=30?'户外可备遮阳帽，选择宽松、透气的衣物。':mean<5?'进出室内时可逐层增减，避免出汗后受凉。':'久坐或空调环境，可多备一件轻便外搭。';
- return{id:preset.id,label:preset.label,items,layer,extra};
+ return{id:preset.id,label:preset.label,items,quick,layer,extra};
+}
+// One cached scan per city; hints follow historical mean temperature, independent of display metric.
+const wardrobeCache=new Map();
+function wardrobeDates(city){
+ if(wardrobeCache.has(city))return wardrobeCache.get(city);
+ const temperatures=series(city,'mean'),at=day=>temperatures[(day+365)%365],markers=[];
+ for(const boundary of [{temp:12,up:'换春秋装',down:'添保暖层'},{temp:24,up:'换轻薄装',down:'添长袖层'}])for(const direction of [1,-1]){
+  const next=temp=>direction===1?temp>=boundary.temp:temp<boundary.temp;let best=null;
+  for(let day=0;day<365;day++){
+   if(!next(at(day))||next(at(day-1)))continue;
+   let stable=true;for(let offset=-7;offset<7;offset++)if(next(at(day+offset))!==(offset>=0)){stable=false;break}
+   if(!stable)continue;const strength=Math.abs(at(day+6)-at(day-7));
+   if(!best||strength>best.strength)best={day,threshold:boundary.temp,direction,label:direction===1?boundary.up:boundary.down,strength};
+  }
+  if(best)markers.push(best);
+ }
+ markers.sort((a,b)=>a.day-b.day);wardrobeCache.set(city,markers);return markers;
 }
 let outfitKey='';
 function renderClothing(day){
@@ -449,9 +494,8 @@ function renderClothing(day){
  const city=state.source,month=idxToDate(day).monthIndex,climate={mean:value(city,'mean',day),low:value(city,'low',day),high:value(city,'high',day),humidity:CITIES[city].humidity[month],rain:CITIES[city].rain[month]};
  const advice=clothingAdvice(climate);
  setText($('outfit-context'),CITIES[city].name+' · '+dateStr(day));
- setText($('outfit-preview'),advice.items[0]+' · '+advice.items[1]);
  $('outfit-card').dataset.tier=advice.id;setText($('outfit-brief'),advice.layer);
- ['top','outer','bottom','shoes'].forEach((key,i)=>setText($('outfit-'+key),advice.items[i]));
+ ['top','outer','bottom','shoes'].forEach((key,i)=>{setText($('outfit-'+key),advice.items[i]);setText($('outfit-quick-'+key),advice.quick[i]);$('quick-item-'+key).setAttribute('title',advice.items[i])});
  setText($('outfit-layer-note'),advice.layer);setText($('outfit-extra-note'),advice.extra);
 }
 function svgEl(tag,attrs={},parent=wheel){const e=document.createElementNS(svgNS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);parent.appendChild(e);return e}
@@ -508,6 +552,14 @@ function buildWheel(){
   const pos=polar(angleDay(starts[n]+daysInMonth[n]/2),328),label=svgEl('text',{x:pos.x,y:pos.y,class:'monthlabel'},base);
   label.textContent=String(n+1).padStart(2,'0');months.push(label);
  }
+ const wardrobe=svgEl('g',{class:'wardrobe-marks','aria-hidden':'true'},base);
+ const arcStart=polar(-6/365*360,292),arcEnd=polar(6/365*360,292);
+ const wardrobeMarks=Array.from({length:4},()=>{const group=svgEl('g',{class:'wardrobe-mark'},wardrobe);
+  svgEl('path',{d:`M ${arcStart.x} ${arcStart.y} A 292 292 0 0 1 ${arcEnd.x} ${arcEnd.y}`,class:'wardrobe-arc'},group);
+  svgEl('circle',{cx:360,cy:68,r:6,class:'season-ping'},group);
+  svgEl('path',{d:'M 360 61 L 365 68 L 360 75 L 355 68 Z',class:'wardrobe-diamond'},group);
+  const title=svgEl('title',{},group);return{group,title};
+ });
  const overlay=svgEl('g',{'pointer-events':'none'});
  const connection=svgEl('path',{fill:'none',stroke:'#d3e9bd','stroke-width':2.2,'stroke-dasharray':'4 8',opacity:.7,class:'connection-path'},overlay);
  const marker=color=>{const group=svgEl('g',{class:'dial-marker'},overlay);
@@ -518,12 +570,29 @@ function buildWheel(){
  svgEl('circle',{cx:360,cy:360,r:177,fill:'url(#dial-center)',stroke:'#72949b','stroke-width':1.5},overlay);
  svgEl('circle',{cx:360,cy:360,r:165,fill:'none',stroke:'#3c5a61','stroke-width':1,'stroke-dasharray':'2 10'},overlay);
  const label=(y,cls)=>svgEl('text',{x:360,y,class:cls},overlay);
- const labels={orbit:label(277,'orbit'),date:label(345,'center-date'),temp:label(381,'center-num')};
- svgEl('line',{x1:312,y1:403,x2:408,y2:403,stroke:'#526a71','stroke-width':1},overlay);
- labels.sub=label(433,'center-sub');labels.matchDate=label(479,'center-date');labels.matchTemp=label(511,'center-num orange');
+ const labels={orbit:label(237,'orbit'),date:label(300,'center-date'),temp:label(352,'center-num')};
+ labels.hanger=svgEl('use',{href:'#clothes-hanger',x:314,y:220,width:20,height:20,class:'center-hanger'},overlay);
+ svgEl('line',{x1:320,y1:382,x2:400,y2:382,stroke:'#526a71','stroke-width':1},overlay);
+ labels.sub=label(411,'center-sub');labels.matchDate=label(460,'center-match-date');labels.matchTemp=label(503,'center-match-num');
  // SVG touch-action is applied on its root box; the HTML center sibling permits scrolling.
  svgEl('circle',{cx:360,cy:360,r:282.5,fill:'none',stroke:'transparent','stroke-width':129,class:'dial-hit-area','aria-hidden':'true'});
- wheelParts={bed,inner,source,target,targetBars,boundaries,months,connection,sourceMarker,targetMarker,labels,cross:false};
+ wheelParts={bed,inner,source,target,targetBars,boundaries,months,connection,sourceMarker,targetMarker,labels,wardrobe,wardrobeMarks,wardrobeKey:'',centerMode:null,cross:false};
+ syncWardrobeVisibility();
+}
+function syncWardrobeVisibility(){wheelParts?.wardrobe.classList.toggle('is-visible',wheelVisible&&!document.hidden)}
+function drawWardrobeHints(parts,day){
+ const dates=wardrobeDates(state.source),key=state.source+'|'+state.wardrobe;
+ if(parts.wardrobeKey!==key){parts.wardrobeKey=key;parts.wardrobe.style.display=state.wardrobe?'':'none';
+  $('wardrobe-legend').hidden=!state.wardrobe||!dates.length;$('wardrobe-toggle').setAttribute('aria-pressed',String(state.wardrobe));
+  if(state.wardrobe)wheel.setAttribute('aria-description',CITIES[state.source].name+'的换季参考：'+dates.map(mark=>dateStr(mark.day)+'前后'+mark.label).join('，')+'。基于历史气候。');else wheel.removeAttribute('aria-description');
+  parts.wardrobeMarks.forEach((part,i)=>{const mark=dates[i];part.group.style.display=mark?'':'none';if(!mark)return;
+   part.group.setAttribute('transform',`rotate(${angleDay(mark.day)} 360 360)`);part.group.dataset.day=mark.day;part.group.dataset.threshold=mark.threshold;
+   setText(part.title,dateStr(mark.day)+'前后 · '+mark.label+' · 历史气候参考');
+  });
+ }
+ let nearby=null;
+ parts.wardrobeMarks.forEach((part,i)=>{const mark=dates[i],near=!!(state.wardrobe&&mark&&circularDist(day,mark.day)<=7);part.group.classList.toggle('is-near',near);if(near)nearby=mark});
+ return nearby;
 }
 function drawWheel(){
  if(!wheelParts)buildWheel();
@@ -544,12 +613,13 @@ function drawWheel(){
   }
  }
  const labels=parts.labels,dst=cross?state.target:state.source;
- setText(labels.orbit,cross?CITIES[state.source].name+'  →  '+CITIES[state.target].name:'S E A S O N A L  E C H O');
+ const nearby=drawWardrobeHints(parts,d),mean=value(state.source,'mean',d);
+ if(parts.centerMode!==cross){parts.centerMode=cross;labels.hanger.style.display=cross?'none':'';labels.orbit.setAttribute('x',cross?'360':'374')}
+ setText(labels.orbit,cross?CITIES[state.source].name+'  →  '+CITIES[state.target].name:nearby?nearby.label:OUTFIT_PRESETS.find(p=>mean<p.max).label);
  setText(labels.date,dateStr(d));setText(labels.temp,'≈ '+value(state.source,state.metric,d).toFixed(1)+' °C');
- setText(labels.sub,cross?'目标城市 · 最相近日期':'另一季节 · 最相近日期');
- setText(labels.matchDate,dateStr(m));setText(labels.matchTemp,(cross?CITIES[dst].name+' · ':'')+'≈ '+value(dst,state.metric,m).toFixed(1)+' °C');
+ setText(labels.sub,cross?'相似日':'同温日');
+ setText(labels.matchDate,dateStr(m));setText(labels.matchTemp,'≈ '+value(dst,state.metric,m).toFixed(1)+' °C');
  parts.months.forEach((el,n)=>el.classList.toggle('selectedMonth',n===idxToDate(d).monthIndex));
- setText($('ring-key'),cross?'双城对照':'春秋同温');
  for(const [axis,day] of [[dialMotion.source,d],[dialMotion.match,m]]){
   axis.target=dialMotion.ready?nearestDay(day,axis.position):day;
   if(!dialMotion.ready){axis.position=axis.target;axis.velocity=0}
@@ -661,6 +731,7 @@ function dateKeys(e){let day=null;
 }
 spectrumInput.addEventListener('keydown',dateKeys);wheel.addEventListener('keydown',dateKeys);
 function configure(change){cancelDial();change();requestRender()}
+$('wardrobe-toggle').addEventListener('click',()=>{state.wardrobe=!state.wardrobe;setText($('sr-status'),state.wardrobe?'已显示换季参考':'已隐藏换季参考');requestRender(false)});
 $('mode-same').addEventListener('click',()=>configure(()=>{state.mode='same'}));
 $('mode-cross').addEventListener('click',()=>configure(()=>{state.mode='cross';if(state.target===state.source)state.target=Object.keys(CITIES).find(k=>k!==state.source)}));
 $('city').addEventListener('change',e=>configure(()=>{const old=state.source;state.source=e.target.value;if(state.mode==='cross'&&state.source===state.target)state.target=old}));
@@ -677,7 +748,7 @@ let todayTimer=0;
 $('return-today').addEventListener('click',()=>{cancelDial();const now=new Date();changeDay(starts[now.getMonth()]+Math.min(now.getDate(),daysInMonth[now.getMonth()])-1);
  const b=$('return-today');b.classList.add('today-bounce');clearTimeout(todayTimer);todayTimer=setTimeout(()=>b.classList.remove('today-bounce'),550)});
 const dialPanel=$('wheel-panel'),dialSurface=wheel.parentElement,dialWrap=dialSurface.parentElement;
-let dialRect=null,pendingHighlight=null,activePointerId=null,confirmTimer=0;
+let dialRect=null,pendingHighlight=null,activePointerId=null,dialPressPoint=null,confirmTimer=0;
 function invalidateDialRect(){dialRect=null}
 window.addEventListener('resize',invalidateDialRect,{passive:true});window.addEventListener('scroll',invalidateDialRect,{passive:true,capture:true});
 if('ResizeObserver' in window)new ResizeObserver(invalidateDialRect).observe(dialWrap);
@@ -694,19 +765,22 @@ function pointHighlight(e){const {rect,x,y}=pointerPosition(e);pendingHighlight=
 }
 function setPreview(d){if(d===state.day&&!state.drag)d=null;dialPanel.classList.toggle('dial-hover',d!==null);if(d===state.hover)return;state.hover=d;requestRender(false)}
 function releaseDial(){dialPanel.classList.remove('dial-active');for(const axis of faceAxes)axis.target=0;wakeMotion()}
-function cancelDial(){cancelSpectrum();const id=activePointerId;state.drag=false;activePointerId=null;releaseDial();setPreview(null);
+function cancelDial(){cancelSpectrum();const id=activePointerId;state.drag=false;activePointerId=null;dialPressPoint=null;releaseDial();setPreview(null);
  if(id!==null&&wheel.hasPointerCapture?.(id))wheel.releasePointerCapture(id);
 }
 wheel.addEventListener('pointerdown',e=>{if(state.drag||e.button!==0||e.isPrimary===false)return;invalidateDialRect();const d=dayFromPointer(e);if(d===null)return;
- state.drag=true;activePointerId=e.pointerId;pointHighlight(e);dialPanel.classList.remove('dial-confirmed');dialPanel.classList.add('dial-active');
+ state.drag=true;activePointerId=e.pointerId;dialPressPoint={x:e.clientX,y:e.clientY};pointHighlight(e);dialPanel.classList.remove('dial-confirmed');dialPanel.classList.add('dial-active');
  wheel.setPointerCapture?.(e.pointerId);state.hover=d;requestRender(false);e.preventDefault();
 });
 wheel.addEventListener('pointermove',e=>{
- if(state.drag){if(e.pointerId!==activePointerId)return;pointHighlight(e);const d=dayFromPointer(e,true);if(d!==null)setPreview(d);return}
+ if(state.drag){if(e.pointerId!==activePointerId)return;if(dialPressPoint&&!dialPressPoint.moved&&Math.hypot(e.clientX-dialPressPoint.x,e.clientY-dialPressPoint.y)>8)dialPressPoint.moved=true;pointHighlight(e);const d=dayFromPointer(e,true);if(d!==null)setPreview(d);return}
  if(e.pointerType==='mouse'||e.pointerType==='pen'){pointHighlight(e);setPreview(dayFromPointer(e))}
 });
 wheel.addEventListener('pointerup',e=>{if(!state.drag||e.pointerId!==activePointerId)return;
- const d=dayFromPointer(e,true)??state.hover;state.drag=false;activePointerId=null;releaseDial();pointHighlight(e);
+ let d=dayFromPointer(e,true)??state.hover;
+ const tapped=dialPressPoint&&!dialPressPoint.moved&&Math.hypot(e.clientX-dialPressPoint.x,e.clientY-dialPressPoint.y)<=8;dialPressPoint=null;
+ if(state.wardrobe&&tapped&&d!==null){const {x,y}=pointerPosition(e),radius=Math.hypot(x,y);if(radius>=284&&radius<=306){const marker=wardrobeDates(state.source).find(mark=>circularDist(d,mark.day)<=5);if(marker)d=marker.day}}
+ state.drag=false;activePointerId=null;releaseDial();pointHighlight(e);
  if(wheel.hasPointerCapture?.(e.pointerId))wheel.releasePointerCapture(e.pointerId);
  dialPanel.classList.remove('dial-hover');if(d!==null)changeDay(d);
  dialPanel.classList.add('dial-confirmed');clearTimeout(confirmTimer);confirmTimer=setTimeout(()=>dialPanel.classList.remove('dial-confirmed'),500);
@@ -719,8 +793,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){cancelDial();return
  if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();changeDay(state.day+(e.key==='ArrowRight'?1:-1))}
 });
 function settleMotion(){for(const axis of [dialMotion.source,dialMotion.match,...faceAxes]){axis.position=axis.target;axis.velocity=0}paintDial();dialPanel.classList.remove('is-moving','is-tilting');lastFrame=0}
-document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelDial();cancelAnimationFrame(frameId);frameId=0;settleMotion()}else wakeMotion()});
-if('IntersectionObserver' in window)new IntersectionObserver(([entry])=>{wheelVisible=entry.isIntersecting;if(!wheelVisible)settleMotion()}).observe(wheel);
+document.addEventListener('visibilitychange',()=>{syncWardrobeVisibility();if(document.hidden){cancelDial();cancelAnimationFrame(frameId);frameId=0;settleMotion()}else wakeMotion()});
+if('IntersectionObserver' in window)new IntersectionObserver(([entry])=>{wheelVisible=entry.isIntersecting;syncWardrobeVisibility();if(!wheelVisible)settleMotion()}).observe(wheel);
 const motionChanged=()=>{if(motionPreference.matches){for(const axis of faceAxes)axis.target=0;settleMotion()}};
 if(motionPreference.addEventListener)motionPreference.addEventListener('change',motionChanged);else motionPreference.addListener(motionChanged);
 $('copy-result').addEventListener('click',async()=>{

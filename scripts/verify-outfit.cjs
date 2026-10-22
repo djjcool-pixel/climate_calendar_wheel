@@ -13,6 +13,8 @@ for (const [city, data] of Object.entries(CITIES)) {
     assert.ok(Object.values(climate).every(Number.isFinite), `${city}/${day} needs finite climate inputs`);
     const advice = clothingAdvice(climate);
     assert.equal(advice.items.length, 4);
+    assert.equal(advice.quick.length, 4);
+    assert.ok(advice.quick.every(text => text.length > 0 && text.length <= 4), 'icon captions must remain short and meaningful');
     assert.ok([advice.label, ...advice.items, advice.layer, advice.extra].every(text => typeof text === 'string' && text.length > 0 && !/NaN|undefined/.test(text)));
     if (climate.rain >= 100) assert.match(advice.extra, /该月降水/, 'monthly rain must not be presented as a daily forecast');
     if (climate.low < 5) assert.match(advice.layer, /保暖/);

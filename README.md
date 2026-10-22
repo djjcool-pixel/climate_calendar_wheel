@@ -8,13 +8,13 @@
 
 ## 功能
 
-- **气温年轮（主视图）**：展示全年逐日气温的冷暖分布。点击或拖动外圈、操作日期选择器或滑块，即可探索任意一天。
+- **气温年轮（主视图）**：展示全年逐日气温的冷暖分布。默认打开当天；鼠标悬停外圈实时预览，点击确认日期。手机可沿外圈触摸拨动，松手确认。
 - **全年温度光谱**：紧随轮盘下方的连续色带，支持点击选取日期。
 - **日期映射（默认折叠）**：同城寻找升温季与降温季气温近似的日期，或将源城市某天映射到另一城市的近似气候日期。
 - **气候比较**：支持平均气温、平均最高 / 最低气温以及温度优先 / 综合气候两种匹配方式，并展示湿度与降水的参考对照。
 - **响应式设计与动效**：手机端优化，轮盘和信息卡自适应；提供入场、切换和连线动态效果，兼容系统减少动态效果设置。
 
-城市：东京、北京、合肥、成都、西安、广州。
+城市：东京、北京、合肥、成都、西安、广州、武汉。
 
 ## 数据说明
 
@@ -24,6 +24,12 @@
 - [Japan Meteorological Agency — Climate Normals](https://www.data.jma.go.jp/stats/en/normal/normal.html)
 - [JMA ClimatView](https://ds.data.jma.go.jp/tcc/tcc/products/climate/climatview/frame.php)
 - [Climate Zone](https://www.climate-zone.com/)
+
+## 部署
+
+Vercel 项目：`climate-calendar-wheel`，关联 GitHub `main` 分支，自动部署。
+
+生产域名：`weather.lucidcairn.com`。域名由 DNSPod 提供解析，如未指向 Vercel，请添加 `weather` 的 CNAME 记录；准确记录值以 Vercel Domains 配置面板为准。
 
 ## 开发
 

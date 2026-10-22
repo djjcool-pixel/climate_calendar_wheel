@@ -39,3 +39,25 @@ Vercel 项目：`climate-calendar-wheel`，关联 GitHub `main` 分支，自动�
 python3 -m http.server 8000
 # 浏览器打开 http://localhost:8000
 ```
+
+### 动效与性能
+
+默认城市为**成都**，跨城比较默认目标为东京。
+
+- 指针与连线共用一个按需运行的 `requestAnimationFrame` 循环；使用可中途接续的阻尼运动，跨年按最短圆弧移动。日期、滑块和按钮始终以最终选定值为准。
+- SVG 温度刻度、指针、连线及文本节点复用；目标城市内圈首次使用时才创建。指针输入每帧合并，匹配结果按配置与日期缓存，缓存最多保留 16 组。
+- 温度光谱使用 CSS 渐变；折叠的比较面板延后更新。静止后停止动画循环，切换到后台、轮盘离屏或系统开启“减少动态效果”时直接归位。
+- 主要控件统一 44px 高，使用 SVG 导航图标；分段按钮的选中底色平滑滑动。触屏上沿外圈拨动，中心区域可正常滚动页面。
+
+### 浏览器回归检查
+
+网站运行仍不需要安装依赖。下面的 Playwright 仅用于开发验证：
+
+```bash
+npm install --no-save --package-lock=false playwright@1.62.1
+npx playwright install chromium firefox webkit
+node scripts/verify-motion.cjs
+BROWSERS=chromium,firefox,webkit node scripts/verify-motion.cjs
+```
+
+Linux 如缺少浏览器系统库，可按 Playwright 提示安装所需开发环境依赖。检查覆盖 320–1440px 布局、跨年短弧、快速连续点击、节点复用、拖动确认与取消、键盘、跨城交换、减少动态效果与静止停帧；Chromium 另用原生触屏事件验证外圈拨动与中心滚动。内嵌浏览器仍建议在目标 App 的真机上复核。

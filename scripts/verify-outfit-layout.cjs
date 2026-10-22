@@ -30,6 +30,7 @@ async function verify(name) {
       assert.equal(await page.locator('.outfit-piece:visible').count(), 4);
       assert.equal(await page.locator('#outfit-preview').isVisible(), false);
       await summary.focus(); await page.keyboard.press('Enter');
+      await page.waitForFunction(() => !document.querySelector('#outfit-card').classList.contains('is-drawer-animating'));
       assert.equal(await card.evaluate(el => el.open), false, 'native keyboard activation must close details');
     }
     const year = (await page.locator('#date').inputValue()).slice(0,4);

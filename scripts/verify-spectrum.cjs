@@ -13,6 +13,8 @@ async function settle(page) {
 }
 async function point(page, fraction) {
   const el = page.locator('#spectrum-slider'); await el.scrollIntoViewIfNeeded();
+  // Coordinate-driven gestures need a settled viewport after the mode-change scroll.
+  await el.evaluate(el => el.scrollIntoView({behavior:'instant',block:'center'}));
   const r = await el.boundingBox(); return {x:r.x+11+(r.width-22)*fraction,y:r.y+r.height/2};
 }
 async function check(name,url) {

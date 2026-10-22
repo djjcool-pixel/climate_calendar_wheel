@@ -53,7 +53,7 @@ async function check(name){
   await page.emulateMedia({reducedMotion:'no-preference'});await page.setViewportSize({width:393,height:600});await page.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight));
   await page.waitForFunction(()=>!document.querySelector('.wardrobe-marks').classList.contains('is-visible'));
   assert.ok(await page.locator('.season-ping').evaluateAll(els=>els.every(el=>getComputedStyle(el).animationName==='none')),'offscreen cues must stop their pulse animation');
-  await page.setViewportSize({width:393,height:852});await page.locator('#mapping-details > summary').click();await page.locator('#mode-cross').click();await settle(page);assert.equal(await page.locator('.center-hanger').evaluate(el=>getComputedStyle(el).display),'none');assert.match(await page.locator('.orbit').textContent(),/成都.*东京/);assert.equal(await page.locator('.tempbar').count(),730);
+  await page.setViewportSize({width:393,height:852});await page.locator('#mapping-details > summary').click();await page.locator('#mode-cross').click();await settle(page);assert.equal(await page.locator('.center-hanger').evaluate(el=>getComputedStyle(el).display),'none');assert.match(await page.locator('.orbit').textContent(),/成都.*起点/);assert.match(await page.locator('.center-sub').textContent(),/东京.*目标/);assert.equal(await page.locator('.tempbar').count(),730);
   await page.locator('#mode-same').click();await page.locator('#mapping-details > summary').click();await page.locator('#return-today').click();await settle(page);
   await page.emulateMedia({reducedMotion:'no-preference'});await page.waitForFunction(()=>document.getAnimations().every(a=>a.playState!=='running'));
   assert.equal(await page.locator('.is-moving').count(),0);

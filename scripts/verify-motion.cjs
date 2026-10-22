@@ -54,6 +54,20 @@ async function verify(name, engine) {
     assert.equal(await page.locator('#city option').count(), 9);
     assert.equal(await page.locator('#target-city option').count(), 9);
     const year = await page.locator('#date').inputValue().then(x => x.slice(0, 4));
+    assert.match(await page.locator('#outfit-context').textContent(), /^成都 · /);
+    // Wardrobe recommendations follow the selected source date, regardless of comparison settings.
+    await page.locator('#city').selectOption('hami'); await date(page, `${year}-01-15`);
+    assert.equal(await page.locator('#outfit-card').getAttribute('data-tier'), 'freezing');
+    assert.match(await page.locator('#outfit-outer').textContent(), /羽绒/);
+    assert.match(await page.locator('#outfit-context').textContent(), /^哈密 · 1月15日$/);
+    await page.locator('#city').selectOption('wuhan'); await date(page, `${year}-07-15`);
+    assert.equal(await page.locator('#outfit-card').getAttribute('data-tier'), 'hot');
+    assert.match(await page.locator('#outfit-extra-note').textContent(), /该月降水/);
+    const clothes = await page.locator('#outfit-card').textContent();
+    await page.locator('[data-metric="low"]').click(); await settle(page);
+    assert.equal(await page.locator('#outfit-card').textContent(), clothes, 'comparison metric must not change real wardrobe advice');
+    await page.locator('[data-metric="mean"]').click();
+    await page.locator('#city').selectOption('chengdu');
     await date(page, `${year}-12-31`);
     const before = await angle(page);
     await page.locator('#next-day').click(); await settle(page);
@@ -68,20 +82,31 @@ async function verify(name, engine) {
       window.dialAdded = 0;
       window.dialObserver = new MutationObserver(rs => { for (const r of rs) window.dialAdded += r.addedNodes.length; });
       window.dialObserver.observe(document.querySelector('#wheel'), { childList: true, subtree: true });
+      window.savedClothes = [...document.querySelectorAll('#outfit-card *')];
+      window.outfitAdded = 0;
+      window.outfitObserver = new MutationObserver(rs => { for (const r of rs) window.outfitAdded += r.addedNodes.length; });
+      window.outfitObserver.observe(document.querySelector('#outfit-card'), { childList: true, subtree: true });
     });
     for (let i = 0; i < 90; i++) { const p = await point(page, i * 4); await page.mouse.move(p.x, p.y); }
     await page.mouse.move(0, 0); await settle(page);
     assert.equal(await page.evaluate(() => window.dialAdded), 0, 'hover must reuse both SVG elements and text nodes');
     assert.ok(await page.evaluate(() => window.savedDial.every(el => el.isConnected)), 'dial nodes must keep identity');
+    assert.equal(await page.evaluate(() => window.outfitAdded), 0, 'clothing must reuse elements and text nodes');
+    assert.ok(await page.evaluate(() => window.savedClothes.every(el => el.isConnected)));
     const dragStart = await point(page, 90), dragEnd = await point(page, 170);
+    const selectedClothes = await page.locator('#outfit-card').textContent();
     await page.mouse.move(dragStart.x, dragStart.y); await page.mouse.down(); await page.mouse.move(dragEnd.x, dragEnd.y, { steps: 15 }); await sleep(80);
     assert.equal(await page.locator('#day-slider').inputValue(), '60', 'drag is preview-only before release');
+    assert.equal(await page.locator('#outfit-card').textContent(), selectedClothes, 'drag previews must defer wardrobe work until date confirmation');
     await page.mouse.up(); await settle(page);
     assert.equal(await page.locator('#day-slider').inputValue(), '170');
     assert.equal(await page.locator('#interaction-indicator').textContent(), '● 已选定');
+    assert.equal(await page.locator('#outfit-context').textContent(), '成都 · 6月20日');
+    assert.equal(await page.evaluate(() => window.outfitAdded), 0, 'confirmed wardrobe updates must reuse text nodes');
     await page.mouse.down(); await page.mouse.move(dragStart.x, dragStart.y); await page.keyboard.press('Escape'); await page.mouse.up();
     await page.mouse.move(0, 0); await settle(page);
     assert.equal(await page.locator('#day-slider').inputValue(), '170', 'Escape cancels a drag');
+    assert.equal(await page.locator('#outfit-context').textContent(), '成都 · 6月20日');
     assert.equal(await page.locator('.dial-active').count(), 0);
     for (const [day, axis, sign] of [[0, 'y', -1], [90, 'x', 1], [182, 'y', 1], [274, 'x', -1]]) {
       const p = await point(page, day); await page.mouse.move(p.x, p.y); await page.mouse.down(); await settle(page);
@@ -119,11 +144,14 @@ async function verify(name, engine) {
       await page.locator('#swap-cities').click(); await settle(page);
       assert.equal(await page.locator('#city').inputValue(), city);
       assert.equal(await page.locator('#city-name').textContent(), city === 'hami' ? '哈密' : '昆明');
+      assert.ok((await page.locator('#outfit-context').textContent()).startsWith(city === 'hami' ? '哈密 · ' : '昆明 · '));
+      assert.ok(!/NaN|undefined|—/.test(await page.locator('#outfit-card').textContent()), 'all wardrobe values must be populated');
     }
     // Responsive checks include expanded cross-city settings.
     for (const width of [320, 360, 390, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 }); await sleep(80);
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `horizontal overflow at ${width}`);
+      assert.ok(await page.locator('#outfit-card').evaluate(el => [...el.querySelectorAll('.outfit-piece, .outfit-piece dd, .outfit-weather')].every(item => item.scrollWidth <= item.clientWidth + 1)), `clothing text must fit at ${width}`);
       for (const id of ['prev-day', 'next-day', 'return-today']) assert.ok((await page.locator('#' + id).boundingBox()).height >= 44, `${id} needs a 44px hit area`);
       for (const id of ['city', 'target-city']) {
         const fit = await page.locator('#' + id).evaluate(el => {

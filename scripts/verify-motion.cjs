@@ -113,9 +113,10 @@ async function verify(name, engine) {
       const p = await point(page, day); await page.mouse.move(p.x, p.y); await page.mouse.down(); await settle(page);
       const face = await page.locator('.dial-surface').evaluate(el => {
         const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
-        return { x: m.m41, y: m.m42, hasDepth: el.style.transform.includes('rotateX(') && el.style.transform.includes('rotateY(') };
+        return { x: m.m41, y: m.m42, hasDepth: el.style.transform.includes('rotateX(') && el.style.transform.includes('rotateY('), depth:m.m43, tilt:Math.max(...[...el.style.transform.matchAll(/rotate[XY]\(([-\d.]+)deg\)/g)].map(m=>Math.abs(Number(m[1])))) };
       });
       assert.ok(face[axis] * sign > 1 && face.hasDepth, `dial must lean toward press direction ${day}`);
+      assert.ok(face.tilt>3.5&&face.depth<-4.8,'press must have stronger tilt and depth than the previous 3-degree surface');
       await page.keyboard.press('Escape'); await page.mouse.up(); await page.mouse.move(0, 0); await settle(page);
       assert.equal(await page.locator('.dial-surface').evaluate(el => el.style.transform), 'none', 'release must return flat and drop the 3D transform');
     }

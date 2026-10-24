@@ -7,116 +7,107 @@
 <meta name="description" content="季节回声：双模式气候日历年轮，寻找同城春秋气候回声，或将一个城市的日期映射到另一座城市。" />
 <title>季节回声｜Climate Calendar Wheel</title>
 <style>
-:root{--bg:#0c1924;--panel:#142531;--deep:#0f202c;--text:#f2f7f1;--muted:#94aab4;--soft:#b7cbd0;--line:#32465080;--green:#d4f18a;--orange:#f8b188;--radius:17px;--font:Inter,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}
+:root{--bg:#0c1924;--deep:#0f202c;--text:#f2f7f1;--muted:#94aab4;--soft:#b7cbd0;--radius:17px;--font:Inter,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;min-width:320px;background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased}
-button,select,input{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+button{font:inherit}
+select{font:inherit}
+input{font:inherit}button{cursor:pointer}button:focus-visible{outline:2px solid var(--green);outline-offset:3px}select:focus-visible{outline:2px solid var(--green);outline-offset:3px}input:focus-visible{outline:2px solid var(--green);outline-offset:3px}a:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 button{-webkit-tap-highlight-color:transparent}
-.shell{max-width:1500px;padding:0 32px 26px;margin:auto}
-.topbar{height:70px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.shell{margin:auto}
+.topbar{border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--text)}
 .brand-mark{height:34px;width:34px;border:2px solid var(--green);border-radius:50%;position:relative;display:grid;place-items:center}
 .brand-mark:before{content:'';width:18px;height:18px;border:1.5px solid var(--green);border-radius:50%}
 .brand-mark:after{content:'';height:5px;width:5px;border-radius:50%;background:var(--green);position:absolute;right:2px;top:3px}
 .brand-word{font-size:16px;font-weight:800;letter-spacing:.03em}.brand-word small{display:block;font-size:8px;color:#8397a0;letter-spacing:.24em;font-weight:700;margin-top:3px}
 
-.intro{padding:24px 0 12px;display:flex;align-items:end;justify-content:space-between;gap:20px}
+.intro{display:flex;justify-content:space-between;gap:20px}
 .eyebrow{color:var(--green);font-size:10px;letter-spacing:.2em;font-weight:800}
-.intro h1{margin:7px 0;font-size:clamp(24px,2.5vw,34px);font-weight:830;letter-spacing:-.045em;line-height:1.2}.intro h1 em{font-style:normal;color:var(--green)}
-.intro p{font-size:12px;line-height:1.65;color:#a9bbc2;margin:0}
-.intro-aside{max-width:260px;line-height:1.65;color:#9bb0b8;font-size:11px;border-left:1px solid var(--line);padding-left:15px;margin-bottom:2px}
+.intro h1{font-weight:830;letter-spacing:-.045em;line-height:1.2}.intro h1 em{font-style:normal;color:var(--green)}
+.intro p{line-height:1.65;color:#a9bbc2;margin:0}
 .mode-switch{margin:10px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:735px}
 .mode-option{border:1px solid var(--line);background:#162b38;color:#a5bac0;padding:13px 16px;text-align:left;border-radius:13px;display:flex;align-items:center;gap:11px;min-width:0}
 .mode-option .mode-icon{font-size:21px;line-height:1;display:grid;place-items:center;flex:0 0 28px;color:#aac4b1}
 .mode-option b{font-size:13px;display:block;color:#e2ebe5;margin-bottom:3px}.mode-option small{display:block;font-size:10px;color:#92a7ae;line-height:1.35}
 .mode-option.active{border-color:#c9e98892;background:#243b3e;box-shadow:inset 0 0 0 1px #b5db8430}.mode-option.active .mode-icon{color:var(--green)}
-.workspace{display:grid;grid-template-columns:minmax(228px,258px) minmax(0,1fr) minmax(245px,305px);align-items:stretch;gap:14px;margin-top:14px}
-.panel,.bottom-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);min-width:0}
-.controls{padding:19px;display:flex;flex-direction:column;gap:19px}
-.section-title{display:flex;justify-content:space-between;align-items:center;gap:5px;padding-bottom:0}
-.section-title strong{font-size:12px;letter-spacing:.08em}.section-title small{font-size:10px;color:#7d96a2}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);min-width:0}
 .fieldlabel{display:block;margin-bottom:8px;color:#9cafb7;font-size:11px;font-weight:600}
 .source-target{display:grid;gap:13px}.field{min-width:0}.select-wrap{position:relative}.select-wrap:after{content:'⌄';position:absolute;right:12px;top:46%;transform:translateY(-50%);pointer-events:none;color:#c4d3d1;font-size:21px}
 select{width:100%;min-width:0;appearance:none;border-radius:9px;padding:12px 29px 12px 11px;background:#1d3340;border:1px solid #40566380;color:var(--text);font-size:13px;font-weight:700}
 .city-info{display:flex;align-items:flex-start;gap:7px;color:#8fa5ad;font-size:10px;line-height:1.5;margin-top:8px;min-height:15px}.city-info:before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);margin-top:5px;flex-shrink:0}.target-info:before{background:var(--orange)}
 .target-field[hidden]{display:none!important}
 .swap-button{border:1px solid #40566370;background:#152b36;color:#bed3d1;width:100%;padding:8px 12px;border-radius:9px;text-align:center;font-size:11px;font-weight:700}.swap-button:hover{background:#254752}
-.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:#10212d;border:1px solid var(--line);padding:4px;gap:3px;border-radius:10px}.seg.two{grid-template-columns:1fr 1fr}
-.seg button{border:0;background:transparent;color:#99acb4;min-width:0;white-space:nowrap;border-radius:7px;padding:10px 4px;font-size:11px;font-weight:700}
-.seg button.active{color:#e7f6cb;background:#3a5154}.seg button:focus-visible{outline-offset:0}
-.date-row{display:flex;gap:7px}.date-row input{border:1px solid #40566380;color:var(--text);background:#1d3340;border-radius:9px;padding:10px 6px;min-width:0;width:100%;font-size:13px;color-scheme:dark}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:#10212d;border:1px solid var(--line);border-radius:10px}.seg.two{grid-template-columns:1fr 1fr}
+.seg button{border:0;background:transparent;color:#99acb4;min-width:0;white-space:nowrap;border-radius:7px;font-size:11px;font-weight:700}.seg button:focus-visible{outline-offset:0}
+.date-row{display:flex}.date-row input{border:1px solid #40566380;background:#1d3340;border-radius:9px;min-width:0;width:100%;font-size:13px;color-scheme:dark}
 .iconbtn{flex-shrink:0;width:36px;background:#1d3340;border:1px solid #40566380;border-radius:9px;font-size:21px;color:#c9d6d6}
-.control-hint{font-size:10px;line-height:1.6;color:#8aa2ab;padding-top:6px;border-top:1px solid var(--line)}
-.wheel-panel{padding:10px 9px 12px;background:radial-gradient(ellipse at 50% 45%,#203845 0%,#152936 60%,#11222e 100%);overflow:hidden}
-.wheel-top{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:9px 10px 0;font-size:10px;letter-spacing:.12em;color:#b4c8c9;font-weight:700}
+.wheel-top{display:flex;justify-content:space-between;gap:8px;align-items:center;color:#b4c8c9;font-weight:700}
 .wheel-top .right{color:#8fa7af;font-weight:500;letter-spacing:.04em}
-.wheel-svg-wrap{max-width:715px;width:100%;aspect-ratio:1;margin:0 auto}.wheel-svg{display:block;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none}
+.wheel-svg-wrap{width:100%;aspect-ratio:1;margin:0 auto}.wheel-svg{display:block;width:100%;height:100%;user-select:none;-webkit-user-select:none}
 .wheel-svg .monthlabel{font-size:18px;fill:#9eb4bc;font-weight:650;text-anchor:middle;dominant-baseline:middle}.wheel-svg .monthlabel.selectedMonth{fill:white}
 .wheel-svg .monthboundary{stroke:#5a747b;stroke-width:1.1;opacity:.53}.wheel-svg .tempbar{stroke-linecap:round}
-.wheel-svg .orbit{font-size:11px;fill:#93acb6;font-weight:750;letter-spacing:.18em;text-anchor:middle}.wheel-svg .center-date{font-size:37px;fill:#f2f7ed;text-anchor:middle;font-weight:800;letter-spacing:-.06em}
-.wheel-svg .center-num{font-size:23px;font-weight:800;fill:var(--green);text-anchor:middle}.wheel-svg .center-num.orange{fill:var(--orange)}
-.wheel-svg .center-sub{font-size:12px;fill:#adbec0;text-anchor:middle}.wheel-svg .center-foot{font-size:10px;fill:#839ca7;text-anchor:middle}
-.wheel-legend{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px;margin:-1px 0 6px;font-size:10px;color:#a3b7bd}
+.wheel-svg .orbit{text-anchor:middle}.wheel-svg .center-date{fill:#f2f7ed;text-anchor:middle;font-weight:800;letter-spacing:-.06em}
+.wheel-svg .center-num{font-weight:800;fill:var(--green);text-anchor:middle}
+.wheel-svg .center-sub{text-anchor:middle}.wheel-svg .center-foot{font-size:10px;fill:#839ca7;text-anchor:middle}
+.wheel-legend{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;color:#a3b7bd}
 .gradient{width:115px;height:7px;border-radius:8px;background:linear-gradient(90deg,#518fc3,#7dc5a8,#d1da8c,#efba6f,#d15b5b)}
 
-.results{display:flex;flex-direction:column;gap:12px;min-width:0}.result-card{padding:16px 18px}.result-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:11px}.result-top span:first-child{font-size:11px;letter-spacing:.06em;font-weight:750;color:#bec9cd}.result-top span:last-child{font-size:9px;color:#76939e;letter-spacing:.04em}
+.results{flex-direction:column;min-width:0}.result-card{padding:16px 18px}.result-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:11px}.result-top span:first-child{font-size:11px;letter-spacing:.06em;font-weight:750;color:#bec9cd}.result-top span:last-child{font-size:9px;color:#76939e;letter-spacing:.04em}
 .overline{font-size:10px;color:#98acb4;font-weight:650}.big-date{font-size:30px;font-weight:820;letter-spacing:-.05em;margin:9px 0 3px;line-height:1.15}.big-temp{color:var(--green);font-size:23px;letter-spacing:-.045em;font-weight:780}.result-card.match-card{background:linear-gradient(150deg,#1e3945,#1b323e)}.match-card .big-temp{color:var(--orange)}
-.diff{font-size:10px;color:#c7d6d7;background:#2d4650;border:1px solid #506d7240;padding:8px;border-radius:8px;margin-top:11px}.diff b{color:#f1f5ec}.fine-print{font-size:10px;color:#839da6;line-height:1.5;margin-top:9px}
+.diff{font-size:10px;color:#c7d6d7;background:#2d4650;border:1px solid #506d7240;padding:8px;border-radius:8px;margin-top:11px}.diff b{color:#f1f5ec}
 .details-card{padding:15px 16px;background:#182e3a;flex:1}.details-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.details-head b{font-size:12px}.details-head small{font-size:9px;color:#8da3ab}
 .metric-grid{margin-top:11px;display:grid;grid-template-columns:75px 1fr 1fr;row-gap:1px;column-gap:4px}.metric-grid .cell{font-size:11px;padding:8px 2px;border-bottom:1px solid #3b53604b;min-width:0}.metric-grid .head{font-size:10px;color:#8eacb2;font-weight:750}.metric-grid .metric-name{color:#a2b7bf}.metric-grid .first{color:#dbf3b5;font-variant-numeric:tabular-nums}.metric-grid .second{color:#fbc8a9;font-variant-numeric:tabular-nums}.metric-grid .align-right{text-align:right}
 .detail-caption{font-size:10px;line-height:1.6;color:#8aa2aa;margin:11px 0 0}
-.under{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:14px;margin-top:14px}.bottom-card{padding:19px 23px}.bottom-card .h3{font-size:13px;font-weight:750}.bottom-card p{margin:8px 0 0;color:#8fa6ae;font-size:11px;line-height:1.6}
-.foot-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.foot-data{font-size:11px;color:#cce9ae;font-variant-numeric:tabular-nums;font-weight:750}
-.month-pair{display:grid;gap:12px;margin-top:13px}.month-row{display:grid;grid-template-columns:58px minmax(0,1fr);align-items:center;gap:9px}.month-city{font-size:11px;color:#c4d9dd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px}.monthmini{padding:0;border:0;background:transparent;min-width:0;text-align:center;cursor:pointer}.monthmini .bar{display:block;width:100%;height:7px;opacity:.9;border-radius:5px}.monthmini.selected .bar{outline:2px solid var(--green);outline-offset:2px}.monthmini .txt{font-size:9px;display:block;color:#77939e;margin-top:6px}.monthmini.selected .txt{color:var(--green)}.monthmini.target .bar{opacity:.7}.monthmini.target{cursor:default}
+.foot-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.foot-data{font-size:11px;color:#cce9ae;font-variant-numeric:tabular-nums;font-weight:750}.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px}
 .insight-text{line-height:1.8!important;color:#b5c9cd!important;font-size:12px!important;margin:12px 0 15px!important}
 .cta{border-radius:9px;background:var(--green);color:#1b2b27;font-weight:800;font-size:11px;padding:10px 15px;border:none}.cta:hover{background:#e4fbb1}
-.footer{margin-top:16px;padding-top:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px 16px;border-top:1px solid var(--line);color:#78929b;font-size:10px;line-height:1.7}.footer a{color:#bed9b2;text-decoration:none}.footer a:hover{text-decoration:underline}
+.footer{padding-top:14px;display:flex;flex-wrap:wrap;gap:5px 16px;border-top:1px solid var(--line);color:#78929b;line-height:1.7}.footer a{color:#bed9b2;text-decoration:none}.footer a:hover{text-decoration:underline}
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-@media(max-width:1160px){.shell{padding:0 22px 24px}.workspace{grid-template-columns:235px minmax(0,1fr)}.results{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1.6fr}.result-card{padding:18px}.intro-aside{display:none}}
-@media(max-width:760px){.shell{padding:0 14px 24px}.topbar{height:62px}.intro{padding:20px 0 10px}.intro h1{font-size:27px}.mode-switch{max-width:none}.workspace{grid-template-columns:1fr;gap:11px;margin-top:12px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:13px;padding:15px;grid-row:1}.controls>.section-title,.source-target,.controls>.control-hint{grid-column:1/-1}.source-target{grid-template-columns:1fr 1fr;align-items:start;gap:10px}.swap-button{grid-column:1/-1;padding:7px}.wheel-panel{grid-row:2;padding:8px 2px}.wheel-svg-wrap{max-width:610px}.results{grid-row:3;grid-column:auto;grid-template-columns:1fr 1fr;gap:10px}.details-card{grid-column:1/-1}.metric-grid{grid-template-columns:130px 1fr 1fr}.under{grid-template-columns:1fr}.bottom-card{padding:18px}.footer{margin-top:15px}.control-hint{display:none}}
-@media(max-width:440px){.brand-word{font-size:14px}.intro{padding:16px 0 6px}.intro h1{font-size:24px;margin:5px 0}.intro p{font-size:11px}.eyebrow{font-size:9px}.mode-switch{gap:7px;margin-top:9px}.mode-option{padding:10px 9px;gap:7px;border-radius:11px}.mode-option .mode-icon{font-size:18px;flex-basis:23px}.mode-option b{font-size:12px}.mode-option small{font-size:9px}.controls{padding:13px;gap:12px}.source-target{gap:8px}.source-target select{font-size:12px;padding-left:8px;padding-right:23px}.fieldlabel{font-size:10px}.city-info{font-size:9px}.wheel-top{padding:7px 14px 0;font-size:9px}.wheel-top .right{font-size:9px}.wheel-svg .monthlabel{font-size:19px}.wheel-svg .center-date{font-size:41px}.wheel-svg .orbit{font-size:11px}.wheel-legend{font-size:9px;gap:6px}.gradient{width:68px}.result-card{padding:13px 12px}.result-top{margin-bottom:10px}.result-top span:first-child{font-size:10px}.result-top span:last-child{font-size:8px}.big-date{font-size:24px}.big-temp{font-size:20px}.fine-print{font-size:9px}.metric-grid{grid-template-columns:85px 1fr 1fr}.months{gap:3px}.monthmini .txt{font-size:8px}.month-row{grid-template-columns:44px 1fr}.month-city{font-size:9px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
-
-/* v4 — wheel first, spectrum second, optional date mapping */
+@media(max-width:1160px){.shell{padding:0 22px 24px}.results{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1.6fr}.result-card{padding:18px}}
+@media(max-width:760px){.mode-switch{max-width:none}.source-target{grid-column:1/-1}.source-target{grid-template-columns:1fr 1fr;align-items:start;gap:10px}.swap-button{grid-column:1/-1;padding:7px}.wheel-panel{grid-row:2;padding:8px 2px}.results{grid-row:3;grid-column:auto;gap:10px}.details-card{grid-column:1/-1}.metric-grid{grid-template-columns:130px 1fr 1fr}.footer{margin-top:15px}}
+@media(max-width:440px){.brand-word{font-size:14px}.intro{padding:16px 0 6px}.intro h1{font-size:24px;margin:5px 0}.intro p{font-size:11px}.eyebrow{font-size:9px}.mode-switch{gap:7px;margin-top:9px}.mode-option{padding:10px 9px;gap:7px;border-radius:11px}.mode-option .mode-icon{font-size:18px;flex-basis:23px}.mode-option b{font-size:12px}.mode-option small{font-size:9px}.source-target{gap:8px}.source-target select{font-size:12px;padding-left:8px;padding-right:23px}.fieldlabel{font-size:10px}.city-info{font-size:9px}.wheel-top{padding:7px 14px 0;font-size:9px}.wheel-top .right{font-size:9px}.wheel-svg .monthlabel{font-size:19px}.wheel-svg .center-date{font-size:41px}.wheel-svg .orbit{font-size:11px}.wheel-legend{font-size:9px;gap:6px}.gradient{width:68px}.result-card{padding:13px 12px}.result-top{margin-bottom:10px}.result-top span:first-child{font-size:10px}.result-top span:last-child{font-size:8px}.big-date{font-size:24px}.big-temp{font-size:20px}.metric-grid{grid-template-columns:85px 1fr 1fr}.months{gap:3px}}
 :root{--panel:#152935;--line:#36535b65;--green:#d4f18a;--orange:#f8b188}
 .shell{max-width:1380px;padding:0 32px 22px}.topbar{height:61px}
-.intro{padding:19px 0 19px;align-items:center}.intro h1{margin:5px 0;font-size:clamp(23px,2.1vw,29px)}.intro p{font-size:11px}.intro-aside{display:block;border:0;padding:0;max-width:none;font-size:10px;letter-spacing:.15em;color:#738f99}
-.primary-experience{background:linear-gradient(135deg,#142a36,#0f222e 90%);border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;box-shadow:0 24px 58px #07111a35}
+.intro{align-items:center}.intro h1{margin:5px 0}.intro p{font-size:11px}
+.primary-experience{border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;box-shadow:0 24px 58px #07111a35}
 .primary-experience:before{content:'';position:absolute;pointer-events:none;width:560px;height:560px;left:24%;top:100px;border-radius:50%;background:#bfe68b08;filter:blur(60px)}
-.primary-bar{display:flex;justify-content:space-between;gap:15px;align-items:end;padding:23px 28px 17px;border-bottom:1px solid #3b556035;position:relative}.section-kicker{font-size:9px;letter-spacing:.23em;font-weight:750;color:#accf88}.primary-bar h2,.spectrum-heading h2{font-size:19px;font-weight:800;line-height:1.3;letter-spacing:-.025em;margin:8px 0 0}.live-mark{display:inline-flex;font-size:9px;color:#a8d49d;background:#29423b;border:1px solid #56836a55;border-radius:99px;padding:4px 7px;margin-left:8px;font-weight:600;letter-spacing:.02em;vertical-align:middle}.wheel-explain{font-size:10px;color:#90a9af}
-.primary-toolbar{display:grid;grid-template-columns:minmax(190px,1fr) minmax(220px,1.08fr) minmax(218px,.93fr);gap:18px;align-items:start;margin:18px 28px 8px;position:relative}.primary-toolbar>.toolbar-city,.primary-toolbar>.toolbar-metric,.primary-toolbar>.toolbar-date{min-width:0}.primary-toolbar .fieldlabel{margin-bottom:8px;font-size:10px}.primary-toolbar .city-info{margin-top:6px;font-size:9px}.primary-toolbar select,.primary-toolbar input{height:43px}.primary-toolbar .date-row{height:43px}.primary-toolbar .iconbtn{width:38px;font-size:24px;line-height:1}.primary-toolbar .seg{height:43px}.primary-toolbar .seg button{font-size:12px}.primary-toolbar select{font-size:12px}
-.wheel-showcase{display:grid;grid-template-columns:minmax(0,1fr) 264px;gap:6px;max-width:1170px;margin:auto;align-items:center;padding:0 25px 5px}.wheel-panel{border:0;background:none;overflow:visible;padding:0;min-width:0}.wheel-top{max-width:725px;margin:auto;padding:14px 6px 2px;letter-spacing:.13em;font-size:10px}.wheel-top-dot{width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;box-shadow:0 0 10px #d4f18a77}.wheel-svg-wrap{max-width:710px;animation:wheel-enter .65s cubic-bezier(.2,.8,.2,1) both}.wheel-svg{touch-action:none}.wheel-svg .tempbar{transition:stroke .32s ease}.wheel-legend{margin:-8px 0 12px;gap:12px;font-size:10px}.wheel-legend .gradient{width:116px}
-.spectrum-card{margin-top:16px;padding:23px 29px 25px;background:#142934;border:1px solid var(--line);border-radius:18px;animation:fade-up .7s .14s both}.spectrum-heading{display:flex;justify-content:space-between;align-items:end;gap:16px}.spectrum-heading h2{font-size:18px}.spectrum-heading .foot-data{font-size:11px}.spectrum-card>p{font-size:11px;color:#8faab3;margin:11px 0 21px}.spectrum-body{display:grid;gap:15px}.spectrum-cityline{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.spectrum-cityline strong{font-size:11px;color:#d0e5e1}.spectrum-cityline span{font-size:10px;color:#83a4ad}.spectrum-gradient-track{position:relative;width:100%;height:27px;border-radius:8px;display:flex;overflow:hidden;outline:1px solid #8ea4ae3b;cursor:crosshair;box-shadow:inset 0 0 10px #060d1570;transition:filter .2s,transform .2s}.spectrum-gradient-track:hover{filter:brightness(1.16)}.spectrum-gradient-track>span{flex:1 1 0;min-width:0;height:100%;pointer-events:none}.spectrum-gradient-track::after{content:'';position:absolute;left:calc(var(--position,87.4%));top:0;bottom:0;width:3px;transform:translateX(-1.5px);background:#f5ffe0;box-shadow:0 0 0 1px #08212d,0 0 12px #ffffff99;z-index:1;pointer-events:none;transition:none}.spectrum-gradient-track.is-target{height:17px;cursor:default}.spectrum-gradient-track.is-target:after{background:var(--orange)}.spectrum-month-labels{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));margin-top:9px}.spectrum-month-labels span{text-align:left;font-size:10px;color:#748f99}.spectrum-month-labels span:last-child{text-align:right}.target-spectrum{padding-top:4px}
-.mapping-panel{margin-top:16px;background:#132631;border:1px solid var(--line);border-radius:18px;overflow:hidden}.mapping-summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:17px;padding:22px 28px;transition:background .2s}.mapping-summary::-webkit-details-marker{display:none}.mapping-summary:hover{background:#1a323f}.summary-icon{width:47px;height:47px;border:1px solid #59786caa;background:#203c40;border-radius:13px;display:grid;place-items:center;font-size:23px;color:var(--green);flex-shrink:0}.summary-text{display:flex;flex-direction:column;gap:5px;min-width:0}.summary-text small{font-size:9px;letter-spacing:.15em;color:#9cbc99;font-weight:800}.summary-text strong{font-size:16px;letter-spacing:-.015em}.summary-text>span{font-size:10px;color:#819da7}.summary-status{margin-left:auto;white-space:nowrap;font-size:10px;color:#96afa9}.summary-chevron{margin-left:auto;font-size:29px;color:#d5edbd;transition:transform .3s ease;line-height:1}.mapping-panel[open] .summary-chevron{transform:rotate(180deg)}.mapping-panel[open] .mapping-summary{border-bottom:1px solid #3c596240}.mapping-content{padding:20px 28px 28px}.mapping-content .mode-switch{max-width:none;margin:0;gap:10px}.mapping-settings{display:flex;align-items:end;flex-wrap:wrap;gap:14px;margin:15px 0}.mapping-settings>.field{width:240px}.mapping-settings .control-block{width:260px;margin-left:auto}.mapping-settings .control-block .seg{height:44px}.mapping-settings .swap-button{max-width:220px;height:44px}.results{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:12px}.details-card{min-height:220px}.mapping-insight{margin-top:12px;background:#1b323c;border:1px solid #3a566055;border-radius:13px;padding:17px 19px}.mapping-insight .foot-top strong{font-size:13px}.mapping-insight .insight-text{margin:11px 0 6px!important}.mapping-insight #match-method-note{font-size:10px;line-height:1.7;color:#8aa2ab;margin:0}.footer{margin-top:19px}
+.primary-bar{display:flex;justify-content:space-between;gap:15px;align-items:end;border-bottom:1px solid #3b556035;position:relative}.section-kicker{font-size:9px;letter-spacing:.23em;font-weight:750;color:#accf88}.primary-bar h2{font-weight:800;line-height:1.3;letter-spacing:-.025em;margin:8px 0 0}.spectrum-heading h2{font-weight:800;line-height:1.3;letter-spacing:-.025em}.live-mark{display:inline-flex;font-size:9px;border:1px solid #56836a55;border-radius:99px;padding:4px 7px;margin-left:8px;font-weight:600;letter-spacing:.02em;vertical-align:middle}
+.primary-toolbar{display:grid;grid-template-columns:minmax(190px,1fr) minmax(220px,1.08fr) minmax(218px,.93fr);gap:18px;align-items:start;position:relative}.primary-toolbar>.toolbar-city{min-width:0}.primary-toolbar>.toolbar-metric{min-width:0}.primary-toolbar>.toolbar-date{min-width:0}.primary-toolbar .fieldlabel{margin-bottom:8px;font-size:10px}.primary-toolbar .city-info{margin-top:6px;font-size:9px}.primary-toolbar input{height:43px}.primary-toolbar .iconbtn{font-size:24px}.primary-toolbar .seg button{font-size:12px}.primary-toolbar select{font-size:12px}
+.wheel-showcase{display:grid;grid-template-columns:minmax(0,1fr) 264px;gap:6px;max-width:1170px;margin:auto;align-items:center;padding:0 25px 5px}.wheel-panel{border:0;background:none;overflow:visible;padding:0;min-width:0}.wheel-top{max-width:725px;margin:auto;letter-spacing:.13em;font-size:10px}.wheel-top-dot{width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;box-shadow:0 0 10px #d4f18a77}.wheel-svg-wrap{animation:wheel-enter .65s cubic-bezier(.2,.8,.2,1) both}.wheel-svg .tempbar{transition:stroke .32s ease}.wheel-legend{margin:-8px 0 12px;gap:12px;font-size:10px}.wheel-legend .gradient{width:116px}
+.spectrum-card{background:#142934;border:1px solid var(--line);border-radius:18px;animation:fade-up .7s .14s both}.spectrum-heading{display:flex;justify-content:space-between;align-items:end;gap:16px}.spectrum-heading .foot-data{font-size:11px}.spectrum-card>p{font-size:11px;color:#8faab3;margin:11px 0 21px}.spectrum-body{display:grid}.spectrum-cityline{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.spectrum-cityline strong{font-size:11px;color:#d0e5e1}.spectrum-cityline span{font-size:10px;color:#83a4ad}.spectrum-gradient-track{position:relative;width:100%;height:27px;border-radius:8px;display:flex;overflow:hidden;outline:1px solid #8ea4ae3b;cursor:crosshair;box-shadow:inset 0 0 10px #060d1570;transition:filter .2s,transform .2s}.spectrum-gradient-track:hover{filter:brightness(1.16)}.spectrum-gradient-track>span{flex:1 1 0;min-width:0;height:100%;pointer-events:none}.spectrum-gradient-track::after{content:'';position:absolute;left:calc(var(--position,87.4%));top:0;bottom:0;width:3px;transform:translateX(-1.5px);background:#f5ffe0;box-shadow:0 0 0 1px #08212d,0 0 12px #ffffff99;z-index:1;pointer-events:none;transition:none}.spectrum-gradient-track.is-target{height:17px;cursor:default}.spectrum-gradient-track.is-target:after{background:var(--orange)}.spectrum-month-labels{display:grid;grid-template-columns:repeat(12,minmax(0,1fr))}.spectrum-month-labels span{text-align:left;font-size:10px;color:#748f99}.spectrum-month-labels span:last-child{text-align:right}.target-spectrum{padding-top:4px}
+.mapping-panel{background:#132631;border:1px solid var(--line);border-radius:18px;overflow:hidden}.mapping-summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:17px;transition:background .2s}.mapping-summary::-webkit-details-marker{display:none}.mapping-summary:hover{background:#1a323f}.summary-icon{border:1px solid #59786caa;background:#203c40;border-radius:13px;display:grid;place-items:center;color:var(--green);flex-shrink:0}.summary-text{display:flex;flex-direction:column;gap:5px;min-width:0}.summary-text small{font-size:9px;letter-spacing:.15em;color:#9cbc99;font-weight:800}.summary-text strong{letter-spacing:-.015em}.summary-text>span{font-size:10px;color:#819da7}.summary-chevron{margin-left:auto;font-size:29px;color:#d5edbd;transition:transform .3s ease;line-height:1}.mapping-panel[open] .summary-chevron{transform:rotate(180deg)}.mapping-panel[open] .mapping-summary{border-bottom:1px solid #3c596240}.mapping-content{padding:20px 28px 28px}.mapping-content .mode-switch{max-width:none;margin:0;gap:10px}.mapping-settings{display:flex;align-items:end;flex-wrap:wrap;gap:14px;margin:15px 0}.mapping-settings>.field{width:240px}.mapping-settings .control-block{width:260px;margin-left:auto}.mapping-settings .control-block .seg{height:44px}.mapping-settings .swap-button{max-width:220px;height:44px}.results{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:12px}.details-card{min-height:220px}.mapping-insight{margin-top:12px;background:#1b323c;border:1px solid #3a566055;border-radius:13px;padding:17px 19px}.mapping-insight .foot-top strong{font-size:13px}.mapping-insight .insight-text{margin:11px 0 6px!important}.mapping-insight #match-method-note{font-size:10px;line-height:1.7;color:#8aa2ab;margin:0}
 @keyframes wheel-enter{from{opacity:0;transform:translateY(10px) scale(.965);}to{opacity:1;transform:translateY(0) scale(1);}}@keyframes wheel-change{from{opacity:.7;transform:scale(.987)}to{opacity:1;transform:scale(1)}}@keyframes fade-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@keyframes link-drift{from{stroke-dashoffset:0}to{stroke-dashoffset:-48}}@keyframes marker-pulse{0%,100%{stroke-opacity:1}50%{stroke-opacity:.5}}
 
-@media(max-width:1100px){.shell{padding:0 22px 22px}.wheel-showcase{grid-template-columns:minmax(0,1fr) 235px;padding:0 15px}.intro-aside{display:none}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1;min-height:0}.metric-grid{grid-template-columns:170px 1fr 1fr}}
-@media(max-width:760px){.shell{padding:0 12px 18px}.topbar{height:56px}.intro{padding:17px 2px 14px}.intro h1{font-size:23px}.intro p{font-size:10px}.primary-experience{border-radius:16px}.primary-bar{padding:17px 16px 13px}.primary-bar h2{font-size:17px}.wheel-explain{display:none}.primary-toolbar{margin:13px 13px 0;gap:9px;grid-template-columns:1fr 1fr}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1}.primary-toolbar .fieldlabel{font-size:9px}.primary-toolbar .city-info{display:none}.primary-toolbar select,.primary-toolbar .seg,.primary-toolbar .date-row{height:40px}.primary-toolbar .seg{padding:3px}.primary-toolbar .seg button{font-size:10px;padding:8px 2px}.primary-toolbar .date-row{max-width:none}.wheel-showcase{display:flex;flex-direction:column;gap:0;padding:2px 4px 5px}.wheel-panel{width:100%}.wheel-top{padding:14px 13px 0;font-size:9px}.wheel-svg-wrap{width:100%;max-width:600px}.wheel-legend{margin:-1px auto 12px;font-size:9px;gap:8px}.spectrum-card{padding:18px 16px;margin-top:12px}.spectrum-heading h2{font-size:16px}.spectrum-card>p{margin-bottom:18px}.spectrum-gradient-track{height:26px}.spectrum-month-labels span{font-size:9px}.mapping-panel{margin-top:12px}.mapping-summary{padding:18px 15px;gap:10px}.summary-icon{width:40px;height:40px;font-size:19px;border-radius:10px}.summary-text strong{font-size:13px}.summary-text>span{font-size:9px}.summary-status{display:none}.summary-chevron{font-size:24px;margin-left:auto}.mapping-content{padding:15px}.mapping-settings>.field{flex:1;min-width:180px}.mapping-settings .control-block{flex:1;margin-left:0;min-width:180px}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1}.footer{padding-top:12px}}
+@media(max-width:1100px){.shell{padding:0 22px 22px}.wheel-showcase{grid-template-columns:minmax(0,1fr) 235px;padding:0 15px}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1;min-height:0}.metric-grid{grid-template-columns:170px 1fr 1fr}}
+@media(max-width:760px){.intro p{font-size:10px}.primary-experience{border-radius:16px}.primary-toolbar .city-info{display:none}.primary-toolbar .date-row{height:40px}.primary-toolbar .date-row{max-width:none}.wheel-showcase{display:flex;flex-direction:column;gap:0}.wheel-panel{width:100%}.wheel-svg-wrap{width:100%;max-width:600px}.spectrum-heading h2{font-size:16px}.spectrum-card>p{margin-bottom:18px}.spectrum-gradient-track{height:26px}.mapping-summary{gap:10px}.summary-icon{border-radius:10px}.summary-text>span{font-size:9px}.summary-chevron{font-size:24px;margin-left:auto}.mapping-content{padding:15px}.mapping-settings>.field{flex:1;min-width:180px}.mapping-settings .control-block{flex:1;margin-left:0;min-width:180px}.results{grid-template-columns:1fr 1fr}.results .details-card{grid-column:1/-1}.footer{padding-top:12px}}
 @media(max-width:410px){.shell{padding:0 8px 14px}.brand-word{font-size:13px}.brand-mark{width:30px;height:30px}.intro{padding:14px 4px 12px}.intro h1{font-size:21px}.primary-bar{padding:15px 12px 12px}.primary-bar h2{font-size:16px}.live-mark{font-size:8px;margin-left:4px}.primary-toolbar{margin:11px 10px 0;gap:8px}.primary-toolbar select{font-size:11px;padding-left:8px;padding-right:22px}.primary-toolbar .seg button{font-size:9px}.wheel-top{padding:11px 10px 0;font-size:8px}.wheel-svg .monthlabel{font-size:17px}.wheel-legend{gap:6px;font-size:8px}.wheel-legend .gradient{width:65px}.spectrum-card{padding:16px 12px}.spectrum-month-labels span{font-size:8px}.mapping-summary{padding:15px 12px}.summary-icon{width:35px;height:35px}.summary-text strong{font-size:12px}.summary-text>span{font-size:8px}.mode-option{padding:10px}.mode-option b{font-size:11px}.mode-option small{font-size:9px}.results .result-card{padding:13px}.metric-grid{grid-template-columns:90px 1fr 1fr}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-
-/* v5: same-city seasonal wheel is the primary interaction */
 .intro{padding:12px 0 10px}.intro h1{font-size:clamp(20px,2.1vw,27px)}.intro .eyebrow{display:none}
 .primary-experience{background:radial-gradient(ellipse at 35% 32%,#1c3742 0%,#112632 65%,#0e212c 100%)}
 .primary-bar{padding:18px 25px 13px}.primary-bar h2{font-size:21px;margin-top:4px}.primary-toolbar{margin:12px 25px 0}
-.wheel-svg{cursor:default;touch-action:pan-y}.wheel-svg .connection-path{stroke:#d3e9bd;stroke-width:2.2;opacity:.7}
+.wheel-svg{cursor:default}.wheel-svg .connection-path{stroke:#d3e9bd;stroke-width:2.2;opacity:.7}
 .wheel-svg-wrap{max-width:760px}.wheel-panel{position:relative}.wheel-top{padding:5px 10px 0}
-.live-mark{background:#1b4237;color:#d1f2af;transition:background .15s,color .15s}.live-mark.is-preview{color:#ffe7b0;background:#594331}.intro-aside,.spectrum-card>p,.detail-caption,.fine-print,#match-method-note,.city-info{display:none!important}.spectrum-card{margin-top:12px;padding:18px 24px}.spectrum-heading h2{margin:4px 0 0;font-size:16px}.spectrum-body{margin-top:18px}.spectrum-card .foot-data{font-size:10px}
+.live-mark{background:#1b4237;color:#d1f2af;transition:background .15s,color .15s}.live-mark.is-preview{color:#ffe7b0;background:#594331}.spectrum-card>p{display:none!important}.detail-caption{display:none!important}#match-method-note{display:none!important}.city-info{display:none!important}.spectrum-card{margin-top:12px;padding:18px 24px}.spectrum-heading h2{margin:4px 0 0;font-size:16px}.spectrum-card .foot-data{font-size:10px}
 .mapping-panel{margin-top:12px}.mapping-summary{padding:15px 24px}.summary-text strong{font-size:14px}.summary-icon{width:36px;height:36px;font-size:20px}.summary-text>span{display:none}
 .footer{justify-content:space-between;font-size:10px;opacity:.66;margin-top:12px}
-@media(max-width:760px){
- .shell{padding:0 10px 20px}.topbar{height:52px}.intro{padding:12px 4px 10px}.intro h1{font-size:21px;margin:0}.primary-bar{padding:13px 14px 9px}.primary-bar h2{font-size:18px}.primary-toolbar{margin:10px 12px 0;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:10px}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1;display:flex;align-items:center;gap:12px}.toolbar-date .fieldlabel{margin:0;white-space:nowrap}.toolbar-date .date-row{flex:1;height:34px}.primary-toolbar select,.primary-toolbar .seg{height:38px}.primary-toolbar .date-row input{height:34px}.primary-toolbar .iconbtn{height:34px}.wheel-showcase{padding:0 2px 4px}.wheel-top{padding:8px 12px 0}.wheel-legend{margin:-10px 0 3px}.spectrum-card{padding:14px 13px}.spectrum-body{margin-top:14px}.mapping-summary{padding:12px 13px}.summary-text strong{font-size:13px}.footer{font-size:9px}
+@media(max-width:760px){.topbar{height:52px}.intro{padding:12px 4px 10px}.intro h1{font-size:21px;margin:0}.toolbar-city{grid-column:1}.toolbar-metric{grid-column:2}.toolbar-date{grid-column:1/-1;align-items:center}.toolbar-date .fieldlabel{white-space:nowrap}.toolbar-date .date-row{flex:1}.primary-toolbar select{height:38px}.primary-toolbar .seg{height:38px}.primary-toolbar .date-row input{height:34px}.primary-toolbar .iconbtn{height:34px}.wheel-showcase{padding:0 2px 4px}.spectrum-card{padding:14px 13px}.summary-text strong{font-size:13px}.footer{font-size:9px}
 }
-@media(max-width:380px){.intro h1{font-size:20px}.primary-bar h2{font-size:17px}.primary-toolbar .seg button{font-size:9px}.wheel-legend{font-size:8px}}
+@media(max-width:380px){.intro h1{font-size:20px}.wheel-legend{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.wheel-svg .point-halo{animation:none}.wheel-svg-wrap{will-change:auto}}
 
 /* Dial surfaces share a restrained depth, consistent hit areas and interruptible motion. */
 :root{--ease-out:cubic-bezier(.2,.75,.25,1);color-scheme:dark}
-button,select,input{touch-action:manipulation}
+button{touch-action:manipulation}
+select{touch-action:manipulation}
+input{touch-action:manipulation}
 button{transition:color .18s,border-color .18s,background-color .18s,transform .18s var(--ease-out)}
 button:active{transform:translateY(1px)}
-.primary-toolbar select,.primary-toolbar .seg,.primary-toolbar .date-row,.primary-toolbar .date-row input,.primary-toolbar .iconbtn{height:44px}
+.primary-toolbar select{height:44px}
+.primary-toolbar .seg{height:44px}
+.primary-toolbar .date-row{height:44px}
+.primary-toolbar .date-row input{height:44px}
+.primary-toolbar .iconbtn{height:44px}
 .primary-toolbar .iconbtn{width:44px;display:grid;place-items:center;line-height:1}
 .iconbtn svg{width:18px;height:18px;pointer-events:none}
 .date-row{gap:6px}.date-row input{font-variant-numeric:tabular-nums;text-align:center;padding:8px;line-height:1.25}
@@ -131,32 +122,30 @@ select{-webkit-appearance:none;line-height:1.25}
 .today-icon{width:18px;height:18px;display:block;color:var(--green);flex-shrink:0}
 .today-icon svg{display:block;width:100%;height:100%}
 .today-bounce .today-icon{animation:today-reset .5s var(--ease-out)}
-@keyframes today-reset{from{transform:rotate(-180deg)}to{transform:rotate(0)}}.swap-button,.cta,.mode-option{min-height:44px}
+@keyframes today-reset{from{transform:rotate(-180deg)}to{transform:rotate(0)}}.swap-button{min-height:44px}.cta{min-height:44px}.mode-option{min-height:44px}
 .mode-option{transition:border-color .22s,background-color .22s}
-.wheel-svg-wrap{position:relative;isolation:isolate;--touch-x:0px;--touch-y:0px;-webkit-tap-highlight-color:transparent}
+.wheel-svg-wrap{position:relative;isolation:isolate;-webkit-tap-highlight-color:transparent}
 .dial-surface:before{content:'';position:absolute;inset:7.4%;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle at 34% 20%,#a1d6da20,#102731 70%);box-shadow:0 14px 23px #020b146b,inset 0 2px 3px #d7f3df24,inset 0 -9px 16px #000b1290}
-.dial-surface:after{content:'';position:absolute;left:0;top:0;width:130px;height:130px;z-index:2;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#e5ffcc25,transparent 68%);opacity:0;transform:translate3d(calc(var(--touch-x) - 65px),calc(var(--touch-y) - 65px),0);transition:opacity .2s}
-.wheel-panel.dial-hover .dial-surface:after,.wheel-panel.dial-active .dial-surface:after{opacity:1}
+.dial-glow{content:'';position:absolute;left:0;top:0;width:130px;height:130px;z-index:2;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#e5ffcc25,transparent 68%);opacity:0;transform:translate3d(-65px,-65px,0);transition:opacity .2s}
+.wheel-panel.dial-hover .dial-glow{opacity:1}
+.wheel-panel.dial-active .dial-glow{opacity:1}
 .wheel-svg{position:relative;z-index:1;touch-action:none;pointer-events:none;transform-origin:center;transition:transform .24s var(--ease-out)}
 .dial-scroll-zone{position:absolute;inset:20%;border-radius:50%;z-index:3;touch-action:pan-y}
 .dial-hit-area{touch-action:none;pointer-events:stroke;cursor:grab}
 .dial-active .dial-hit-area{cursor:grabbing}
-
-.temperature-ring{transition:opacity .32s}
-.dial-ripple{position:absolute;left:var(--touch-x);top:var(--touch-y);z-index:3;width:22px;height:22px;border-radius:50%;border:1px solid #e2ffc6;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.7)}
+.dial-ripple{position:absolute;left:0;top:0;z-index:3;width:22px;height:22px;border-radius:50%;border:1px solid #e2ffc6;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.7)}
 .wheel-panel.dial-confirmed .dial-ripple{animation:dial-confirm .46s var(--ease-out) both}
 @keyframes dial-confirm{0%{opacity:.8;transform:translate(-50%,-50%) scale(.7)}100%{opacity:0;transform:translate(-50%,-50%) scale(2.8)}}
 /* No perpetual SVG animation or permanent full-wheel compositor layer. */
 @media(hover:hover) and (pointer:fine){
- .today-btn:hover,.iconbtn:hover{border-color:#a7c798;background-color:#294a48;transform:translateY(-1px)}
+ .today-btn:hover{border-color:#a7c798;background-color:#294a48;transform:translateY(-1px)}
+ .iconbtn:hover{border-color:#a7c798;background-color:#294a48;transform:translateY(-1px)}
  .today-btn:hover{background:linear-gradient(145deg,#34564e,#234249)}
  .seg button:hover{color:#f0f8e6}.mode-option:hover{border-color:#69877f}
 }
-@media(hover:none){.dial-surface:after{display:none}}
+@media(hover:none){.dial-glow{display:none}}
 @media(max-width:760px){
- .primary-toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:10px}
- .primary-toolbar .date-row input{font-size:14px}
- .primary-toolbar .seg button{font-size:11px;padding:0 2px}
+ .primary-toolbar .seg button{padding:0 2px}
  .toolbar-date .date-row{height:44px}.toolbar-date .fieldlabel{font-size:10px}
  .primary-bar{align-items:center;gap:8px}.primary-bar h2{font-size:17px}
  .today-btn{font-size:11px;padding:8px 11px;gap:5px}.live-mark{font-size:8px;margin-left:3px;padding:3px 5px}
@@ -167,7 +156,7 @@ select{-webkit-appearance:none;line-height:1.25}
  .primary-toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:8px}.primary-toolbar select{padding-left:7px}
  .primary-toolbar .seg button{font-size:10px}
 }
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.dial-surface{transform:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}*:before{animation:none!important;transition:none!important;scroll-behavior:auto!important}*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 /* Compact city labels; the full native choice list stays available on every screen. */
 .city-select{position:relative;min-width:0}
@@ -182,12 +171,10 @@ select{-webkit-appearance:none;line-height:1.25}
 .date-row input{font-weight:400;letter-spacing:.015em;color:#dfe9e6}
 .primary-toolbar .fieldlabel{line-height:1.4;font-weight:500}
 .primary-toolbar .seg button{font-weight:600}
-.wheel-svg .center-sub{fill:#a6bec1}
 .wheel-svg:focus-visible{outline:2px solid #c4df9a;outline-offset:-4px;border-radius:50%}
 @media(hover:hover) and (pointer:fine){.city-select:hover .city-display{border-color:#73948b}}
 @media(max-width:760px){
  .shell{padding:0 12px 20px}
- .primary-bar{padding:14px 15px 12px}
  .primary-toolbar{margin:12px 15px 0;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px 10px}
  .primary-toolbar .fieldlabel{font-size:10px;margin-bottom:7px}
  .city-name{font-size:14px;font-weight:550}.city-en{display:none}.city-display{padding:0 12px}
@@ -198,8 +185,10 @@ select{-webkit-appearance:none;line-height:1.25}
  .wheel-top{padding:12px 15px 1px;font-size:9px;letter-spacing:.09em}.wheel-top .right{font-size:9px;letter-spacing:.02em;color:#94aeb6}
  .wheel-svg .center-sub{font-size:14px}.wheel-svg .center-num{font-size:25px}
  .wheel-legend{font-size:9px;gap:7px;margin:-5px 0 8px}
- .spectrum-card,.mapping-panel{border-radius:16px}
- .spectrum-cityline span,.spectrum-month-labels span{color:#8daab3}
+ .spectrum-card{border-radius:16px}
+ .mapping-panel{border-radius:16px}
+ .spectrum-cityline span{color:#8daab3}
+ .spectrum-month-labels span{color:#8daab3}
 }
 @media(max-width:360px){
  .primary-toolbar{margin-inline:12px;column-gap:8px}
@@ -218,9 +207,10 @@ select{-webkit-appearance:none;line-height:1.25}
  .toolbar-date .date-row{width:100%;max-width:none}
 }
 
-.wheel-svg-wrap{perspective:1000px}
+.wheel-svg-wrap{perspective:850px}
 .dial-surface{position:relative;isolation:isolate;width:100%;height:100%;transform-origin:50% 50%;transform:none}
-.dial-active .dial-surface,.is-tilting .dial-surface{will-change:transform}
+.dial-active .dial-surface{will-change:transform}
+.is-tilting .dial-surface{will-change:transform}
 @media(prefers-reduced-motion:reduce){.dial-surface{transform:none!important;will-change:auto!important}}
 
 /* Wardrobe suggestions reuse the selected day's local climate series. */
@@ -231,10 +221,12 @@ select{-webkit-appearance:none;line-height:1.25}
 #months:after{display:none}
 .spectrum-slider{-webkit-appearance:none;appearance:none;position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:48px;margin:0;padding:0;background:transparent;border:0;cursor:grab;touch-action:none}
 .spectrum-slider::-webkit-slider-runnable-track{height:32px;border:0;background:transparent}
-.spectrum-slider::-moz-range-track,.spectrum-slider::-moz-range-progress{height:32px;border:0;background:transparent}
+.spectrum-slider::-moz-range-track{height:32px;border:0;background:transparent}
+.spectrum-slider::-moz-range-progress{height:32px;border:0;background:transparent}
 .spectrum-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:22px;height:38px;margin-top:-3px;border:2px solid #f2f8de;border-radius:9px;background:#e2edcb linear-gradient(90deg,transparent 25%,#59715d66 25%,#59715d66 35%,transparent 35%,transparent 65%,#59715d66 65%,#59715d66 75%,transparent 75%) center/10px 12px no-repeat;box-shadow:0 2px 4px #07182088,0 0 0 1px #28433999;transition:transform .12s ease}
 .spectrum-slider::-moz-range-thumb{box-sizing:border-box;width:22px;height:38px;border:2px solid #f2f8de;border-radius:9px;background:#e2edcb linear-gradient(90deg,transparent 25%,#59715d66 25%,#59715d66 35%,transparent 35%,transparent 65%,#59715d66 65%,#59715d66 75%,transparent 75%) center/10px 12px no-repeat;box-shadow:0 2px 4px #07182088,0 0 0 1px #28433999;transition:transform .12s ease}
-.is-scrubbing,.is-scrubbing .spectrum-slider{cursor:grabbing}
+.is-scrubbing{cursor:grabbing}
+.is-scrubbing .spectrum-slider{cursor:grabbing}
 .is-scrubbing .spectrum-slider::-webkit-slider-thumb{transform:scale(1.08)}
 .is-scrubbing .spectrum-slider::-moz-range-thumb{transform:scale(1.08)}
 .spectrum-slider:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:10px}
@@ -244,12 +236,14 @@ select{-webkit-appearance:none;line-height:1.25}
 .outfit-summary::-webkit-details-marker{display:none}
 .outfit-summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 .outfit-details{padding:0 24px 17px}
-.outfit-preview{margin:0;color:#d0e0c7;font-size:12px;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.outfit-preview{margin:0;color:#d0e0c7;font-size:12px;line-height:1.6;-webkit-box-orient:vertical}
 .outfit-toggle{display:flex;align-items:center;gap:6px;margin-top:11px;color:#b6d49e;font-size:10px;line-height:18px}
 .outfit-toggle svg{width:16px;height:16px;flex:none;transition:transform .18s ease}
 .outfit-preview-note{margin-left:auto;color:#83a2a8;font-size:9px}
 .outfit-close-label{display:none}
-.outfit-card[open] .outfit-open-label,.outfit-card[open] .outfit-preview,.outfit-card[open] .outfit-brief{display:none}
+.outfit-card[open] .outfit-open-label{display:none}
+.outfit-card[open] .outfit-preview{display:none}
+.outfit-card[open] .outfit-brief{display:none}
 .outfit-card[open] .outfit-close-label{display:inline}
 .outfit-card[open] .outfit-toggle svg{transform:rotate(180deg)}
 .outfit-head{display:flex;align-items:center;justify-content:space-between;gap:14px}
@@ -265,9 +259,10 @@ select{-webkit-appearance:none;line-height:1.25}
 .outfit-footnote{margin:12px 0 0;padding-top:10px;border-top:1px solid #49656035;font-size:10px;line-height:1.6;color:#86a4ac}
 @media(max-width:760px){
  :root{--secondary-preview-height:180px}
- .outfit-card{border-radius:16px}.outfit-summary{padding:17px 14px 14px}.outfit-details{padding:0 14px 14px}.outfit-head h2{font-size:16px}
+ .outfit-card{border-radius:16px}.outfit-details{padding:0 14px 14px}.outfit-head h2{font-size:16px}
  .outfit-card:not([open]) .outfit-summary{min-height:calc(var(--secondary-preview-height) - 2px);display:flex;flex-direction:column;justify-content:space-between}
- .outfit-card:not([open]) .outfit-summary>*,.outfit-head{width:100%}
+ .outfit-card:not([open]) .outfit-summary>*{width:100%}
+ .outfit-head{width:100%}
  .spectrum-card{min-height:var(--secondary-preview-height)}
  .outfit-toggle{margin-top:7px}
  .outfit-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.outfit-piece{padding:12px 10px;column-gap:8px;min-height:94px}.outfit-piece dd{font-size:12px;min-height:38px}
@@ -276,12 +271,16 @@ select{-webkit-appearance:none;line-height:1.25}
 /* Keep the established visual hierarchy, with less vertical space on phones. */
 @media(max-width:760px){
  .primary-bar{padding:10px 14px}
- .primary-bar .section-kicker,.spectrum-heading .section-kicker,.outfit-head .section-kicker{display:block;font-size:8px;line-height:1.25}
+ .primary-bar .section-kicker{display:block;font-size:8px;line-height:1.25}
+ .spectrum-heading .section-kicker{display:block;font-size:8px;line-height:1.25}
+ .outfit-head .section-kicker{display:block;font-size:8px;line-height:1.25}
  .primary-bar h2{margin-top:5px}
  .primary-toolbar{margin-top:10px;row-gap:8px}
  .wheel-top{padding-top:10px}
  .wheel-legend{margin-top:-7px;margin-bottom:6px}
- .spectrum-card,.outfit-card,.mapping-panel{margin-top:10px}
+ .spectrum-card{margin-top:10px}
+ .outfit-card{margin-top:10px}
+ .mapping-panel{margin-top:10px}
  .spectrum-body{margin-top:10px;gap:8px}
  .spectrum-cityline{margin-bottom:8px}
  .spectrum-month-labels span{font-size:9px;line-height:1.3}
@@ -330,13 +329,14 @@ select{-webkit-appearance:none;line-height:1.25}
 .summary-temp small{font-size:16px;font-weight:500;letter-spacing:0}
 .summary-target .summary-date{color:#f2e3d3}.summary-target .summary-temp{color:var(--orange)}
 .summary-connection{display:flex;align-items:center;justify-content:center;gap:7px;color:#89a6ad;font-size:9px;line-height:1.4;white-space:nowrap}
-.summary-connection:before,.summary-connection:after{content:'';height:1px;flex:1;background:#526d744d}
+.summary-connection:before{content:'';height:1px;flex:1;background:#526d744d}
+.summary-connection:after{content:'';height:1px;flex:1;background:#526d744d}
 .summary-connection svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
 @media(max-width:760px){
  .wheel-sidebar{display:grid;grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr);align-items:center;gap:10px;max-width:none;width:calc(100% - 24px);margin:0 12px;padding:14px 3px 12px;border-top:1px solid #46636c60}
  .summary-context{font-size:10px;gap:6px}.summary-date{font-size:18px}.summary-temp{font-size:30px}.summary-temp small{font-size:13px}
- .summary-target{text-align:right}.summary-target .summary-context,.summary-target .summary-temp{justify-content:flex-end}
- .summary-connection{flex-direction:column;gap:3px;font-size:8px}.summary-connection svg{width:20px;height:20px}.summary-connection:before,.summary-connection:after{display:none}
+ .summary-target{text-align:right}.summary-target .summary-context{justify-content:flex-end}.summary-target .summary-temp{justify-content:flex-end}
+ .summary-connection{flex-direction:column;gap:3px;font-size:8px}.summary-connection svg{width:20px;height:20px}.summary-connection:before{display:none}.summary-connection:after{display:none}
 }
 @media(max-width:380px){.wheel-sidebar{gap:6px;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr)}.summary-context{font-size:9px}.summary-date{font-size:17px}.summary-temp{font-size:28px}}
 
@@ -352,24 +352,32 @@ select{-webkit-appearance:none;line-height:1.25}
 .primary-toolbar.is-cross .city-en{display:none}.is-cross .city-display{gap:6px;padding-inline:9px}
 .mapping-context{margin-left:auto;color:#a8bfc0;font-size:10px;white-space:nowrap}.mapping-context[hidden]{display:none}.mapping-context:not([hidden])+.summary-chevron{margin-left:0}
 .outfit-city{font-size:10px;color:#afc69f;white-space:nowrap}.outfit-city[hidden]{display:none}
-.legend-scale,.legend-route{display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.legend-scale{display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.legend-route{display:inline-flex;align-items:center;justify-content:center;gap:7px}
 .legend-key{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:3px 4px;min-height:28px;border:0;border-radius:8px;background:none;color:#b5c8c8;font-size:inherit;white-space:nowrap}
 .legend-key>svg{width:14px;height:14px;flex:none;fill:none;stroke:var(--green);stroke-width:1.8}.legend-target>svg{stroke:var(--orange)}
-.legend-key .ring-inner,.legend-key small,.legend-direction{display:none}
+.legend-key .ring-inner{display:none}
+.legend-key small{display:none}
+.legend-direction{display:none}
 .is-cross .legend-route{width:100%;order:-1;gap:9px}
 .is-cross .legend-key{min-height:44px;padding:5px 8px;border:1px solid #405f6655;background:#15303a;font-size:10px}
 .is-cross .legend-key small{display:inline;color:#8fabb2;font-size:9px}
 .is-cross .legend-key .ring-inner{display:block;opacity:.25}.is-cross .legend-target .ring-inner{opacity:1}.is-cross .legend-target .ring-outer{opacity:.25}
 .is-cross .legend-direction{display:block;width:16px;height:16px;fill:none;stroke:#88a4aa;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 .wheel-panel.is-cross .dial-scroll-zone{inset:17%}
-.wheel-panel.is-cross .orbit,.wheel-panel.is-cross .center-sub{font-size:17px}.wheel-panel.is-cross .center-sub{fill:#d6bca7}
-.temperature-ring,.dial-marker{transition:opacity .18s ease}
-.is-cross.focus-source .target-ring,.is-cross.focus-target .source-ring{opacity:.22}
-.focus-source .target-marker,.focus-target .source-marker{opacity:.25}
+.wheel-panel.is-cross .orbit{font-size:17px}
+.wheel-panel.is-cross .center-sub{font-size:17px}.wheel-panel.is-cross .center-sub{fill:#d6bca7}
+.temperature-ring{transition:opacity .18s ease}
+.dial-marker{transition:opacity .18s ease}
+.is-cross.focus-source .target-ring{opacity:.22}
+.is-cross.focus-target .source-ring{opacity:.22}
+.focus-source .target-marker{opacity:.25}
+.focus-target .source-marker{opacity:.25}
 @media(max-width:1100px){.primary-toolbar.is-cross{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}.primary-toolbar.is-cross .toolbar-cities{grid-column:1/-1}.primary-toolbar.is-cross .toolbar-metric{grid-column:1}.primary-toolbar.is-cross .toolbar-date{grid-column:2}}
 @media(max-width:760px){
- .toolbar-cities{grid-column:1}.toolbar-cities .toolbar-city,.toolbar-cities .toolbar-target{grid-column:auto}
- .primary-toolbar.is-cross .toolbar-metric,.primary-toolbar.is-cross .toolbar-date{grid-column:1/-1}
+ .toolbar-cities{grid-column:1}.toolbar-cities .toolbar-city{grid-column:auto}.toolbar-cities .toolbar-target{grid-column:auto}
+ .primary-toolbar.is-cross .toolbar-metric{grid-column:1/-1}
+ .primary-toolbar.is-cross .toolbar-date{grid-column:1/-1}
  .primary-toolbar.is-cross .toolbar-metric .seg{height:38px}.primary-toolbar.is-cross .toolbar-metric .seg button{min-height:28px}
  .toolbar-cities.is-cross{gap:5px}.is-cross .city-display{padding-inline:7px;gap:4px}.is-cross .city-chevron{width:14px}
  .wheel-panel.is-cross .wheel-legend{row-gap:3px;margin-top:-3px}.is-cross .legend-key{font-size:10px}
@@ -378,7 +386,8 @@ select{-webkit-appearance:none;line-height:1.25}
 
 /* Short height and opacity transitions; no persistent layers or frame loop. */
 .is-drawer-animating{overflow:hidden;overflow-anchor:none}
-.mapping-panel.is-closing .summary-chevron,.outfit-card.is-closing .outfit-toggle svg{transform:rotate(0)}
+.mapping-panel.is-closing .summary-chevron{transform:rotate(0)}
+.outfit-card.is-closing .outfit-toggle svg{transform:rotate(0)}
 .outfit-card.is-closing .outfit-close-label{display:none}.outfit-card.is-closing .outfit-open-label{display:inline}
 </style>
 </head>
@@ -397,7 +406,7 @@ select{-webkit-appearance:none;line-height:1.25}
 <div class="toolbar-date"><label class="fieldlabel" for="date">日期</label><div class="date-row"><button class="iconbtn" id="prev-day" type="button" aria-label="前一天"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><input id="date" type="date" value="2025-11-15" min="2025-01-01" max="2025-12-31"/><button class="iconbtn" id="next-day" type="button" aria-label="后一天"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></div></div>
 </div>
 <div class="wheel-showcase">
-<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> <span id="wheel-instruction">365 DAYS · 12 MONTHS</span></span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><div class="dial-surface"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="slider" tabindex="0" aria-valuemin="1" aria-valuemax="365" aria-valuenow="1" aria-orientation="horizontal" aria-label="全年气候轮盘：沿外圈拨动，或用方向键选择日期"></svg><span class="dial-scroll-zone" aria-hidden="true"></span><span class="dial-ripple" aria-hidden="true"></span></div></div><div class="wheel-legend"><span class="legend-scale"><span>冷</span><span class="gradient"></span><span>热</span></span><span class="legend-route"><button type="button" class="legend-key" id="legend-source"><svg viewBox="0 0 20 20" aria-hidden="true"><circle class="ring-outer" cx="10" cy="10" r="8"/><circle class="ring-inner" cx="10" cy="10" r="4.5"/></svg><span id="legend-source-label">起点</span><small>外圈</small></button><svg class="legend-direction" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h13m-4-4 4 4-4 4"/></svg><button type="button" class="legend-key legend-target" id="legend-target"><svg viewBox="0 0 20 20" aria-hidden="true"><circle class="ring-outer" cx="10" cy="10" r="8"/><circle class="ring-inner" cx="10" cy="10" r="4.5"/></svg><span id="legend-target-label">同温日</span><small>内圈</small></button></span><span class="wardrobe-legend" id="wardrobe-legend" title="历史气候换季参考"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="m7 1 4 6-4 6-4-6Z"/></svg><span>换季</span></span></div></div>
+<div class="wheel-panel" id="wheel-panel"><div class="wheel-top"><span><span class="wheel-top-dot"></span> <span id="wheel-instruction">365 DAYS · 12 MONTHS</span></span><span class="right" id="view-mode">日均温 · 单城市年轮</span></div><div class="wheel-svg-wrap"><div class="dial-surface"><svg id="wheel" class="wheel-svg" viewBox="0 0 720 720" role="slider" tabindex="0" aria-valuemin="1" aria-valuemax="365" aria-valuenow="1" aria-orientation="horizontal" aria-label="全年气候轮盘：沿外圈拨动，或用方向键选择日期"></svg><span class="dial-glow" aria-hidden="true"></span><span class="dial-scroll-zone" aria-hidden="true"></span><span class="dial-ripple" aria-hidden="true"></span></div></div><div class="wheel-legend"><span class="legend-scale"><span>冷</span><span class="gradient"></span><span>热</span></span><span class="legend-route"><button type="button" class="legend-key" id="legend-source"><svg viewBox="0 0 20 20" aria-hidden="true"><circle class="ring-outer" cx="10" cy="10" r="8"/><circle class="ring-inner" cx="10" cy="10" r="4.5"/></svg><span id="legend-source-label">起点</span><small>外圈</small></button><svg class="legend-direction" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h13m-4-4 4 4-4 4"/></svg><button type="button" class="legend-key legend-target" id="legend-target"><svg viewBox="0 0 20 20" aria-hidden="true"><circle class="ring-outer" cx="10" cy="10" r="8"/><circle class="ring-inner" cx="10" cy="10" r="4.5"/></svg><span id="legend-target-label">同温日</span><small>内圈</small></button></span><span class="wardrobe-legend" id="wardrobe-legend" title="历史气候换季参考"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="m7 1 4 6-4 6-4-6Z"/></svg><span>换季</span></span></div></div>
 <aside class="wheel-sidebar" aria-label="日期气温对照">
 <section class="summary-point summary-source" aria-label="所选日期"><p class="summary-context" id="sidebar-lead">成都 · 秋季</p><span class="summary-date" id="sidebar-date">11月15日</span><strong class="summary-temp" id="sidebar-temp"><span id="sidebar-temp-value">12.5</span><small>°C</small></strong></section>
 <div class="summary-connection"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9c5-6 11 6 16 0M4 15c5-6 11 6 16 0"/></svg><span id="sidebar-match-kind">同温日</span></div>
@@ -480,29 +489,40 @@ function value(city,key,d){return series(city,key)[d]}
 function trend(city,d){return value(city,'mean',(d+3)%365)-value(city,'mean',(d+362)%365)}
 function circularDist(a,b){return Math.min(Math.abs(a-b),365-Math.abs(a-b))}
 function normalizedRain(city,d){const m=idxToDate(d).monthIndex;return CITIES[city].rain[m]/daysInMonth[m]}
-function matchScore(from,d,to,i){const tmp=Math.abs(value(from,state.metric,d)-value(to,state.metric,i));if(state.algorithm==='temp')return tmp;
-const delta=(key)=>Math.abs(value(from,key,d)-value(to,key,i));
-const hum=Math.abs(value(from,'humidity',d)-value(to,'humidity',i));
-const rain=Math.abs(normalizedRain(from,d)-normalizedRain(to,i));
-return Math.sqrt(.50*(tmp/2.5)**2+.13*(delta('mean')/3)**2+.10*(delta('high')/4)**2+.10*(delta('low')/4)**2+.10*(hum/13)**2+.07*(rain/3)**2)}
-// Cache lazily by configuration; a drag revisiting a date does no matching work.
-const matchCache=new Map();
-function matchDate(d){const key=[state.mode,state.source,state.target,state.metric,state.algorithm].join('|');
-let dates=matchCache.get(key);if(!dates){dates=new Int16Array(365).fill(-1);if(matchCache.size>=16)matchCache.delete(matchCache.keys().next().value);matchCache.set(key,dates)}
-if(dates[d]!==-1)return dates[d];
-const from=state.source,to=state.mode==='same'?from:state.target;const sourceTrend=Math.sign(trend(from,d));let best=null;
-for(let i=0;i<365;i++){
- if(state.mode==='same'){
-  if(circularDist(d,i)<42)continue;
-  const candidateTrend=Math.sign(trend(to,i));
-  if(sourceTrend && candidateTrend && sourceTrend===candidateTrend)continue;
- }
- const score=matchScore(from,d,to,i);
- const tie=state.mode==='same'?-circularDist(d,i):((Math.sign(trend(to,i))!==sourceTrend?1:0)*366+circularDist(d,i));
- // Score always wins; use slope and date proximity only to resolve near-equal temperatures.
- if(!best||score<best.score-0.015||(Math.abs(score-best.score)<=0.015 && tie<best.tie))best={index:i,score,tie};
+// Reuse numeric series and candidate trends; no city/key lookups inside the score loop.
+const matchingClimateCache=new Map();
+function matchingClimate(city,metric,comprehensive){
+ let climate=matchingClimateCache.get(city);
+ if(!climate){const mean=series(city,'mean'),slopes=Int8Array.from(mean,(_,day)=>Math.sign(mean[(day+3)%365]-mean[(day+362)%365]));climate={mean,slopes};matchingClimateCache.set(city,climate)}
+ if(!climate[metric])climate[metric]=series(city,metric);
+ if(comprehensive&&!climate.rain){for(const key of ['high','low','humidity'])climate[key]=series(city,key);climate.rain=Array.from({length:365},(_,day)=>normalizedRain(city,day))}
+ return climate;
 }
-return dates[d]=best?best.index:(d+182)%365}
+// The same bounded, lazy date cache; retain every score and tie-breaking rule exactly.
+const matchCache=new Map();let activeMatch=null;
+function matchDate(d){
+ const {mode,source,target,metric,algorithm}=state;
+ if(!activeMatch||activeMatch.mode!==mode||activeMatch.source!==source||activeMatch.target!==target||activeMatch.metric!==metric||activeMatch.algorithm!==algorithm){
+  const key=[mode,source,target,metric,algorithm].join('|');let context=matchCache.get(key);
+  if(!context){if(matchCache.size>=16)matchCache.delete(matchCache.keys().next().value);
+   context={mode,source,target,metric,algorithm,dates:new Int16Array(365).fill(-1),from:matchingClimate(source,metric,algorithm==='climate'),to:matchingClimate(mode==='same'?source:target,metric,algorithm==='climate')};matchCache.set(key,context);
+  }
+  activeMatch=context;
+ }
+ const {dates,from,to}=activeMatch;if(dates[d]!==-1)return dates[d];
+ const same=mode==='same',climate=algorithm==='climate',sourceTrend=from.slopes[d];
+ const targetTemps=to[metric],sourceTemp=from[metric][d],sourceMean=from.mean[d],sourceHigh=climate?from.high[d]:0,sourceLow=climate?from.low[d]:0,sourceHumidity=climate?from.humidity[d]:0,sourceRain=climate?from.rain[d]:0;
+ let best=-1,bestScore=Infinity,bestTie=Infinity;
+ for(let i=0;i<365;i++){
+  const distance=Math.min(Math.abs(d-i),365-Math.abs(d-i)),candidateTrend=to.slopes[i];
+  if(same&&(distance<42||(sourceTrend&&candidateTrend&&sourceTrend===candidateTrend)))continue;
+  const temp=Math.abs(sourceTemp-targetTemps[i]);
+  const score=climate?Math.sqrt(.50*(temp/2.5)**2+.13*(Math.abs(sourceMean-to.mean[i])/3)**2+.10*(Math.abs(sourceHigh-to.high[i])/4)**2+.10*(Math.abs(sourceLow-to.low[i])/4)**2+.10*(Math.abs(sourceHumidity-to.humidity[i])/13)**2+.07*(Math.abs(sourceRain-to.rain[i])/3)**2):temp;
+  const tie=same?-distance:((candidateTrend!==sourceTrend?1:0)*366+distance);
+  if(best===-1||score<bestScore-0.015||(Math.abs(score-bestScore)<=0.015&&tie<bestTie)){best=i;bestScore=score;bestTie=tie}
+ }
+ return dates[d]=best===-1?(d+182)%365:best;
+}
 // Simple, local wardrobe rules: no network requests or per-frame recommendation engine.
 const OUTFIT_PRESETS=[
  {max:-5,id:'freezing',quick:['保暖内搭','厚羽绒','保暖裤','保暖靴'],label:'严寒保暖',items:['保暖打底＋羊毛衫','加厚羽绒服','保暖打底＋厚长裤','保暖靴']},
@@ -550,7 +570,19 @@ function renderClothing(day){
 function svgEl(tag,attrs={},parent=wheel){const e=document.createElementNS(svgNS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);parent.appendChild(e);return e}
 function polar(deg,r){const a=(deg-90)*Math.PI/180;return{x:360+Math.cos(a)*r,y:360+Math.sin(a)*r}}
 const angleDay=day=>day/365*360;
-function colorFor(temp){const bounds=[-8,2,9,16,23,30,36],cols=[[81,143,195],[112,181,210],[126,197,168],[209,218,140],[239,186,111],[231,128,99],[209,91,91]];let n=0;while(n<bounds.length-2&&temp>bounds[n+1])n++;let t=clamp((temp-bounds[n])/(bounds[n+1]-bounds[n]),0,1);let c=cols[n].map((v,j)=>Math.round(v+(cols[n+1][j]-v)*t));return 'rgb('+c.join(',')+')'}
+const colorBounds=[-8,2,9,16,23,30,36],colorStops=[[81,143,195],[112,181,210],[126,197,168],[209,218,140],[239,186,111],[231,128,99],[209,91,91]];
+function colorFor(temp){const bounds=colorBounds,cols=colorStops;let n=0;while(n<bounds.length-2&&temp>bounds[n+1])n++;let t=clamp((temp-bounds[n])/(bounds[n+1]-bounds[n]),0,1);let c=cols[n].map((v,j)=>Math.round(v+(cols[n+1][j]-v)*t));return 'rgb('+c.join(',')+')'}
+const paletteCache=new Map(),ringGeometryCache=new Map();
+function palette(city,metric){const key=city+'|'+metric;let cached=paletteCache.get(key);if(!cached){const colors=series(city,metric).map(colorFor);cached={colors,gradient:'linear-gradient(90deg,'+colors.join(',')+')'};paletteCache.set(key,cached)}return cached}
+function ringGeometry(r0,r1){const key=r0+'|'+r1;let geometry=ringGeometryCache.get(key);if(!geometry){geometry=Array.from({length:365},(_,i)=>{const a=polar(angleDay(i),r0),b=polar(angleDay(i),r1);return[a.x.toFixed(2),a.y.toFixed(2),b.x.toFixed(2),b.y.toFixed(2)]});ringGeometryCache.set(key,geometry)}return geometry}
+function updateRing(bars,parent,city,r0,r1,geometryChanged,paletteChanged){
+ const colors=palette(city,state.metric).colors,geometry=ringGeometry(r0,r1);
+ if(!bars.length){
+  parent.innerHTML=geometry.map(([x1,y1,x2,y2],i)=>`<line stroke-width="3.5" opacity="0.91" class="tempbar" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${colors[i]}"/>`).join('');
+  bars.push(...parent.children);return;
+ }
+ for(let i=0;i<365;i++){const bar=bars[i];if(geometryChanged){const point=geometry[i];bar.setAttribute('x1',point[0]);bar.setAttribute('y1',point[1]);bar.setAttribute('x2',point[2]);bar.setAttribute('y2',point[3])}if(paletteChanged)bar.setAttribute('stroke',colors[i])}
+}
 // One frame loop owns input rendering and motion. It sleeps when the dial settles.
 const motionPreference=window.matchMedia('(prefers-reduced-motion:reduce)');
 let frameId=0,pendingRender=false,pendingSync=false,lastFrame=0,wheelVisible=true;
@@ -566,20 +598,21 @@ function tick(time){frameId=0;
  const dt=lastFrame?Math.min((time-lastFrame)/1000,.05):1/60;lastFrame=time;
  const snap=motionPreference.matches||!wheelVisible;
  let moving=false,tilting=false;
- const step=(axis,omega)=>{
+ const sourceOmega=state.drag?42:state.hover!==null?32:20,faceOmega=state.drag?34:24,sourceDecay=Math.exp(-sourceOmega*dt),faceDecay=Math.exp(-faceOmega*dt);
+ const step=(axis,omega,decay)=>{
   // Exact critically damped spring: retarget without discarding current velocity.
-  const distance=axis.position-axis.target,term=axis.velocity+omega*distance,decay=Math.exp(-omega*dt);
+  const distance=axis.position-axis.target,term=axis.velocity+omega*distance;
   axis.position=axis.target+(distance+term*dt)*decay;
   axis.velocity=(axis.velocity-omega*term*dt)*decay;
   if(snap||(Math.abs(axis.position-axis.target)<.008&&Math.abs(axis.velocity)<.08)){axis.position=axis.target;axis.velocity=0;return false}return true;
  };
- for(const axis of [dialMotion.source,dialMotion.match])moving=step(axis,state.drag?42:state.hover!==null?32:20)||moving;
- for(const axis of faceAxes)tilting=step(axis,state.drag?34:24)||tilting;
+ for(const axis of [dialMotion.source,dialMotion.match])moving=step(axis,sourceOmega,sourceDecay)||moving;
+ for(const axis of faceAxes)tilting=step(axis,faceOmega,faceDecay)||tilting;
  moving=moving||tilting;
  paintDial();dialPanel.classList.toggle('is-moving',moving);dialPanel.classList.toggle('is-tilting',tilting);
  if(moving||pendingRender)wakeMotion();else lastFrame=0;
 }
-let wheelBaseKey='',wheelParts=null,paintedGeometry='',paintedFace='';
+let wheelParts=null,paintedGeometry='',paintedFace='';
 function buildWheel(){
  const defs=svgEl('defs');
  const gradient=(tag,id,attrs,stops)=>{const g=svgEl(tag,{id,...attrs},defs);for(const [offset,color] of stops)svgEl('stop',{offset,'stop-color':color},g)};
@@ -594,8 +627,7 @@ function buildWheel(){
  svgEl('circle',{cx:360,cy:360,r:303,fill:'none',stroke:'#405a62','stroke-width':1,opacity:.5},base);
  const inner=svgEl('circle',{cx:360,cy:360,r:221,fill:'none',stroke:'#49636e','stroke-width':1,opacity:.6},base);
  const sourceBars=svgEl('g',{class:'temperature-ring source-ring'},base),targetBars=svgEl('g',{class:'temperature-ring target-ring',opacity:0},base);
- const makeBars=parent=>Array.from({length:365},()=>svgEl('line',{'stroke-width':3.5,opacity:.91,class:'tempbar'},parent));
- const source=makeBars(sourceBars),target=[],boundaries=[],months=[];
+ const source=[],target=[],boundaries=[],months=[];
  for(let n=0;n<12;n++){
   boundaries.push(svgEl('line',{class:'monthboundary'},base));
   const pos=polar(angleDay(starts[n]+daysInMonth[n]/2),328),label=svgEl('text',{x:pos.x,y:pos.y,class:'monthlabel'},base);
@@ -625,7 +657,7 @@ function buildWheel(){
  labels.sub=label(411,'center-sub');labels.matchDate=label(460,'center-match-date');labels.matchTemp=label(503,'center-match-num');
  // SVG touch-action is applied on its root box; the HTML center sibling permits scrolling.
  svgEl('circle',{cx:360,cy:360,r:282.5,fill:'none',stroke:'transparent','stroke-width':129,class:'dial-hit-area','aria-hidden':'true'});
- wheelParts={bed,inner,source,target,targetBars,boundaries,months,connection,sourceMarker,targetMarker,labels,wardrobe,wardrobeMarks,wardrobeKey:'',centerMode:null,cross:false};
+ wheelParts={bed,inner,source,target,sourceBars,targetBars,boundaries,months,connection,sourceMarker,targetMarker,labels,wardrobe,wardrobeMarks,wardrobeKey:'',centerMode:null,cross:false};
  syncWardrobeVisibility();
 }
 function syncWardrobeVisibility(){wheelParts?.wardrobe.classList.toggle('is-visible',wheelVisible&&!document.hidden)}
@@ -640,27 +672,21 @@ function drawWardrobeHints(parts,day){
   });
  }
  let nearby=null;
- parts.wardrobeMarks.forEach((part,i)=>{const mark=dates[i],near=!!(state.wardrobe&&mark&&circularDist(day,mark.day)<=7);part.group.classList.toggle('is-near',near);if(near)nearby=mark});
+ parts.wardrobeMarks.forEach((part,i)=>{const mark=dates[i],near=!!(state.wardrobe&&mark&&circularDist(day,mark.day)<=7);if(part.near!==near){part.near=near;part.group.classList.toggle('is-near',near)}if(near)nearby=mark});
  return nearby;
 }
-function drawWheel(){
+function drawWheel(d=state.hover??state.day,m=matchDate(d)){
  if(!wheelParts)buildWheel();
- const d=state.hover??state.day,m=matchDate(d),cross=state.mode==='cross',parts=wheelParts;
- const key=[state.mode,state.source,state.target,state.metric].join('|');
- if(wheelBaseKey!==key){
-  wheelBaseKey=key;parts.cross=cross;
-  parts.bed.setAttribute('r',cross?269:261);parts.bed.setAttribute('stroke-width',cross?44:61);parts.inner.setAttribute('r',cross?205:221);
-  parts.targetBars.setAttribute('opacity',cross?1:0);
-  const a=series(state.source,state.metric),b=series(state.target,state.metric);
-  if(cross&&!parts.target.length){for(let i=0;i<365;i++)parts.target.push(svgEl('line',{'stroke-width':3.5,opacity:.91,class:'tempbar'},parts.targetBars))}
-  const placeBar=(bar,i,r0,r1,temp)=>{const p0=polar(angleDay(i),r0),p1=polar(angleDay(i),r1);
-   for(const [k,v] of Object.entries({x1:p0.x.toFixed(2),y1:p0.y.toFixed(2),x2:p1.x.toFixed(2),y2:p1.y.toFixed(2),stroke:colorFor(temp)}))bar.setAttribute(k,v)};
-  for(let i=0;i<365;i++){placeBar(parts.source[i],i,cross?255:239,cross?281:280,a[i]);if(cross)placeBar(parts.target[i],i,205,233,b[i])}
+ const cross=state.mode==='cross',parts=wheelParts;
+ const geometryChanged=parts.layout!==cross,sourceKey=state.source+'|'+state.metric,targetKey=state.target+'|'+state.metric;
+ if(geometryChanged){
+  parts.layout=cross;parts.cross=cross;
+  parts.bed.setAttribute('r',cross?269:261);parts.bed.setAttribute('stroke-width',cross?44:61);parts.inner.setAttribute('r',cross?205:221);parts.targetBars.setAttribute('opacity',cross?1:0);
   parts.boundaries.forEach((line,n)=>{const p0=polar(angleDay(starts[n]),cross?199:226),p1=polar(angleDay(starts[n]),295);for(const [k,v] of Object.entries({x1:p0.x,y1:p0.y,x2:p1.x,y2:p1.y}))line.setAttribute(k,v)});
-  for(const [marker,r0,r1] of [[parts.sourceMarker,cross?246:223,304],[parts.targetMarker,cross?198:223,cross?241:304]]){
-   marker.line.setAttribute('y1',360-r0);marker.line.setAttribute('y2',360-r1);marker.halo.setAttribute('cy',360-r1);marker.dot.setAttribute('cy',360-r1);
-  }
+  for(const [marker,r0,r1] of [[parts.sourceMarker,cross?246:223,304],[parts.targetMarker,cross?198:223,cross?241:304]]){marker.line.setAttribute('y1',360-r0);marker.line.setAttribute('y2',360-r1);marker.halo.setAttribute('cy',360-r1);marker.dot.setAttribute('cy',360-r1)}
  }
+ if(geometryChanged||parts.sourceKey!==sourceKey){updateRing(parts.source,parts.sourceBars,state.source,cross?255:239,cross?281:280,geometryChanged,parts.sourceKey!==sourceKey);parts.sourceKey=sourceKey}
+ if(cross&&(geometryChanged||parts.targetKey!==targetKey)){updateRing(parts.target,parts.targetBars,state.target,205,233,geometryChanged,parts.targetKey!==targetKey);parts.targetKey=targetKey}
  const labels=parts.labels,dst=cross?state.target:state.source;
  const nearby=drawWardrobeHints(parts,d),mean=value(state.source,'mean',d);
  if(parts.centerMode!==cross){parts.centerMode=cross;labels.hanger.style.display=cross?'none':'';labels.orbit.setAttribute('x',cross?'360':'374')}
@@ -668,18 +694,18 @@ function drawWheel(){
  setText(labels.date,dateStr(d));setText(labels.temp,'≈ '+value(state.source,state.metric,d).toFixed(1)+' °C');
  setText(labels.sub,cross?CITIES[dst].name+' · 目标':state.algorithm==='temp'?'同温日':'相似日');
  setText(labels.matchDate,dateStr(m));setText(labels.matchTemp,'≈ '+value(dst,state.metric,m).toFixed(1)+' °C');
- parts.months.forEach((el,n)=>el.classList.toggle('selectedMonth',n===idxToDate(d).monthIndex));
+ const month=idxToDate(d).monthIndex;if(parts.selectedMonth!==month){parts.months[parts.selectedMonth]?.classList.remove('selectedMonth');parts.months[month].classList.add('selectedMonth');parts.selectedMonth=month}
  for(const [axis,day] of [[dialMotion.source,d],[dialMotion.match,m]]){
   axis.target=dialMotion.ready?nearestDay(day,axis.position):day;
   if(!dialMotion.ready){axis.position=axis.target;axis.velocity=0}
  }
  dialMotion.ready=true;
- wheel.setAttribute('aria-valuenow',String(state.day+1));wheel.setAttribute('aria-valuetext',dateStr(state.day));
+ if(parts.selectedDay!==state.day){parts.selectedDay=state.day;wheel.setAttribute('aria-valuenow',String(state.day+1));wheel.setAttribute('aria-valuetext',dateStr(state.day))}
 }
 function paintDial(){if(!wheelParts)return;
  const face=faceMotion;
  // Drop the 3D transform entirely at rest, releasing the temporary compositor layer.
- const transform=faceAxes.every(axis=>axis.position===0)?'none':`translate3d(${face.x.position.toFixed(2)}px,${face.y.position.toFixed(2)}px,${(-2*face.press.position).toFixed(2)}px) rotateX(${face.rx.position.toFixed(2)}deg) rotateY(${face.ry.position.toFixed(2)}deg) scale(${(1-.006*face.press.position).toFixed(4)})`;
+ const transform=faceAxes.every(axis=>axis.position===0)?'none':`translate3d(${face.x.position.toFixed(2)}px,${face.y.position.toFixed(2)}px,${(-5*face.press.position).toFixed(2)}px) rotateX(${face.rx.position.toFixed(2)}deg) rotateY(${face.ry.position.toFixed(2)}deg) scale(${(1-.008*face.press.position).toFixed(4)})`;
  if(paintedFace!==transform){paintedFace=transform;dialSurface.style.transform=transform}
  const a=angleDay(dialMotion.source.position),b=angleDay(dialMotion.match.position),cross=wheelParts.cross;
  const geometry=[a.toFixed(3),b.toFixed(3),cross].join('|');if(paintedGeometry===geometry)return;paintedGeometry=geometry;
@@ -695,7 +721,7 @@ function activeClasses(){
 for(const [attr,val] of [['data-metric',state.metric],['data-algorithm',state.algorithm]]){document.querySelectorAll('['+attr+']').forEach(btn=>{const active=btn.getAttribute(attr)===val;btn.classList.toggle('active',active);btn.setAttribute('aria-pressed',String(active))})}
 for(const [id,active] of [['mode-same',state.mode==='same'],['mode-cross',state.mode==='cross']]){$(id).classList.toggle('active',active);$(id).setAttribute('aria-pressed',String(active))}}
 let detailKey='';
-function renderResults(){const d=state.hover===null?state.day:state.hover,m=matchDate(d),src=state.source,dst=state.mode==='same'?src:state.target,a=idxToDate(d),b=idxToDate(m);
+function renderResults(d=state.hover??state.day,m=matchDate(d)){const src=state.source,dst=state.mode==='same'?src:state.target,a=idxToDate(d),b=idxToDate(m);
  setText($('sidebar-date'),dateStr(d));setText($('sidebar-temp-value'),value(src,state.metric,d).toFixed(1));
  setText($('sidebar-lead'),state.mode==='cross'?'起点 · '+CITIES[src].name:CITIES[src].name+' · '+seasons[a.monthIndex]);
  setText($('sidebar-match-date'),dateStr(m));setText($('sidebar-match-text'),state.mode==='cross'?'目标 · '+CITIES[dst].name:CITIES[dst].name+' · '+seasons[b.monthIndex]);
@@ -725,7 +751,7 @@ function renderResults(){const d=state.hover===null?state.day:state.hover,m=matc
 }
 function renderMonthRow(city,container,interactive){
  const track=$(container),key=city+'|'+state.metric;
- if(track.dataset.key!==key){track.dataset.key=key;track.style.backgroundImage='linear-gradient(90deg,'+series(city,state.metric).map(colorFor).join(',')+')'}
+ if(track.dataset.key!==key){track.dataset.key=key;track.style.backgroundImage=palette(city,state.metric).gradient}
  if(interactive){const day=state.hover??state.day;if(spectrumPointer===null)spectrumInput.value=String(day);spectrumInput.setAttribute('aria-valuetext',dateStr(day))}
 }
 function render(sync=true){const cross=state.mode==='cross',day=state.hover??state.day;if(sync){activeClasses();
@@ -752,11 +778,11 @@ function render(sync=true){const cross=state.mode==='cross',day=state.hover??sta
  }
  renderMonthRow(state.source,'months',true);if(cross)renderMonthRow(state.target,'target-months',false);
  setText($('spectrum-current'),dateStr(day)+' · '+value(state.source,state.metric,day).toFixed(1)+'°C');
- drawWheel();renderResults();
- if(cross){const match=matchDate(day);setText($('target-spectrum-current'),dateStr(match)+' · '+value(state.target,state.metric,match).toFixed(1)+'°C')}
+ const match=matchDate(day);drawWheel(day,match);renderResults(day,match);
+ if(cross)setText($('target-spectrum-current'),dateStr(match)+' · '+value(state.target,state.metric,match).toFixed(1)+'°C');
  setText($('interaction-indicator'),state.drag?'◉ 拨动中':state.hover!==null?'◉ 预览中':'● 已选定');
  $('interaction-indicator').classList.toggle('is-preview',state.hover!==null);
- if(pendingHighlight){dialWrap.style.setProperty('--touch-x',pendingHighlight.x+'px');dialWrap.style.setProperty('--touch-y',pendingHighlight.y+'px');pendingHighlight=null}
+ if(pendingHighlight){const {x,y}=pendingHighlight;dialGlow.style.transform=`translate3d(${x-65}px,${y-65}px,0)`;if(dialPanel.classList.contains('dial-confirmed')){dialRipple.style.left=x+'px';dialRipple.style.top=y+'px'}pendingHighlight=null}
 }
 
 // Native range follows the finger continuously; climate work is coalesced into the shared frame.
@@ -815,7 +841,7 @@ $('prev-day').addEventListener('click',()=>changeDay(state.day-1));$('next-day')
 let todayTimer=0;
 $('return-today').addEventListener('click',()=>{cancelDial();const now=new Date();changeDay(starts[now.getMonth()]+Math.min(now.getDate(),daysInMonth[now.getMonth()])-1);
  const b=$('return-today');b.classList.add('today-bounce');clearTimeout(todayTimer);todayTimer=setTimeout(()=>b.classList.remove('today-bounce'),550)});
-const dialPanel=$('wheel-panel'),dialSurface=wheel.parentElement,dialWrap=dialSurface.parentElement;
+const dialPanel=$('wheel-panel'),dialSurface=wheel.parentElement,dialWrap=dialSurface.parentElement,dialGlow=dialSurface.querySelector('.dial-glow'),dialRipple=dialSurface.querySelector('.dial-ripple');
 let dialRect=null,pendingHighlight=null,activePointerId=null,dialPressPoint=null,confirmTimer=0;
 function invalidateDialRect(){dialRect=null}
 window.addEventListener('resize',invalidateDialRect,{passive:true});window.addEventListener('scroll',invalidateDialRect,{passive:true,capture:true});
@@ -827,8 +853,8 @@ function dayFromPointer(e,allowOutside=false){const {x,y}=pointerPosition(e),rad
  return Math.round(((Math.atan2(y,x)*180/Math.PI+450)%360)/360*365)%365;
 }
 function pointHighlight(e){const {rect,x,y}=pointerPosition(e);pendingHighlight={x:+(e.clientX-rect.left).toFixed(1),y:+(e.clientY-rect.top).toFixed(1)};
- if(state.drag&&!motionPreference.matches){const nx=clamp(x/360,-1,1),ny=clamp(y/360,-1,1),travel=clamp(rect.width*.009,2.5,5);
-  faceMotion.x.target=nx*travel;faceMotion.y.target=ny*travel;faceMotion.rx.target=-ny*3;faceMotion.ry.target=nx*3;faceMotion.press.target=1;wakeMotion();
+ if(state.drag&&!motionPreference.matches){const nx=clamp(x/360,-1,1),ny=clamp(y/360,-1,1),travel=clamp(rect.width*.013,3.5,7);
+  faceMotion.x.target=nx*travel;faceMotion.y.target=ny*travel;faceMotion.rx.target=-ny*5;faceMotion.ry.target=nx*5;faceMotion.press.target=1;wakeMotion();
  }
 }
 function setPreview(d){if(d===state.day&&!state.drag)d=null;dialPanel.classList.toggle('dial-hover',d!==null);if(d===state.hover)return;state.hover=d;requestRender(false)}
@@ -881,8 +907,8 @@ function animatedDrawer(details,content,onOpen=()=>{}){
   if(reveal&&!expanded&&preview&&!motionPreference.matches&&!document.hidden){effects.push(preview.animate([{opacity:0},{opacity:1}],{duration:160,easing:'ease-out'}))}
  }
  function set(open,animate=true){
+  if(!animate||motionPreference.matches||document.hidden||!details.animate){stop();expanded=open;details.open=open;if(open)onOpen();finish();return}
   const start=details.getBoundingClientRect().height,interrupted=!!animation,style=getComputedStyle(content),opacity=style.opacity,transform=style.transform;stop();expanded=open;
-  if(!animate||motionPreference.matches||document.hidden||!details.animate){details.open=open;if(open)onOpen();finish();return}
   // Measure the natural destination once; no JavaScript runs on every animation frame.
   details.classList.remove('is-drawer-animating','is-closing');details.open=open;if(open)onOpen();
   const end=details.getBoundingClientRect().height;
